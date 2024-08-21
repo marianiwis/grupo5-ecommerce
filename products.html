@@ -10,6 +10,24 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/564x/01/9d/fa/019dfabf0312f0de5d3df51c5817d602.jpg'); /* enlace del background */
+      background-size: cover; /* ajusta la imagen para cubrir todo el fondo */
+      background-position: center; /* centra la imagen en la pantalla */
+      background-repeat: no-repeat; /* evita que la imagen se repita */
+    }
+
+    .card { /*no me estaria funcando el color de la sombra, pero si funciona el resto*/
+      box-shadow: 0 4px 8px #ff8a0d; /* Sombra naranja */
+      position: relative;
+      border: none; /* Elimina borde por defecto */
+      border-radius: 0.25rem; /* Bordes redondeados */
+    }
+    
+  </style>
+  
 </head>
 
 <body>
@@ -36,11 +54,18 @@
       </div>
     </div>
   </nav>
-  <main class="pb-5 container">
+  <main class="pb-5 container" style="margin-top: 2rem;">
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <!-- titulo de la cat -->
+      <h1 class="text-start fw-bold mb-2" style="color: black; font-size: 2.0rem;">Categoría Autos</h1>
+      
+      <!-- linea que divide coso -->
+      <hr style="border: 3px solid #ff8a0d; width: 100%; margin: 0 auto 20px auto;">
+      
+      <div class="row" id="productos-lista">
+        <!-- insertamos las tarjetas de productos -->
       </div>
+    
     </div>
   </main>
   <footer class="text-muted">
