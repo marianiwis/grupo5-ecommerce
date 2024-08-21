@@ -27,7 +27,7 @@
     <div class="línea"></div>
     <div class="login-wrapper">
       <div class="login-container">
-        <form id="loginForm" action="index.html" method="get">
+        <form id="loginForm">
             <div class="input-group">
                 <label for="username">Usuario</label>
                 <input type="text" id="username" name="username" placeholder="Ingrese su nombre de usuario" required>
@@ -36,11 +36,13 @@
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" required>
             </div>
-            <button type="submit">Ingresar</button>
+            <button type="button" id="iniciarSesion">Ingresar</button>
         </form>
+        <div id="liveAlertPlaceholder"></div>
     </div>
   </div>
   </main>
+  <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/login.js"></script>
 </body>
 </html>

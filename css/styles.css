@@ -265,3 +265,8 @@ h1 {
     align-items: center;
     width: 100%;
   }
+
+  .alert-fixed {
+    top: auto;
+    bottom: 0;
+}

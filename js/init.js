@@ -39,3 +39,12 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+let autentication = function(){
+  let session = window.localStorage.getItem("usuario")
+  if (!session) {
+    window.location.href = "login.html";  
+  }
+}
+
+autentication()
