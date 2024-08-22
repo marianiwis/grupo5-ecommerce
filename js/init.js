@@ -48,3 +48,10 @@ let autentication = function(){
 }
 
 autentication()
+
+document.addEventListener("DOMContentLoaded", function(){
+  document.getElementById("cerrarSesion").addEventListener("click", function() {
+    localStorage.removeItem("usuario");
+    window.location = "login.html"
+  });
+})
