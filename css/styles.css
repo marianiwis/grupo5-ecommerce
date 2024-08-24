@@ -191,8 +191,6 @@ a.custom-card:hover {
 
 
 /* Estilo login*/
-
-
 .login-wrapper {
   display: flex;
   width: 80%;
@@ -256,7 +254,7 @@ a.custom-card:hover {
 }
 
 .input-group input {
-  width: 100%; /* Asegura que el input ocupe todo el ancho disponible */
+  width: 100%; /* aseguramos que el input ocupe todo el ancho disponible */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;

@@ -1,7 +1,7 @@
 function mostrarProductos(productosArray) {
     let htmlContentToAppend = "";
 
-    // Iterar sobre cada producto usando forEach
+    // iterar sobre cada producto usando forEach
     productosArray.forEach(producto => {
         htmlContentToAppend += `
         <div class="col-md-4">
@@ -24,14 +24,14 @@ function mostrarProductos(productosArray) {
         `;
     });
 
-    // Insertar el contenido HTML generado en el contenedor de productos
+    // insertar el contenido HTML generado en el contenedor de productos
     document.getElementById("productos-lista").innerHTML = htmlContentToAppend;
 }
 
-// Llamada a la función cuando los datos están disponibles
+// llamada a la función cuando los datos están disponibles
 getJSONData(PRODUCTS_URL + "101.json").then(function(resultObj) {
     if (resultObj.status === "ok") {
-        mostrarProductos(resultObj.data.products); // Aquí usamos forEach
+        mostrarProductos(resultObj.data.products); // aca usamos forEach
     } else {
         console.error("Error en la obtención de datos:", resultObj.data);
     }
