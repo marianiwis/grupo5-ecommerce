@@ -40,11 +40,25 @@ let getJSONData = function(url){
     });
 }
 
+let showuser = function(usuario){
+document.addEventListener("DOMContentLoaded", function () {
+  let navBar = document.getElementById("navbarNav")
+  if (!navBar) {
+    return 
+  }
+  
+  const ul = navBar.querySelector('ul');
+  ul.insertAdjacentHTML('beforeend', '<li class="nav-item"><a href="#" class="nav-link">'+usuario+'</a></li>');
+})
+}
+
 let autentication = function(){
   let session = window.localStorage.getItem("usuario")
   if (!session) {
-    window.location.href = "login.html";  
+    window.location.href = "login.html"; 
+    return 
   }
+  showuser(session)
 }
 
 autentication()
