@@ -212,7 +212,6 @@ a.custom-card:hover {
 .login-image {
   flex: 1;
   background-color: #ffcc00; /* Fondo amarillo mostaza */
-  background-color: #ffcc00;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -256,7 +255,6 @@ a.custom-card:hover {
 
 .input-group input {
   width: 100%; /* aseguramos que el input ocupe todo el ancho disponible */
-  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
