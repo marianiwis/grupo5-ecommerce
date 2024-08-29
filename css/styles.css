@@ -278,6 +278,7 @@ button#iniciarSesion {
   text-align: left;
 }
 
+
 /* Añadir media queries para dispositivos móviles y tabletas */
 
 @media (max-width: 768px) {
@@ -285,6 +286,7 @@ button#iniciarSesion {
 
   .login-wrapper {
     flex-direction: column-reverse;
+   
     width: 95%;
   }
 
@@ -300,7 +302,9 @@ button#iniciarSesion {
 
   .login-image img {
     max-width: 100%;
+
     height: auto ;
+
     border-radius: 8px;
   }
 
@@ -321,7 +325,9 @@ button#iniciarSesion {
   /* Ajustes para tabletas y pantallas más grandes */
 
   .login-wrapper {
+
     flex-direction: row;
+
   }
 
   .login-image {
@@ -359,6 +365,7 @@ button#iniciarSesion {
   }
 }
 
+
 @media (max-width: 320px) {
   .login-image {
     display: none;
@@ -371,3 +378,4 @@ button#iniciarSesion {
     background-blend-mode: overlay;
   }
 }
+
