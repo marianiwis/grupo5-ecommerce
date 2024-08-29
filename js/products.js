@@ -1,10 +1,15 @@
 function mostrarProductos(productosArray) {
     let htmlContentToAppend = "";
 
+<<<<<<< HEAD
     // iterar sobre cada producto usando forEach
+=======
+    //diferentes columnas para que se ajusten a las pantallas
+    // Iterar sobre cada producto usando forEach
+>>>>>>> mari
     productosArray.forEach(producto => {
         htmlContentToAppend += `
-        <div class="col-md-4">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card mb-4 shadow-lg rounded" style="box-shadow: 0 4px 8px #ff8a0d;">
                 <img src="${producto.image}" class="card-img-top" alt="${producto.name}">
                 <div class="card-body">
