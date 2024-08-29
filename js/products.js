@@ -1,12 +1,9 @@
 function mostrarProductos(productosArray) {
     let htmlContentToAppend = "";
 
-<<<<<<< HEAD
     // iterar sobre cada producto usando forEach
-=======
     //diferentes columnas para que se ajusten a las pantallas
     // Iterar sobre cada producto usando forEach
->>>>>>> mari
     productosArray.forEach(producto => {
         htmlContentToAppend += `
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
