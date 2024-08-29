@@ -277,3 +277,65 @@ button#iniciarSesion {
   margin-top: 10px;
   text-align: left;
 }
+/* Añadir media queries para dispositivos móviles y tabletas */
+
+@media (max-width: 767px) {
+  /* Ajustes para dispositivos móviles */
+  
+  .login-wrapper {
+    flex-direction: column;
+    width: 95%;
+  }
+
+  .login-container {
+    padding: 20px;
+  }
+
+  .login-image {
+    height: 200px; /* Ajusta la altura en dispositivos móviles */
+    background-size: contain; /* Asegúrate de que la imagen se ajuste */
+    background-position: center;
+  }
+
+  .login-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .input-group label {
+    font-size: 16px; /* Reducir el tamaño de la fuente en móviles */
+  }
+
+  .input-group input {
+    font-size: 14px; /* Reducir el tamaño de la fuente en móviles */
+  }
+
+  button#iniciarSesion {
+    font-size: 14px; /* Ajustar el tamaño del botón en móviles */
+  }
+}
+
+@media (min-width: 768px)  {
+  /* Ajustes para tabletas y pantallas más grandes */
+
+  .login-wrapper {
+    flex-direction: row;z
+  }
+
+  .login-image {
+    height: auto; /* Dejar que la imagen tome el tamaño adecuado */
+    background-size: cover; /* Mantener el tamaño de fondo en dispositivos más grandes */
+  }
+}
+
+/* Asegúrate de que el contenido sea accesible en pantallas grandes */
+@media (min-width: 1200px) {
+  .login-wrapper {
+    width: 80%;
+  }
+
+  .login-container {
+    padding: 50px;
+  }
+}
