@@ -1,2 +1,2 @@
-# entrega-tarea1
-entrega tarea1
+#Proyecto e-commerce JaP
+Subgrupo 5
