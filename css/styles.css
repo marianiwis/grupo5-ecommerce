@@ -277,3 +277,97 @@ button#iniciarSesion {
   margin-top: 10px;
   text-align: left;
 }
+
+/* Añadir media queries para dispositivos móviles y tabletas */
+
+@media (max-width: 768px) {
+  /* Ajustes para dispositivos móviles */
+
+  .login-wrapper {
+    flex-direction: column-reverse;
+    width: 95%;
+  }
+
+  .login-container {
+    padding: 20px;
+  }
+
+  .login-image {
+    height: 200px; /* Ajusta la altura en dispositivos móviles */
+    background-size: contain; /* Asegúrate de que la imagen se ajuste */
+    background-position: center;
+  }
+
+  .login-image img {
+    max-width: 100%;
+    height: auto ;
+    border-radius: 8px;
+  }
+
+  .input-group label {
+    font-size: 16px; /* Reducir el tamaño de la fuente en móviles */
+  }
+
+  .input-group input {
+    font-size: 14px; /* Reducir el tamaño de la fuente en móviles */
+  }
+
+  button#iniciarSesion {
+    font-size: 14px; /* Ajustar el tamaño del botón en móviles */
+  }
+}
+
+@media (min-width: 768px)  {
+  /* Ajustes para tabletas y pantallas más grandes */
+
+  .login-wrapper {
+    flex-direction: row;
+  }
+
+  .login-image {
+    height: auto; /* Dejar que la imagen tome el tamaño adecuado */
+    background-size: cover; /* Mantener el tamaño de fondo en dispositivos más grandes */
+  }
+}
+
+/* Asegúrate de que el contenido sea accesible en pantallas grandes */
+@media (min-width: 1200px) {
+  .login-wrapper {
+    width: 80%;
+  }
+
+  .login-container {
+    padding: 50px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .login-wrapper {
+    flex-direction: column; /* Coloca la imagen arriba y el formulario abajo */
+    max-width: 600px;
+    margin: 0 auto; /* Centra el contenedor */
+  }
+
+  .login-image {
+    height: 250px; /* Ajusta la altura de la imagen */
+    background-size: contain; /* Asegura que la imagen se ajuste correctamente */
+    background-position: center;
+    order: -1; /* Este order ya no es necesario con el HTML reordenado */
+  }
+
+  .login-container {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 320px) {
+  .login-image {
+    display: none;
+  }
+  body {
+    background-image: url("https://th.bing.com/th/id/OIP.c4xmoeEX9jgCCAP_jGpldQHaEc?w=274&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7");
+    background-color: white;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+  }
+}
