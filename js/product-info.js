@@ -18,19 +18,40 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function mostrarProducto(producto) {
+    // Genera HTML para cada imagen en el array, con la estructura de Bootstrap para el carrusel
+    let imagesHtml = producto.images.map((img, index) => `
+        <div class="carousel-item ${index === 0 ? 'active' : ''}">
+            <img src="${img}" class="d-block w-100" alt="${producto.name}">
+        </div>
+    `).join('');
+
     let htmlContentToAppend = `
     <div class="col-12">
-        <div class="card mb-4 shadow-lg rounded">
-            <img src="${producto.image}" class="card-img-top" alt="${producto.name}" onerror="this.src='path/to/placeholder-image.jpg';">
-            <div class="card-body">
-                <h5 class="card-title">${producto.name}</h5>
-                <p class="card-text">${producto.description}</p>
-                <p class="card-text"><strong>Categoria:</strong> ${producto.category}</p>
-                <p class="card-text"><strong>Vendidos:</strong> ${producto.soldCount}</p>
-                <p class="card-text"><strong>Precio:</strong> ${producto.currency} ${producto.cost}</p>
+        <div id="productCarousel" class="carousel slide mb-4 shadow-lg rounded">
+            <div class="carousel-inner">
+                ${imagesHtml}
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="custom-card-body">
+            <hr style="border: 3px solid #ff8a0d; width: 100%; margin: 0 auto 20px auto;">
+            <h5 class="card-title text-center fw-bold fs-1 text-warning">${producto.name}</h5>
+            <hr style="border: 3px solid #ff8a0d; width: 100%; margin: 0 auto 20px auto;">
+            <p class="card-text" style="font-size: 1.8rem;">${producto.description}</p>
+            <p class="card-text" style="font-size: 1.8rem;"><strong>Categoria:</strong> ${producto.category}</p>
+            <p class="card-text" style="font-size: 1.8rem;"><strong>Vendidos:</strong> ${producto.soldCount}</p>
+            <p class="card-text" style="font-size: 1.8rem;"><strong>Precio:</strong> ${producto.currency} ${producto.cost}</p>
         </div>
     </div>
     `;
     document.getElementById("product-info").innerHTML = htmlContentToAppend;
 }
+
+
