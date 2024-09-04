@@ -4,10 +4,11 @@ function mostrarProductos(productosArray) {
     // iterar sobre cada producto usando forEach
     //diferentes columnas para que se ajusten a las pantallas
     // Iterar sobre cada producto usando forEach
+    //agregamos el onclick para redirigir
     productosArray.forEach(producto => {
         htmlContentToAppend += `
         <div class="col-md-4">
-            <div class="card mb-4 shadow-lg rounded" style="box-shadow: 0 4px 8px #ff8a0d;">
+            <div class="card mb-4 shadow-lg rounded" style="box-shadow: 0 4px 8px #ff8a0d;" onclick="guardarProductoYRedirigir(${producto.id})">
                 <img src="${producto.image}" class="card-img-top" alt="${producto.name}">
                 <div class="card-body">
                     <h5 class="card-title text-center fw-bold">${producto.name}</h5>
@@ -30,7 +31,13 @@ function mostrarProductos(productosArray) {
     document.getElementById("productos-lista").innerHTML = htmlContentToAppend;
 }
 
-// llamada a la función cuando los datos están disponibles
+function guardarProductoYRedirigir(productoId) {
+    localStorage.setItem("productoId", productoId);
+    window.location.href = "product-info.html";
+}
+
+
+// Llamada a la función cuando los datos están disponibles
 getJSONData(PRODUCTS_URL + "101.json").then(function(resultObj) {
     if (resultObj.status === "ok") {
         mostrarProductos(resultObj.data.products); // aca usamos forEach
