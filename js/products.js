@@ -48,6 +48,14 @@ function guardarProductoYRedirigir(productoId) {
     }
 });*/
 
+function productosVacios() {
+    document.getElementById("productos-lista").innerHTML = "<div class='col-md-4'> No hay productos para mostrar. </div>";
+}
+
+function productoTitulos(titulo) {
+    document.getElementById("productos-titulo").innerHTML = "Productos / "+titulo;
+}
+
 // Inicializar la página cargando productos de la categoría seleccionada
 // Almacena un valor
 document.addEventListener("DOMContentLoaded", function() {
@@ -58,10 +66,19 @@ document.addEventListener("DOMContentLoaded", function() {
         getJSONData(`https://japceibal.github.io/emercado-api/cats_products/${categoriaID}.json`)
             .then(function(resultObj) {
                 if (resultObj.status === "ok") {
-                    mostrarProductos(resultObj.data.products);
+                    if (resultObj.data.products.length > 0) {
+                        mostrarProductos(resultObj.data.products);
+                    }else{
+                        productosVacios();
+                    }
+
+                    if (resultObj.data.catName) {
+                        productoTitulos(resultObj.data.catName)
+                    }
                 } else {
                     console.error("Error en la obtención de datos:", resultObj.data);
                 }
+                
             });
     } else {
         console.error("No se encontró el ID de categoría en el almacenamiento local.");
