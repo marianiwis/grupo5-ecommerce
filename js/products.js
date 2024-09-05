@@ -29,8 +29,10 @@ function mostrarProductos(productosArray) {
 
     // insertar el contenido HTML generado en el contenedor de productos
     document.getElementById("productos-lista").innerHTML = htmlContentToAppend;
+
 }
 
+// función para guardar el ID del producto y redirigir
 function guardarProductoYRedirigir(productoId) {
     localStorage.setItem("productoId", productoId);
     window.location.href = "product-info.html";
@@ -38,11 +40,36 @@ function guardarProductoYRedirigir(productoId) {
 
 
 // Llamada a la función cuando los datos están disponibles
-getJSONData(PRODUCTS_URL + "101.json").then(function(resultObj) {
+/*getJSONData(PRODUCTS_URL + "101.json").then(function(resultObj) {
     if (resultObj.status === "ok") {
         mostrarProductos(resultObj.data.products); // aca usamos forEach
     } else {
         console.error("Error en la obtención de datos:", resultObj.data);
     }
+});*/
+
+// Inicializar la página cargando productos de la categoría seleccionada
+// Almacena un valor
+document.addEventListener("DOMContentLoaded", function() {
+    const categoriaID = localStorage.getItem('catID');
+    console.log(`Categoría ID obtenido: ${categoriaID}`);
+
+    if (categoriaID) {
+        getJSONData(`https://japceibal.github.io/emercado-api/cats_products/${categoriaID}.json`)
+            .then(function(resultObj) {
+                if (resultObj.status === "ok") {
+                    mostrarProductos(resultObj.data.products);
+                } else {
+                    console.error("Error en la obtención de datos:", resultObj.data);
+                }
+            });
+    } else {
+        console.error("No se encontró el ID de categoría en el almacenamiento local.");
+    }
 });
+
+
+
+
+
 
