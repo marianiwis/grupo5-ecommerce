@@ -27,7 +27,7 @@ function mostrarProducto(producto) {
 
     let htmlContentToAppend = `
     <div class="col-12">
-        <div id="productCarousel" class="carousel slide mb-4 shadow-lg rounded">
+        <div id="productCarousel" class="carousel slide shadow-lg rounded">
             <div class="carousel-inner">
                 ${imagesHtml}
             </div>
@@ -41,13 +41,13 @@ function mostrarProducto(producto) {
             </button>
         </div>
         <div class="custom-card-body">
+            <hr style="border: 3px solid #ff8a0d; width: 100%; margin: 0;">
+            <h5 class="card-title text-center fw-bold fs-1">${producto.name}</h5>
             <hr style="border: 3px solid #ff8a0d; width: 100%; margin: 0 auto 20px auto;">
-            <h5 class="card-title text-center fw-bold fs-1 text-warning">${producto.name}</h5>
-            <hr style="border: 3px solid #ff8a0d; width: 100%; margin: 0 auto 20px auto;">
-            <p class="card-text" style="font-size: 1.8rem;">${producto.description}</p>
-            <p class="card-text" style="font-size: 1.8rem;"><strong>Categoria:</strong> ${producto.category}</p>
-            <p class="card-text" style="font-size: 1.8rem;"><strong>Vendidos:</strong> ${producto.soldCount}</p>
-            <p class="card-text" style="font-size: 1.8rem;"><strong>Precio:</strong> ${producto.currency} ${producto.cost}</p>
+            <p class="card-text" style="font-size: 1.5rem;">${producto.description}</p>
+            <p class="card-text" style="font-size: 1.1rem;"><strong>Categoria:</strong> ${producto.category}</p>
+            <p class="card-text" style="font-size: 1.1rem;"><strong>Vendidos:</strong> ${producto.soldCount}</p>
+            <p class="card-text text-danger" style="font-size: 1.1rem;"><strong>Precio:</strong> ${producto.currency} ${producto.cost}</p>
         </div>
     </div>
     `;
