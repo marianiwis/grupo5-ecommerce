@@ -1,9 +1,10 @@
-<<<<<<< Updated upstream
-=======
 function mostrarProductos(productosArray) {
     let htmlContentToAppend = "";
 
-    // Iterar sobre cada producto usando forEach y generar el HTML
+    // iterar sobre cada producto usando forEach
+    //diferentes columnas para que se ajusten a las pantallas
+    // Iterar sobre cada producto usando forEach
+    //agregamos el onclick para redirigir
     productosArray.forEach(producto => {
         htmlContentToAppend += `
         <div class="col-md-4">
@@ -26,29 +27,38 @@ function mostrarProductos(productosArray) {
         `;
     });
 
-    // Insertar el contenido HTML generado en el contenedor de productos
+    // insertar el contenido HTML generado en el contenedor de productos
     document.getElementById("productos-lista").innerHTML = htmlContentToAppend;
+
 }
 
-// Función para guardar el ID del producto y redirigir
+// función para guardar el ID del producto y redirigir
 function guardarProductoYRedirigir(productoId) {
     localStorage.setItem("productoId", productoId);
     window.location.href = "product-info.html";
 }
+// Llamada a la función cuando los datos están disponibles
+/*getJSONData(PRODUCTS_URL + "101.json").then(function(resultObj) {
+    if (resultObj.status === "ok") {
+        mostrarProductos(resultObj.data.products); // aca usamos forEach
+    } else {
+        console.error("Error en la obtención de datos:", resultObj.data);
+    }
+});*/
 
 function productosVacios() {
     document.getElementById("productos-lista").innerHTML = "<div class='col-md-4'> No hay productos para mostrar. </div>";
 }
 
 function productoTitulos(titulo) {
-    document.getElementById("productos-titulo").innerHTML = "Productos / " + titulo;
+document.getElementById("productos-titulo").innerHTML = "Productos / " + titulo;
 }
 
 // Inicializar la página cargando productos de la categoría seleccionada
+// Almacena un valor
 document.addEventListener("DOMContentLoaded", function() {
     const categoriaID = localStorage.getItem('catID');
     let productosCargados = []; // Declarar variable para almacenar los productos cargados
-
     console.log(`Categoría ID obtenido: ${categoriaID}`);
 
     if (categoriaID) {
@@ -74,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
 
                     if (resultObj.data.catName) {
-                        productoTitulos(resultObj.data.catName);
+                        productoTitulos(resultObj.data.catName)
                     }
                 } else {
                     console.error("Error en la obtención de datos:", resultObj.data);
@@ -84,4 +94,3 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error("No se encontró el ID de categoría en el almacenamiento local.");
     }
 });
->>>>>>> Stashed changes
