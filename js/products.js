@@ -37,8 +37,6 @@ function guardarProductoYRedirigir(productoId) {
     localStorage.setItem("productoId", productoId);
     window.location.href = "product-info.html";
 }
-
-
 // Llamada a la función cuando los datos están disponibles
 /*getJSONData(PRODUCTS_URL + "101.json").then(function(resultObj) {
     if (resultObj.status === "ok") {
@@ -53,13 +51,14 @@ function productosVacios() {
 }
 
 function productoTitulos(titulo) {
-    document.getElementById("productos-titulo").innerHTML = "Productos / "+titulo;
+document.getElementById("productos-titulo").innerHTML = "Productos / " + titulo;
 }
 
 // Inicializar la página cargando productos de la categoría seleccionada
 // Almacena un valor
 document.addEventListener("DOMContentLoaded", function() {
     const categoriaID = localStorage.getItem('catID');
+    let productosCargados = []; // Declarar variable para almacenar los productos cargados
     console.log(`Categoría ID obtenido: ${categoriaID}`);
 
     if (categoriaID) {
@@ -67,8 +66,20 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(function(resultObj) {
                 if (resultObj.status === "ok") {
                     if (resultObj.data.products.length > 0) {
-                        mostrarProductos(resultObj.data.products);
-                    }else{
+                        productosCargados = resultObj.data.products; // Asignar los productos cargados a la variable
+                        mostrarProductos(productosCargados); // Mostrar los productos
+
+                        // Buscador en tiempo real
+                        const input = document.getElementById('inputBuscador');
+                        input.addEventListener('input', function() {
+                            const inputTexto = input.value.trim().toUpperCase();
+                            const productosFiltrados = productosCargados.filter(producto =>
+                                producto.name.toUpperCase().includes(inputTexto) ||
+                                producto.description.toUpperCase().includes(inputTexto)
+                            );
+                            mostrarProductos(productosFiltrados); // Mostrar productos filtrados
+                        });
+                    } else {
                         productosVacios();
                     }
 
@@ -78,15 +89,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 } else {
                     console.error("Error en la obtención de datos:", resultObj.data);
                 }
-                
             });
     } else {
         console.error("No se encontró el ID de categoría en el almacenamiento local.");
     }
 });
-
-
-
-
-
-
