@@ -42,13 +42,23 @@
     }
 
     .custom-card-body {
-        background-color: #fbefe2; /*fondo piola*/
-        border-radius: 15px; /*bordes redondeados para el contenido*/
-        padding: 20px; /*espacio entre las cosas del contenido*/
+        /*background-color: #fbefe2;*/ /*fondo piola*/
+        background-color: #ffffff;
+        border-radius: 0px 0px 15px 15px;
+        padding: 50px; /*espacio entre las cosas del contenido*/
     }
 
     .carousel-inner img {
-        border-radius: 15px; /* bordes redondeados para las imágenes del carrusel */
+      border-radius: 15px 15px 0px 0px; /* bordes redondeados para las imágenes del carrusel */
+    }
+
+    .float-end{
+      position:fixed;
+      right: 10px;
+      bottom: 0;
+    }
+    .float-end img{
+      width: 43px;
     }
   </style>
 </head>
@@ -82,14 +92,16 @@
   </nav>
 
   <main>
-    <div id="product-info" class="container mt-4">
+    <div id="product-info" class="container mt-4 mb-5">
       <!-- Aaca se inserta el contenido del producto -->
     </div>
   </main>
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
-        <a href="#">Volver arriba</a>
+        <a href="#">
+          <img src="/img/volver-arriba.png" alt="">
+        </a>
       </p>
     </div>
   </footer>
