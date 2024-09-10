@@ -279,6 +279,7 @@ button#iniciarSesion {
 }
 
 
+
 /* Añadir media queries para dispositivos móviles y tabletas */
 
 @media (max-width: 768px) {
@@ -325,6 +326,7 @@ button#iniciarSesion {
 
   .login-wrapper {
 
+
     flex-direction: row;
 
   }
@@ -345,6 +347,7 @@ button#iniciarSesion {
     padding: 50px;
   }
 }
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .login-wrapper {
     flex-direction: column; /* Coloca la imagen arriba y el formulario abajo */
