@@ -1,9 +1,10 @@
+
 let productos = []; // Variable para almacenar los productos
 
 function mostrarProductos(productosArray) {
     let htmlContentToAppend = "";
 
-    // iterar sobre cada producto usando forEach
+// iterar sobre cada producto usando forEach
     //diferentes columnas para que se ajusten a las pantallas
     // Iterar sobre cada producto usando forEach
     //agregamos el onclick para redirigir
@@ -28,7 +29,6 @@ function mostrarProductos(productosArray) {
         </div>
         `;
     });
-
 // insertar el contenido HTML generado en el contenedor de productos
     document.getElementById("productos-lista").innerHTML = htmlContentToAppend;
 }
@@ -58,13 +58,11 @@ function applyFilters() {
     const minPrice = parseFloat(document.getElementById('min-price').value) || 0;
     const maxPrice = parseFloat(document.getElementById('max-price').value) || Infinity;
     const sortOrder = document.getElementById('sort-order').value;
-    
-// Filtrar productos por precio
-    let filteredProductos = productos.filter(producto => 
+
+    let filteredProductos = productos.filter(producto =>
         producto.cost >= minPrice && producto.cost <= maxPrice
     );
 
-// Para ordenar los productos
     if (sortOrder === 'price-asc') {
         filteredProductos.sort((a, b) => a.cost - b.cost);
     } else if (sortOrder === 'price-desc') {
@@ -76,8 +74,6 @@ function applyFilters() {
     mostrarProductos(filteredProductos);
 }
 
-// Inicializar la página cargando productos de la categoría seleccionada
-// Almacena un valor
 document.addEventListener("DOMContentLoaded", function() {
     const categoriaID = localStorage.getItem('catID');
     console.log(`Categoría ID obtenido: ${categoriaID}`);
@@ -87,8 +83,20 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(function(resultObj) {
                 if (resultObj.status === "ok") {
                     if (resultObj.data.products.length > 0) {
-                        productos = resultObj.data.products; // Almacena productos globalmente
+                        productos = resultObj.data.products;
                         mostrarProductos(productos);
+
+                        // Buscador en tiempo real
+                        const input = document.getElementById('inputBuscador');
+                        input.addEventListener('input', function() {
+                            const inputTexto = input.value.trim().toUpperCase();
+                            const productosFiltrados = productos.filter(producto =>
+                                producto.name.toUpperCase().includes(inputTexto) ||
+                                producto.description.toUpperCase().includes(inputTexto)
+                            );
+                            mostrarProductos(productosFiltrados);
+                        });
+
                     } else {
                         productosVacios();
                     }
@@ -104,6 +112,6 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error("No se encontró el ID de categoría en el almacenamiento local.");
     }
 
-// Agregar evento de aplicar filtros
+    // Agregar evento de aplicar filtros
     document.getElementById('apply-filters').addEventListener('click', applyFilters);
 });

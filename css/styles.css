@@ -277,16 +277,19 @@ button#iniciarSesion {
   margin-top: 10px;
   text-align: left;
 }
+
+
+
 /* Añadir media queries para dispositivos móviles y tabletas */
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   /* Ajustes para dispositivos móviles */
-  
+
   .login-wrapper {
-    flex-direction: column;
+    flex-direction: column-reverse;
+   
     width: 95%;
   }
-
   .login-container {
     padding: 20px;
   }
@@ -299,7 +302,9 @@ button#iniciarSesion {
 
   .login-image img {
     max-width: 100%;
-    height: auto;
+
+    height: auto ;
+
     border-radius: 8px;
   }
 
@@ -320,7 +325,10 @@ button#iniciarSesion {
   /* Ajustes para tabletas y pantallas más grandes */
 
   .login-wrapper {
-    flex-direction: row;z
+
+
+    flex-direction: row;
+
   }
 
   .login-image {
@@ -338,4 +346,42 @@ button#iniciarSesion {
   .login-container {
     padding: 50px;
   }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .login-wrapper {
+    flex-direction: column; /* Coloca la imagen arriba y el formulario abajo */
+    max-width: 600px;
+    margin: 0 auto; /* Centra el contenedor */
+  }
+
+  .login-image {
+    height: 250px; /* Ajusta la altura de la imagen */
+    background-size: contain; /* Asegura que la imagen se ajuste correctamente */
+    background-position: center;
+    order: -1; /* Este order ya no es necesario con el HTML reordenado */
+  }
+
+  .login-container {
+    padding: 20px;
+  }
+}
+
+
+@media (max-width: 320px) {
+  .login-image {
+    display: none;
+  }
+  body {
+    background-image: url("https://th.bing.com/th/id/OIP.c4xmoeEX9jgCCAP_jGpldQHaEc?w=274&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7");
+    background-color: white;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+  }
+}
+
+  .alert-fixed {
+    top: auto;
+    bottom: 0;
 }
