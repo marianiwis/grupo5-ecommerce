@@ -1,10 +1,9 @@
-
-let productos = []; // Variable para almacenar los productos
+let productos = []; // variable para almacenar los productos
 
 function mostrarProductos(productosArray) {
     let htmlContentToAppend = "";
 
-// iterar sobre cada producto usando forEach
+    // iterar sobre cada producto usando forEach
     //diferentes columnas para que se ajusten a las pantallas
     // Iterar sobre cada producto usando forEach
     //agregamos el onclick para redirigir
@@ -29,6 +28,7 @@ function mostrarProductos(productosArray) {
         </div>
         `;
     });
+
 // insertar el contenido HTML generado en el contenedor de productos
     document.getElementById("productos-lista").innerHTML = htmlContentToAppend;
 }
@@ -46,6 +46,7 @@ function guardarProductoYRedirigir(productoId) {
         console.error("Error en la obtención de datos:", resultObj.data);
     }
 });*/
+
 function productosVacios() {
     document.getElementById("productos-lista").innerHTML = "<div class='col-md-4'> No hay productos para mostrar. </div>";
 }

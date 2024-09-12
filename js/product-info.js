@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
-    const url = `${PRODUCT_INFO_URL}${productoId}.json`; // Usar el ID del producto
+    const url = `${PRODUCT_INFO_URL}${productoId}.json`; // usa el ID del producto
 
     getJSONData(url).then(function(resultObj) {
         if (resultObj.status === "ok") {
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function mostrarProducto(producto) {
-    // Genera HTML para cada imagen en el array, con la estructura de Bootstrap para el carrusel
+    // genera HTML para cada imagen en el array, con la estructura de Bootstrap para el carrusel
     let imagesHtml = producto.images.map((img, index) => `
         <div class="carousel-item ${index === 0 ? 'active' : ''}">
             <img src="${img}" class="d-block w-100" alt="${producto.name}">
