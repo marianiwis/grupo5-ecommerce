@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    //obtener el Identificador
     const productoId = localStorage.getItem("productoId");
 
     if (!productoId) {
@@ -6,8 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
+    //se construye una URL para realizar una solicitud a un API para obtener información sobre un producto específico
     const url = `${PRODUCT_INFO_URL}${productoId}.json`; // usa el ID del producto
 
+    //realiza una solicitud HTTP para obtener datos en formato JSON desde la URL especificada.
     getJSONData(url).then(function(resultObj) {
         if (resultObj.status === "ok") {
             mostrarProducto(resultObj.data);
@@ -19,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function mostrarProducto(producto) {
     // genera HTML para cada imagen en el array, con la estructura de Bootstrap para el carrusel
+    //con controles para navegar entre las imágenes y asegurar que el diseño sea limpio y responsivo
     let imagesHtml = producto.images.map((img, index) => `
         <div class="carousel-item ${index === 0 ? 'active' : ''}">
             <img src="${img}" class="d-block w-100" alt="${producto.name}">

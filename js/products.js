@@ -32,11 +32,15 @@ function mostrarProductos(productosArray) {
 // insertar el contenido HTML generado en el contenedor de productos
     document.getElementById("productos-lista").innerHTML = htmlContentToAppend;
 }
+
 // función para guardar el ID del producto y redirigir
 function guardarProductoYRedirigir(productoId) {
+    // guarda el ID del producto en el almacenamiento local
     localStorage.setItem("productoId", productoId);
+    // redirige al usuario a la página product-info.html
     window.location.href = "product-info.html";
 }
+
 
 // Llamada a la función cuando los datos están disponibles
 /*getJSONData(PRODUCTS_URL + "101.json").then(function(resultObj) {
