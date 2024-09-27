@@ -18,6 +18,20 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("Error en la obtención de datos:", resultObj.data);
         }
     });
+
+    //para obtener los comentarios del producto
+    const urlComentarios = `https://japceibal.github.io/emercado-api/products_comments/${productoId}.json`;
+    getJSONData(urlComentarios).then(function(resultObj) {
+        if (resultObj.status === "ok") {
+            console.log(resultObj.data); // Agrega este log para ver los datos en la consola
+            mostrarCalificaciones(resultObj.data);
+        } else {
+            console.error("Error en la obtención de comentarios:", resultObj.data);
+        }
+    });
+
+    // Agregar evento de aplicar filtros
+    document.getElementById('apply-filters').addEventListener('click', applyFilters);
 });
 
 function mostrarProducto(producto) {
@@ -58,4 +72,23 @@ function mostrarProducto(producto) {
     document.getElementById("product-info").innerHTML = htmlContentToAppend;
 }
 
+// Función para mostrar las calificaciones (comentarios) como cards
+function mostrarCalificaciones(comentarios) {
+    let calificacionesHtml = ''; // Iniciar como cadena vacía
+    comentarios.forEach(comentario => {
+        calificacionesHtml += `
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #ff8a0d; font-weight: bold;">${comentario.user}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">${comentario.dateTime}</h6>
+                    <p class="card-text"><strong>Comentario:</strong> ${comentario.description}</p>
+                    <p class="card-text"><strong>Producto ID:</strong> ${comentario.product}</p>
+                    <p class="card-text"><strong>Puntuación:</strong> ${comentario.score}</p>
+                </div>
+            </div>
+        `;
+    });
+
+    document.getElementById("calificaciones-lista").innerHTML = calificacionesHtml;
+}
 
