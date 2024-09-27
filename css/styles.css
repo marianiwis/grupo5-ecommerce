@@ -385,3 +385,22 @@ button#iniciarSesion {
     top: auto;
     bottom: 0;
 }
+
+#comment-text{
+  resize: none;
+}
+
+.stars{
+  color: #ffc300;
+  cursor: pointer;
+}
+.btn-enviar{
+  background-color: #ffc300;
+  outline-color: #ffc300;
+  border-color: #ffc300;
+}
+.btn-enviar:hover{
+  background-color: #ffc300;
+  outline-color: #ffc300;
+  border-color: #ffc300;
+}
