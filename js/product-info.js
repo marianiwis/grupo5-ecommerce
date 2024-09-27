@@ -72,6 +72,19 @@ function mostrarProducto(producto) {
     document.getElementById("product-info").innerHTML = htmlContentToAppend;
 }
 
+// Función para generar estrellas
+function generarEstrellas(puntuacion) {
+    let estrellasHtml = '';
+    for (let i = 1; i <= 5; i++) {
+        if (i <= puntuacion) {
+            estrellasHtml += '<span class="bi bi-star-fill stars"></span>'; // Estrella llena
+        } else {
+            estrellasHtml += '<span class="bi bi-star stars"></span>'; // Estrella vacía
+        }
+    }
+    return estrellasHtml;
+}
+
 // Función para mostrar las calificaciones (comentarios) como cards
 function mostrarCalificaciones(comentarios) {
     let calificacionesHtml = ''; // Iniciar como cadena vacía
@@ -83,7 +96,7 @@ function mostrarCalificaciones(comentarios) {
                     <h6 class="card-subtitle mb-2 text-muted">${comentario.dateTime}</h6>
                     <p class="card-text"><strong>Comentario:</strong> ${comentario.description}</p>
                     <p class="card-text"><strong>Producto ID:</strong> ${comentario.product}</p>
-                    <p class="card-text"><strong>Puntuación:</strong> ${comentario.score}</p>
+                    <p class="card-text"><strong>Puntuación:</strong> ${generarEstrellas(comentario.score)}</p>
                 </div>
             </div>
         `;
