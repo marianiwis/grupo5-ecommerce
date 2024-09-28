@@ -145,7 +145,7 @@ function mostrarCalificaciones(comentarios) {
         description: comentarioTexto,
         score: calificacionSeleccionada,
         dateTime: new Date().toLocaleString(),
-        product: localStorage.getItem("productoId")  // Supongo que ya tienes un productoId en el localStorage
+        product: localStorage.getItem("productoId")  
       };
 
       // Añadir el nuevo comentario a la lista de comentarios
