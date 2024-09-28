@@ -105,3 +105,78 @@ function mostrarCalificaciones(comentarios) {
     document.getElementById("calificaciones-lista").innerHTML = calificacionesHtml;
 }
 
+ // Desafiate
+  document.addEventListener("DOMContentLoaded", function() {
+    let calificacionSeleccionada = 0;
+
+    // Evento para seleccionar estrellas
+    const estrellas = document.querySelectorAll('.bi-star, .bi-star-fill');
+    estrellas.forEach(estrella => {
+      estrella.addEventListener('click', function() {
+        calificacionSeleccionada = parseInt(this.getAttribute('attr-data'));
+
+        // Resaltar las estrellas según la selección
+        estrellas.forEach(star => {
+          if (parseInt(star.getAttribute('attr-data')) <= calificacionSeleccionada) {
+            star.classList.remove('bi-star');
+            star.classList.add('bi-star-fill');
+          } else {
+            star.classList.remove('bi-star-fill');
+            star.classList.add('bi-star');
+          }
+        });
+      });
+    });
+
+    // Manejar el envío de comentario
+    document.querySelector('.btn-enviar').addEventListener('click', function() {
+      const comentarioTexto = document.getElementById('comment-text').value;
+      const nombreUsuario = "Usuario anónimo"; // Puedes reemplazarlo por un valor almacenado o capturado
+
+      // Validar si se ha ingresado un comentario y una calificación
+      if (comentarioTexto.trim() === "" || calificacionSeleccionada === 0) {
+        alert("Por favor, completa el comentario y selecciona una calificación.");
+        return;
+      }
+
+      // Crear un objeto con el nuevo comentario
+      const nuevoComentario = {
+        user: nombreUsuario,
+        description: comentarioTexto,
+        score: calificacionSeleccionada,
+        dateTime: new Date().toLocaleString(),
+        product: localStorage.getItem("productoId")  // Supongo que ya tienes un productoId en el localStorage
+      };
+
+      // Añadir el nuevo comentario a la lista de comentarios
+      agregarComentario(nuevoComentario);
+
+      // Limpiar el formulario
+      document.getElementById('comment-text').value = '';
+      estrellas.forEach(star => star.classList.remove('bi-star-fill', 'bi-star'));
+      calificacionSeleccionada = 0;
+    });
+
+    // Función para mostrar el nuevo comentario en la lista
+    function agregarComentario(comentario) {
+      const calificacionesLista = document.getElementById("calificaciones-lista");
+
+      let estrellasHtml = '';
+      for (let i = 1; i <= 5; i++) {
+        estrellasHtml += i <= comentario.score ? '<span class="bi bi-star-fill stars"></span>' : '<span class="bi bi-star stars"></span>';
+      }
+
+      const comentarioHtml = `
+        <div class="calificacion-card">
+          <h5 class="fw-bold" style="color: #ff8a0d;">${comentario.user}</h5>
+          <h6 class="text-muted">${comentario.dateTime}</h6>
+          <p><strong>Comentario:</strong> ${comentario.description}</p>
+          <p><strong>Puntuación:</strong> ${estrellasHtml}</p>
+        </div>
+      `;
+
+      // Agregar el comentario al inicio de la lista
+      calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
+    }
+  });
+
