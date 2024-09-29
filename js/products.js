@@ -79,6 +79,12 @@ function applyFilters() {
     mostrarProductos(filteredProductos);
 }
 
+function clearFilters() {
+    document.getElementById('min-price').value = null;
+    document.getElementById('max-price').value = null;
+    applyFilters()
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     const categoriaID = localStorage.getItem('catID');
     console.log(`Categoría ID obtenido: ${categoriaID}`);
@@ -101,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             );
                             mostrarProductos(productosFiltrados);
                         });
-
+                        applyFilters()
                     } else {
                         productosVacios();
                     }
@@ -119,4 +125,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Agregar evento de aplicar filtros
     document.getElementById('apply-filters').addEventListener('click', applyFilters);
+    
+    document.getElementById('clear-filters').addEventListener('click', clearFilters);
 });
