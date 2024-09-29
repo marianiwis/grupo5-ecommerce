@@ -131,10 +131,12 @@ function mostrarCalificaciones(comentarios) {
     // Manejar el envío de comentario
     document.querySelector('.btn-enviar').addEventListener('click', function() {
       const comentarioTexto = document.getElementById('comment-text').value;
-      const nombreUsuario = "Usuario anónimo"; // Puedes reemplazarlo por un valor almacenado o capturado
-
+      const nombreUsuario = window.localStorage.getItem('usuario') ?? "Usuario anónimo"; // Puedes reemplazarlo por un valor almacenado o capturado
+      if(calificacionSeleccionada === 0) {
+        calificacionSeleccionada = 1;
+      }
       // Validar si se ha ingresado un comentario y una calificación
-      if (comentarioTexto.trim() === "" || calificacionSeleccionada === 0) {
+      if (comentarioTexto.trim() === "") {
         alert("Por favor, completa el comentario y selecciona una calificación.");
         return;
       }
@@ -153,8 +155,16 @@ function mostrarCalificaciones(comentarios) {
 
       // Limpiar el formulario
       document.getElementById('comment-text').value = '';
-      estrellas.forEach(star => star.classList.remove('bi-star-fill', 'bi-star'));
-      calificacionSeleccionada = 0;
+      estrellas.forEach((star,index) => {
+        star.classList.remove('bi-star-fill', 'bi-star')
+        if(index == 0){
+          star.classList.add('bi-star-fill')
+        }else{
+          star.classList.add('bi-star')
+        }
+      });
+      
+      calificacionSeleccionada = 1;
     });
 
     // Función para mostrar el nuevo comentario en la lista
