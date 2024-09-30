@@ -1,14 +1,35 @@
 document.addEventListener("DOMContentLoaded", function() {
-    //obtener el Identificador
-    const productoId = localStorage.getItem("productoId");
 
+    // obtener el Identificador de producto
+    const productoId = localStorage.getItem("productoId");
     if (!productoId) {
         console.error("No se ha encontrado el ID del producto.");
         return;
     }
+    // obtener el identificador de categoría
+    const categoriaID = localStorage.getItem("catID");
+    if (!categoriaID) {
+        console.error("No se ha encontrado el ID de la categoría.");
+        return;
+    }
 
-    //se construye una URL para realizar una solicitud a un API para obtener información sobre un producto específico
-    const url = `${PRODUCT_INFO_URL}${productoId}.json`; // usa el ID del producto
+    // URLs para realizar solicitud a un API y obtener info
+    const urlProducto = `${PRODUCT_INFO_URL}${productoId}${EXT_TYPE}`; // Usa el ID del producto
+    const urlCat = `${PRODUCTS_URL}${categoriaID}${EXT_TYPE}`; // Usa el ID de la categoría
+
+    
+            // Obtener productos de la misma categoría
+getJSONData(urlCat).then(function(relatedResult) {
+    if (relatedResult.status === "ok") {
+        const productosRelacionados = relatedResult.data.products;
+        console.log("Productos filtrados relacionados:", productosRelacionados); // Añadir esto para verificar
+        mostrarProductosRelacionados(productosRelacionados);
+    } else {
+        console.error("Error en la obtención de productos relacionados:", relatedResult.data);
+    }
+}).catch(function(error) {
+    console.error("Error en la solicitud de productos relacionados:", error);
+});
 
     //realiza una solicitud HTTP para obtener datos en formato JSON desde la URL especificada.
     getJSONData(url).then(function(resultObj) {
@@ -34,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('apply-filters').addEventListener('click', applyFilters);
 });
 
+// Función para mostrar el producto
 function mostrarProducto(producto) {
     // genera HTML para cada imagen en el array, con la estructura de Bootstrap para el carrusel
     //con controles para navegar entre las imágenes y asegurar que el diseño sea limpio y responsivo
@@ -72,6 +94,64 @@ function mostrarProducto(producto) {
     document.getElementById("product-info").innerHTML = htmlContentToAppend;
 }
 
+// Función para mostrar productos relacionados
+function mostrarProductosRelacionados(productos) {
+    if (productos.length === 0) {
+        document.getElementById("related-products").innerHTML = "<p>No hay productos relacionados.</p>";
+        return;
+    }
+
+    // Agregar título de "Productos Relacionados"
+    let tituloHtml = `
+        <h2 class="text-center mt-5 mb-4">Productos Relacionados</h2>
+    `;
+
+    // Agrupa los productos de 3 en 3
+    let groupedProducts = [];
+    for (let i = 0; i < productos.length; i += 3) {
+        groupedProducts.push(productos.slice(i, i + 3));
+    }
+
+    // Construir el HTML del carrusel con los productos relacionados
+    let relatedHtml = groupedProducts.map((group, index) => `
+        <div class="carousel-item ${index === 0 ? 'active' : ''}">
+            <div class="row justify-content-center">
+                ${group.map(producto => `
+                    <div class="col-md-4 d-flex justify-content-center mb-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="${producto.image}" class="card-img-top" alt="${producto.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${producto.name}</h5>
+                                <p class="card-text text-danger">${producto.currency} ${producto.cost}</p>
+                                <button class="btn btn-primary" onclick="irAProducto(${producto.id})">Ver producto</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `).join('');
+
+    let carouselHtml = `
+    <div id="relatedProductsCarousel" class="carousel slide mt-3" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            ${relatedHtml}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#relatedProductsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#relatedProductsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    `;
+
+    // Agregar el título y el carrusel al contenedor
+    document.getElementById("related-products").innerHTML = tituloHtml + carouselHtml;
+}
+
 // Función para generar estrellas
 function generarEstrellas(puntuacion) {
     let estrellasHtml = '';
@@ -105,88 +185,137 @@ function mostrarCalificaciones(comentarios) {
     document.getElementById("calificaciones-lista").innerHTML = calificacionesHtml;
 }
 
- // Desafiate
-  document.addEventListener("DOMContentLoaded", function() {
+// Manejador para la selección de estrellas y el envío de comentarios
+document.addEventListener("DOMContentLoaded", function() {
     let calificacionSeleccionada = 0;
 
     // Evento para seleccionar estrellas
     const estrellas = document.querySelectorAll('.bi-star, .bi-star-fill');
     estrellas.forEach(estrella => {
-      estrella.addEventListener('click', function() {
-        calificacionSeleccionada = parseInt(this.getAttribute('attr-data'));
+        estrella.addEventListener('click', function() {
+            calificacionSeleccionada = parseInt(this.getAttribute('attr-data'));
 
-        // Resaltar las estrellas según la selección
-        estrellas.forEach(star => {
-          if (parseInt(star.getAttribute('attr-data')) <= calificacionSeleccionada) {
-            star.classList.remove('bi-star');
-            star.classList.add('bi-star-fill');
-          } else {
-            star.classList.remove('bi-star-fill');
-            star.classList.add('bi-star');
-          }
+            // Resaltar las estrellas según la selección
+            estrellas.forEach(star => {
+                if (parseInt(star.getAttribute('attr-data')) <= calificacionSeleccionada) {
+                    star.classList.remove('bi-star');
+                    star.classList.add('bi-star-fill');
+                } else {
+                    star.classList.remove('bi-star-fill');
+                    star.classList.add('bi-star');
+                }
+            });
         });
-      });
     });
 
     // Manejar el envío de comentario
     document.querySelector('.btn-enviar').addEventListener('click', function() {
-      const comentarioTexto = document.getElementById('comment-text').value;
-      const nombreUsuario = window.localStorage.getItem('usuario') ?? "Usuario anónimo"; // Puedes reemplazarlo por un valor almacenado o capturado
-      if(calificacionSeleccionada === 0) {
-        calificacionSeleccionada = 1;
-      }
-      // Validar si se ha ingresado un comentario y una calificación
-      if (comentarioTexto.trim() === "") {
-        alert("Por favor, completa el comentario y selecciona una calificación.");
-        return;
-      }
-
-      // Crear un objeto con el nuevo comentario
-      const nuevoComentario = {
-        user: nombreUsuario,
-        description: comentarioTexto,
-        score: calificacionSeleccionada,
-        dateTime: new Date().toLocaleString(),
-        product: localStorage.getItem("productoId")  
-      };
-
-      // Añadir el nuevo comentario a la lista de comentarios
-      agregarComentario(nuevoComentario);
-
-      // Limpiar el formulario
-      document.getElementById('comment-text').value = '';
-      estrellas.forEach((star,index) => {
-        star.classList.remove('bi-star-fill', 'bi-star')
-        if(index == 0){
-          star.classList.add('bi-star-fill')
-        }else{
-          star.classList.add('bi-star')
+        const comentarioTexto = document.getElementById('comment-text').value;
+        const nombreUsuario = window.localStorage.getItem('usuario') ?? "Usuario anónimo"; // Puedes reemplazarlo por un valor almacenado o capturado
+        if (calificacionSeleccionada === 0) {
+            calificacionSeleccionada = 1;
         }
-      });
-      
-      calificacionSeleccionada = 1;
+
+        // Validar si se ha ingresado un comentario y una calificación
+        if (comentarioTexto.trim() === "") {
+            alert("Por favor, completa el comentario y selecciona una calificación.");
+            return;
+        }
+
+        // Crear un objeto con el nuevo comentario
+        const nuevoComentario = {
+            user: nombreUsuario,
+            description: comentarioTexto,
+            score: calificacionSeleccionada,
+            dateTime: new Date().toLocaleString(),
+            product: localStorage.getItem("productoId")  
+        };
+
+        // Añadir el nuevo comentario a la lista de comentarios
+        agregarComentario(nuevoComentario);
+
+        // Limpiar el formulario
+        document.getElementById('comment-text').value = '';
+        estrellas.forEach((star, index) => {
+            star.classList.remove('bi-star-fill', 'bi-star');
+            if (index == 0) {
+                star.classList.add('bi-star-fill');
+            } else {
+                star.classList.add('bi-star');
+            }
+        });
+        
+        calificacionSeleccionada = 1;
     });
 
     // Función para mostrar el nuevo comentario en la lista
     function agregarComentario(comentario) {
-      const calificacionesLista = document.getElementById("calificaciones-lista");
+        const calificacionesLista = document.getElementById("calificaciones-lista");
 
-      let estrellasHtml = '';
-      for (let i = 1; i <= 5; i++) {
-        estrellasHtml += i <= comentario.score ? '<span class="bi bi-star-fill stars"></span>' : '<span class="bi bi-star stars"></span>';
-      }
+        let estrellasHtml = '';
+        for (let i = 1; i <= 5; i++) {
+            estrellasHtml += i <= comentario.score ? '<span class="bi bi-star-fill stars"></span>' : '<span class="bi bi-star stars"></span>';
+        }
 
-      const comentarioHtml = `
-        <div class="calificacion-card">
-          <h5 class="fw-bold" style="color: #ff8a0d;">${comentario.user}</h5>
-          <h6 class="text-muted">${comentario.dateTime}</h6>
-          <p><strong>Comentario:</strong> ${comentario.description}</p>
-          <p><strong>Puntuación:</strong> ${estrellasHtml}</p>
-        </div>
-      `;
+        const comentarioHtml = `
+            <div class="calificacion-card">
+                <h5 class="fw-bold" style="color: #ff8a0d;">${comentario.user}</h5>
+                <h6 class="text-muted">${comentario.dateTime}</h6>
+                <p><strong>Comentario:</strong> ${comentario.description}</p>
+                <p><strong>Puntuación:</strong> ${estrellasHtml}</p>
+            </div>
+        `;
 
-      // Agregar el comentario al inicio de la lista
-      calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
+        // Agregar el comentario al inicio de la lista
+        calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
     }
-  });
+});
 
+        // Construye el HTML de los productos relacionados
+        let relatedHtml = groupedProducts.map((group, index) => `
+        <div class="carousel-item ${index === 0 ? 'active' : ''}">
+            <div class="row justify-content-center"> <!-- Centramos los productos -->
+                ${group.map(producto => `
+                    <div class="col-md-4 d-flex justify-content-center mb-4"> <!-- Centrado de las tarjetas con margen -->
+                        <div class="card" style="width: 18rem;">
+                            <img src="${producto.image}" class="card-img-top" alt="${producto.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${producto.name}</h5>
+                                <p class="card-text text-danger">${producto.currency} ${producto.cost}</p>
+                                <button class="btn btn-primary" onclick="irAProducto(${producto.id})">Ver producto</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `).join('');
+
+    let carouselHtml = `
+    <div id="relatedProductsCarousel" class="carousel slide mt-5" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            ${relatedHtml}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#relatedProductsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#relatedProductsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    `;
+
+    // Agregar el título y el carrusel al contenedor
+    document.getElementById("related-products").innerHTML = tituloHtml + carouselHtml;
+}
+
+
+// Función para ir a un producto
+function irAProducto(idProducto) {
+    // Almacena el nuevo ID de producto en localStorage
+    localStorage.setItem("productoId", idProducto);
+    // Recarga la página para mostrar el nuevo producto
+    location.reload();
+}
