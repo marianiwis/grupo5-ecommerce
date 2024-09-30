@@ -17,6 +17,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const urlProducto = `${PRODUCT_INFO_URL}${productoId}${EXT_TYPE}`; // Usa el ID del producto
     const urlCat = `${PRODUCTS_URL}${categoriaID}${EXT_TYPE}`; // Usa el ID de la categoría
 
+    // Obtener la información del producto actual
+    getJSONData(urlProducto).then(function(resultObj) {
+        if (resultObj.status === "ok") {
+            const producto = resultObj.data;
+            mostrarProducto(producto);}
+        });
     
             // Obtener productos de la misma categoría
 getJSONData(urlCat).then(function(relatedResult) {
@@ -29,6 +35,7 @@ getJSONData(urlCat).then(function(relatedResult) {
     }
 }).catch(function(error) {
     console.error("Error en la solicitud de productos relacionados:", error);
+});
 });
 
     //realiza una solicitud HTTP para obtener datos en formato JSON desde la URL especificada.
@@ -53,8 +60,12 @@ getJSONData(urlCat).then(function(relatedResult) {
 
     // Agregar evento de aplicar filtros
     document.getElementById('apply-filters').addEventListener('click', applyFilters);
-});
-
+// Obtener la información del producto actual
+getJSONData(urlProducto).then(function(resultObj) {
+    if (resultObj.status === "ok") {
+        const producto = resultObj.data;
+            mostrarProducto(producto);}
+        });
 // Función para mostrar el producto
 function mostrarProducto(producto) {
     // genera HTML para cada imagen en el array, con la estructura de Bootstrap para el carrusel
@@ -100,12 +111,10 @@ function mostrarProductosRelacionados(productos) {
         document.getElementById("related-products").innerHTML = "<p>No hay productos relacionados.</p>";
         return;
     }
-
-    // Agregar título de "Productos Relacionados"
-    let tituloHtml = `
-        <h2 class="text-center mt-5 mb-4">Productos Relacionados</h2>
-    `;
-
+       // Agregar título de "Productos Relacionados"
+       let tituloHtml = `
+       <h2 class="text-center mt-5 mb-4">Productos Relacionados</h2>
+   `;
     // Agrupa los productos de 3 en 3
     let groupedProducts = [];
     for (let i = 0; i < productos.length; i += 3) {
@@ -152,6 +161,14 @@ function mostrarProductosRelacionados(productos) {
     document.getElementById("related-products").innerHTML = tituloHtml + carouselHtml;
 }
 
+// Función para ir a un producto
+function irAProducto(idProducto) {
+    // Almacena el nuevo ID de producto en localStorage
+    localStorage.setItem("productoId", idProducto);
+    // Recarga la página para mostrar el nuevo producto
+    location.reload();
+}
+
 // Función para generar estrellas
 function generarEstrellas(puntuacion) {
     let estrellasHtml = '';
@@ -185,7 +202,7 @@ function mostrarCalificaciones(comentarios) {
     document.getElementById("calificaciones-lista").innerHTML = calificacionesHtml;
 }
 
-// Manejador para la selección de estrellas y el envío de comentarios
+// DESAFIATE Manejador para la selección de estrellas y el envío de comentarios
 document.addEventListener("DOMContentLoaded", function() {
     let calificacionSeleccionada = 0;
 
@@ -271,51 +288,4 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-        // Construye el HTML de los productos relacionados
-        let relatedHtml = groupedProducts.map((group, index) => `
-        <div class="carousel-item ${index === 0 ? 'active' : ''}">
-            <div class="row justify-content-center"> <!-- Centramos los productos -->
-                ${group.map(producto => `
-                    <div class="col-md-4 d-flex justify-content-center mb-4"> <!-- Centrado de las tarjetas con margen -->
-                        <div class="card" style="width: 18rem;">
-                            <img src="${producto.image}" class="card-img-top" alt="${producto.name}">
-                            <div class="card-body">
-                                <h5 class="card-title">${producto.name}</h5>
-                                <p class="card-text text-danger">${producto.currency} ${producto.cost}</p>
-                                <button class="btn btn-primary" onclick="irAProducto(${producto.id})">Ver producto</button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `).join('');
-
-    let carouselHtml = `
-    <div id="relatedProductsCarousel" class="carousel slide mt-5" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            ${relatedHtml}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#relatedProductsCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#relatedProductsCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-    `;
-
-    // Agregar el título y el carrusel al contenedor
-    document.getElementById("related-products").innerHTML = tituloHtml + carouselHtml;
-}
-
-
-// Función para ir a un producto
-function irAProducto(idProducto) {
-    // Almacena el nuevo ID de producto en localStorage
-    localStorage.setItem("productoId", idProducto);
-    // Recarga la página para mostrar el nuevo producto
-    location.reload();
-}
+         
