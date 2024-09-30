@@ -55,6 +55,41 @@
       max-width: 30%; /* aseguro que no se expandan mas del 30% */
     }
 
+    .card {
+      border: none;
+      border-radius: 0.25rem;
+      box-shadow: 0 4px 8px #ff8a0d;
+      height: 100%;
+      display: flex; /* se activa Flexbox en el contenedor */
+      flex-direction: column; /* los elementos dentro del contenedor se organizan en una columna vertical.*/
+    }
+
+    .card-body {
+      flex: 1; /* permite que .card-body crezca y llene el espacio disponible dentro del contenedor padre*/
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+
+    .card-img-top {
+      width: 100%;
+      height: 200px;
+      object-fit: cover; /* hace que la imagen se recorte de manera que ocupe todo el espacio del contenedor mientras mantiene su relación de aspecto*/
+    }
+
+    #productos-lista {
+      display: flex;
+      flex-wrap: wrap; /* permite que los elementos flexibles dentro de #productos-lista se envuelvan en la siguiente línea si no caben en la línea actual*/
+      gap: 1rem;
+    }
+
+    
+    .col-md-4 {
+      flex: 1 1 30%; /* voy a poner 3 tarjetas por filas */
+      max-width: 30%; /* aseguro que no se expandan mas del 30% */
+    }
+
     /*las Media Queries se utilizan para hacer que el diseño sea responsivo*/
     /*para pantallas con un ancho máximo de 768px, cada tarjeta ocupará el
     45% del ancho disponible, mostrando dos tarjetas por fila*/
@@ -106,34 +141,76 @@
     </div>
   </nav>
   
+
   <!-- aca se puede cambiar a trener un solo contenedor seria mas facil, lo voy a ver desp -->
   <main class="pb-5 container" style="margin-top: 2rem;">
     <div class="container">
       
       <!-- titulo de la cat -->
       <h1 class="text-start fw-bold mb-2" style="color: black; font-size: 2.0rem;" id="productos-titulo"></h1>
+
+      <main class="pb-5 container" style="margin-top: 2rem;">
+        <div class="container">
+          
+          <!-- Barrita de color -->
+          <hr style="border: 3px solid #ff8a0d; width: 100%; margin: 0 auto 20px auto;">
+          
+          <!-- Filtros y orden por precios -->
+          <div class="mb-4">
+            <form id="filter-form" class="row">
+
+            <!-- Filtros por rango de precio -->
+            <div class="col-md-4 mb-3">
+              <label for="min-price" class="form-label">Precio Mínimo</label>
+              <input type="number" id="min-price" class="form-control" placeholder="Precio Mínimo">
+              </div>
+            <div class="col-md-4 mb-3">
+              <label for="max-price" class="form-label">Precio Máximo</label>
+              <input type="number" id="max-price" class="form-control" placeholder="Precio Máximo">
+            </div>
+
+            <!-- Ordenar por..  -->
+            <div class="col-md-4 mb-3">
+              <label for="sort-order" class="form-label">Ordenar por</label>
+              <select id="sort-order" class="form-select">
+              <option value="price-asc">Precio: Ascendente</option>
+              <option value="price-desc">Precio: Descendente</option>
+              <option value="relevance-desc">Cantidad vendidos descendente</option>
+              </select>
+            </div>
+
+            <div class="col-12">
+              <button type="button" id="apply-filters" class="btn btn-primary">Aplicar Filtros</button>
+              <button type="button" id="clear-filters" class="btn btn-danger">Limpiar Filtros</button>
+            </div>
+            </form>
+          </div>
+          
+          <h1 class="text-start fw-bold mb-2" style="color: black; font-size: 2.0rem;" id="productos-titulo"></h1>
       
-       <!-- barrita de color -->
-      <hr style="border: 3px solid #ff8a0d; width: 100%; margin: 0 auto 20px auto;">
+          <!-- barrita de color -->
+          <hr style="border: 3px solid #ff8a0d; width: 100%; margin: 0 auto 20px auto;">
       
-      <div class="row" id="productos-lista">
-        <!-- inserto las tarjetas de los productos de forma dinamica -->
-      </div>
-    
-    </div>
-  </main>
+          <div class="row" id="productos-lista">
+          <!-- inserto las tarjetas de los productos de forma dinamica -->
+          </div> 
+        </div>
+      </main>
   
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+      <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <main class="pb-5 container" style="margin-top: 2rem;">
+      <div class="container">
+  </main>
+      
+  <div></div>     
+  <div></div>
+  <div></div>
+  <div></div>
+  </div>
   </div>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/products.js"></script>
 </body>
-
 </html>

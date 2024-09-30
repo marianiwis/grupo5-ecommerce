@@ -1,3 +1,5 @@
+let productos = []; // variable para almacenar los productos
+
 function mostrarProductos(productosArray) {
     let htmlContentToAppend = "";
 
@@ -27,16 +29,19 @@ function mostrarProductos(productosArray) {
         `;
     });
 
-    // insertar el contenido HTML generado en el contenedor de productos
+// insertar el contenido HTML generado en el contenedor de productos
     document.getElementById("productos-lista").innerHTML = htmlContentToAppend;
-
 }
 
 // función para guardar el ID del producto y redirigir
 function guardarProductoYRedirigir(productoId) {
+    // guarda el ID del producto en el almacenamiento local
     localStorage.setItem("productoId", productoId);
+    // redirige al usuario a la página product-info.html
     window.location.href = "product-info.html";
 }
+
+
 // Llamada a la función cuando los datos están disponibles
 /*getJSONData(PRODUCTS_URL + "101.json").then(function(resultObj) {
     if (resultObj.status === "ok") {
@@ -51,14 +56,37 @@ function productosVacios() {
 }
 
 function productoTitulos(titulo) {
-document.getElementById("productos-titulo").innerHTML = "Productos / " + titulo;
+    document.getElementById("productos-titulo").innerHTML = "Productos / " + titulo;
 }
 
-// Inicializar la página cargando productos de la categoría seleccionada
-// Almacena un valor
+function applyFilters() {
+    const minPrice = parseFloat(document.getElementById('min-price').value) || 0;
+    const maxPrice = parseFloat(document.getElementById('max-price').value) || Infinity;
+    const sortOrder = document.getElementById('sort-order').value;
+
+    let filteredProductos = productos.filter(producto =>
+        producto.cost >= minPrice && producto.cost <= maxPrice
+    );
+
+    if (sortOrder === 'price-asc') {
+        filteredProductos.sort((a, b) => a.cost - b.cost);
+    } else if (sortOrder === 'price-desc') {
+        filteredProductos.sort((a, b) => b.cost - a.cost);
+    } else if (sortOrder === 'relevance-desc') {
+        filteredProductos.sort((a, b) => b.soldCount - a.soldCount);
+    }
+
+    mostrarProductos(filteredProductos);
+}
+
+function clearFilters() {
+    document.getElementById('min-price').value = null;
+    document.getElementById('max-price').value = null;
+    applyFilters()
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     const categoriaID = localStorage.getItem('catID');
-    let productosCargados = []; // Declarar variable para almacenar los productos cargados
     console.log(`Categoría ID obtenido: ${categoriaID}`);
 
     if (categoriaID) {
@@ -66,25 +94,26 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(function(resultObj) {
                 if (resultObj.status === "ok") {
                     if (resultObj.data.products.length > 0) {
-                        productosCargados = resultObj.data.products; // Asignar los productos cargados a la variable
-                        mostrarProductos(productosCargados); // Mostrar los productos
+                        productos = resultObj.data.products;
+                        mostrarProductos(productos);
 
                         // Buscador en tiempo real
                         const input = document.getElementById('inputBuscador');
                         input.addEventListener('input', function() {
                             const inputTexto = input.value.trim().toUpperCase();
-                            const productosFiltrados = productosCargados.filter(producto =>
+                            const productosFiltrados = productos.filter(producto =>
                                 producto.name.toUpperCase().includes(inputTexto) ||
                                 producto.description.toUpperCase().includes(inputTexto)
                             );
-                            mostrarProductos(productosFiltrados); // Mostrar productos filtrados
+                            mostrarProductos(productosFiltrados);
                         });
+                        applyFilters()
                     } else {
                         productosVacios();
                     }
 
                     if (resultObj.data.catName) {
-                        productoTitulos(resultObj.data.catName)
+                        productoTitulos(resultObj.data.catName);
                     }
                 } else {
                     console.error("Error en la obtención de datos:", resultObj.data);
@@ -93,4 +122,9 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
         console.error("No se encontró el ID de categoría en el almacenamiento local.");
     }
+
+    // Agregar evento de aplicar filtros
+    document.getElementById('apply-filters').addEventListener('click', applyFilters);
+    
+    document.getElementById('clear-filters').addEventListener('click', clearFilters);
 });

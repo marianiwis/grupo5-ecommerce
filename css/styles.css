@@ -279,6 +279,7 @@ button#iniciarSesion {
 }
 
 
+
 /* Añadir media queries para dispositivos móviles y tabletas */
 
 @media (max-width: 768px) {
@@ -325,6 +326,7 @@ button#iniciarSesion {
 
   .login-wrapper {
 
+
     flex-direction: row;
 
   }
@@ -345,6 +347,7 @@ button#iniciarSesion {
     padding: 50px;
   }
 }
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .login-wrapper {
     flex-direction: column; /* Coloca la imagen arriba y el formulario abajo */
@@ -381,4 +384,23 @@ button#iniciarSesion {
   .alert-fixed {
     top: auto;
     bottom: 0;
+}
+
+#comment-text{
+  resize: none;
+}
+
+.stars{
+  color: #ffc300;
+  cursor: pointer;
+}
+.btn-enviar{
+  background-color: #ffc300;
+  outline-color: #ffc300;
+  border-color: #ffc300;
+}
+.btn-enviar:hover{
+  background-color: #ffc300;
+  outline-color: #ffc300;
+  border-color: #ffc300;
 }
