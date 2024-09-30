@@ -1,0 +1,20 @@
+/* Asegura que se muestren 3 tarjetas en pantallas grandes, 2 en medianas y 1 en pequeñas */
+.carousel-item .col-md-4 {
+    flex: 0 0 auto;
+}
+.relatedProductsCarousel {
+    padding: 50%;
+}
+
+
+@media (min-width: 576px) {
+    .carousel-item .col-md-4 {
+        width: 50%; /* 2 productos por slide en pantallas medianas */
+    }
+}
+
+@media (min-width: 768px) {
+    .carousel-item .col-md-4 {
+        width: 33.33%; /* 3 productos por slide en pantallas grandes */
+    }
+}
