@@ -1,3 +1,11 @@
+// Función para ir a un producto
+function irAProducto(idProducto) {
+    // Almacena el nuevo ID de producto en localStorage
+    localStorage.setItem("productoId", idProducto);
+    // Recarga la página para mostrar el nuevo producto
+    location.reload();
+}
+
 document.addEventListener("DOMContentLoaded", function() {
 
     // obtener el Identificador de producto
@@ -36,16 +44,16 @@ getJSONData(urlCat).then(function(relatedResult) {
 }).catch(function(error) {
     console.error("Error en la solicitud de productos relacionados:", error);
 });
-});
+
 
     //realiza una solicitud HTTP para obtener datos en formato JSON desde la URL especificada.
-    getJSONData(url).then(function(resultObj) {
+    /*getJSONData(url).then(function(resultObj) {
         if (resultObj.status === "ok") {
             mostrarProducto(resultObj.data);
         } else {
             console.error("Error en la obtención de datos:", resultObj.data);
         }
-    });
+    });*/
 
     //para obtener los comentarios del producto
     const urlComentarios = `https://japceibal.github.io/emercado-api/products_comments/${productoId}.json`;
@@ -59,7 +67,7 @@ getJSONData(urlCat).then(function(relatedResult) {
     });
 
     // Agregar evento de aplicar filtros
-    document.getElementById('apply-filters').addEventListener('click', applyFilters);
+    // document.getElementById('apply-filters').addEventListener('click', applyFilters);
 // Obtener la información del producto actual
 getJSONData(urlProducto).then(function(resultObj) {
     if (resultObj.status === "ok") {
@@ -104,6 +112,8 @@ function mostrarProducto(producto) {
     `;
     document.getElementById("product-info").innerHTML = htmlContentToAppend;
 }
+
+
 
 // Función para mostrar productos relacionados
 function mostrarProductosRelacionados(productos) {
@@ -161,14 +171,6 @@ function mostrarProductosRelacionados(productos) {
     document.getElementById("related-products").innerHTML = tituloHtml + carouselHtml;
 }
 
-// Función para ir a un producto
-function irAProducto(idProducto) {
-    // Almacena el nuevo ID de producto en localStorage
-    localStorage.setItem("productoId", idProducto);
-    // Recarga la página para mostrar el nuevo producto
-    location.reload();
-}
-
 // Función para generar estrellas
 function generarEstrellas(puntuacion) {
     let estrellasHtml = '';
@@ -201,7 +203,7 @@ function mostrarCalificaciones(comentarios) {
 
     document.getElementById("calificaciones-lista").innerHTML = calificacionesHtml;
 }
-
+});
 // DESAFIATE Manejador para la selección de estrellas y el envío de comentarios
 document.addEventListener("DOMContentLoaded", function() {
     let calificacionSeleccionada = 0;
@@ -287,5 +289,3 @@ document.addEventListener("DOMContentLoaded", function() {
         calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
     }
 });
-
-         
