@@ -8,31 +8,31 @@ function irAProducto(idProducto) {
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    // obtener el Identificador de producto
-    const productoId = localStorage.getItem("productoId");
+// obtener el Identificador de producto
+const productoId = localStorage.getItem("productoId");
     if (!productoId) {
         console.error("No se ha encontrado el ID del producto.");
         return;
     }
-    // obtener el identificador de categoría
-    const categoriaID = localStorage.getItem("catID");
+// obtener el identificador de categoría
+const categoriaID = localStorage.getItem("catID");
     if (!categoriaID) {
         console.error("No se ha encontrado el ID de la categoría.");
         return;
     }
 
-    // URLs para realizar solicitud a un API y obtener info
-    const urlProducto = `${PRODUCT_INFO_URL}${productoId}${EXT_TYPE}`; // Usa el ID del producto
-    const urlCat = `${PRODUCTS_URL}${categoriaID}${EXT_TYPE}`; // Usa el ID de la categoría
+// URLs para realizar solicitud a un API y obtener info
+const urlProducto = `${PRODUCT_INFO_URL}${productoId}${EXT_TYPE}`; // Usa el ID del producto
+const urlCat = `${PRODUCTS_URL}${categoriaID}${EXT_TYPE}`; // Usa el ID de la categoría
 
-    // Obtener la información del producto actual
-    getJSONData(urlProducto).then(function(resultObj) {
-        if (resultObj.status === "ok") {
-            const producto = resultObj.data;
-            mostrarProducto(producto);}
-        });
+// Obtener la información del producto actual
+getJSONData(urlProducto).then(function(resultObj) {
+    if (resultObj.status === "ok") {
+        const producto = resultObj.data;
+        mostrarProducto(producto);}
+    });
     
-            // Obtener productos de la misma categoría
+// Obtener productos de la misma categoría
 getJSONData(urlCat).then(function(relatedResult) {
     if (relatedResult.status === "ok") {
         const productosRelacionados = relatedResult.data.products;
@@ -46,45 +46,46 @@ getJSONData(urlCat).then(function(relatedResult) {
 });
 
 
-    //realiza una solicitud HTTP para obtener datos en formato JSON desde la URL especificada.
-    /*getJSONData(url).then(function(resultObj) {
-        if (resultObj.status === "ok") {
-            mostrarProducto(resultObj.data);
-        } else {
-            console.error("Error en la obtención de datos:", resultObj.data);
-        }
-    });*/
+//realiza una solicitud HTTP para obtener datos en formato JSON desde la URL especificada.
+/*getJSONData(url).then(function(resultObj) {
+    if (resultObj.status === "ok") {
+         mostrarProducto(resultObj.data);
+    } else {
+        console.error("Error en la obtención de datos:", resultObj.data);
+    }
+});*/
 
-    //para obtener los comentarios del producto
-    const urlComentarios = `https://japceibal.github.io/emercado-api/products_comments/${productoId}.json`;
-    getJSONData(urlComentarios).then(function(resultObj) {
-        if (resultObj.status === "ok") {
-            console.log(resultObj.data); // Agrega este log para ver los datos en la consola
-            mostrarCalificaciones(resultObj.data);
-        } else {
-            console.error("Error en la obtención de comentarios:", resultObj.data);
-        }
-    });
+//para obtener los comentarios del producto
+const urlComentarios = `https://japceibal.github.io/emercado-api/products_comments/${productoId}.json`;
+getJSONData(urlComentarios).then(function(resultObj) {
+    if (resultObj.status === "ok") {
+        console.log(resultObj.data); // Agrega este log para ver los datos en la consola
+        mostrarCalificaciones(resultObj.data);
+    } else {
+        console.error("Error en la obtención de comentarios:", resultObj.data);
+    }
+});
 
-    // Agregar evento de aplicar filtros
-    // document.getElementById('apply-filters').addEventListener('click', applyFilters);
+// Agregar evento de aplicar filtros
+// document.getElementById('apply-filters').addEventListener('click', applyFilters);
 // Obtener la información del producto actual
 getJSONData(urlProducto).then(function(resultObj) {
     if (resultObj.status === "ok") {
         const producto = resultObj.data;
             mostrarProducto(producto);}
         });
+
 // Función para mostrar el producto
 function mostrarProducto(producto) {
     // genera HTML para cada imagen en el array, con la estructura de Bootstrap para el carrusel
     //con controles para navegar entre las imágenes y asegurar que el diseño sea limpio y responsivo
     let imagesHtml = producto.images.map((img, index) => `
-        <div class="carousel-item ${index === 0 ? 'active' : ''}">
-            <img src="${img}" class="d-block w-100" alt="${producto.name}">
-        </div>
-    `).join('');
+    <div class="carousel-item ${index === 0 ? 'active' : ''}">
+        <img src="${img}" class="d-block w-100" alt="${producto.name}">
+    </div>
+`).join('');
 
-    let htmlContentToAppend = `
+let htmlContentToAppend = `
     <div class="col-12">
         <div id="productCarousel" class="carousel slide shadow-lg rounded">
             <div class="carousel-inner">
@@ -227,8 +228,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Manejar el envío de comentario
-    document.querySelector('.btn-enviar').addEventListener('click', function() {
+// Manejar el envío de comentario
+document.querySelector('.btn-enviar').addEventListener('click', function() {
         const comentarioTexto = document.getElementById('comment-text').value;
         const nombreUsuario = window.localStorage.getItem('usuario') ?? "Usuario anónimo"; // Puedes reemplazarlo por un valor almacenado o capturado
         if (calificacionSeleccionada === 0) {
