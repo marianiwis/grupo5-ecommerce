@@ -404,3 +404,16 @@ button#iniciarSesion {
   outline-color: #ffc300;
   border-color: #ffc300;
 }
+
+.carousel-control-prev, .carousel-control-next {
+  z-index: 1;
+  width: 5%;
+}
+
+.carousel-control-prev {
+  left: -5%;
+}
+
+.carousel-control-next {
+  right: -5%;
+}
