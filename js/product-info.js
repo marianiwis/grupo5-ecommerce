@@ -188,11 +188,13 @@ function generarEstrellas(puntuacion) {
 // Función para mostrar las calificaciones (comentarios) como cards
 function mostrarCalificaciones(comentarios) {
     let calificacionesHtml = ''; // Iniciar como cadena vacía
+
+    // Iterar sobre cada comentario
     comentarios.forEach(comentario => {
         calificacionesHtml += `
-            <div class="card mb-4 shadow-sm">
+            <div class="card comment-card mb-4 shadow-sm"> <!-- Asegúrate de usar comment-card aquí -->
                 <div class="card-body">
-                    <h5 class="card-title" style="color: #ff8a0d; font-weight: bold;">${comentario.user}</h5>
+                    <h5 class="card-title">${comentario.user}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">${comentario.dateTime}</h6>
                     <p class="card-text"><strong>Comentario:</strong> ${comentario.description}</p>
                     <p class="card-text"><strong>Producto ID:</strong> ${comentario.product}</p>
@@ -202,9 +204,11 @@ function mostrarCalificaciones(comentarios) {
         `;
     });
 
+    // Asignar el HTML generado al contenedor de calificaciones
     document.getElementById("calificaciones-lista").innerHTML = calificacionesHtml;
 }
-});
+
+
 // DESAFIATE Manejador para la selección de estrellas y el envío de comentarios
 document.addEventListener("DOMContentLoaded", function() {
     let calificacionSeleccionada = 0;
@@ -289,4 +293,34 @@ document.querySelector('.btn-enviar').addEventListener('click', function() {
         // Agregar el comentario al inicio de la lista
         calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
     }
+})})
+
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleModeButton = document.getElementById('toggle-mode');
+
+    // Verifica el modo actual y ajusta el icono del botón
+    if (localStorage.getItem('modo') !== 'dark-mode') {
+        document.body.classList.add('dark-mode'); // Agrega la clase para el modo oscuro
+        toggleModeButton.innerHTML = '<i class="bi bi-sun-fill"></i>'; // Cambia el icono al de sol
+    } else {
+        //document.body.classList.remove('dark-mode'); // Asegúrate de eliminar la clase si no está en modo oscuro
+        toggleModeButton.innerHTML = '<i class="bi bi-moon-fill"></i>'; // Cambia el icono al de luna
+    }
+
+    // Agrega el event listener al botón
+    toggleModeButton.addEventListener('click', () => {
+        // Alternar la clase 'dark-mode' en el body
+        document.body.classList.toggle('dark-mode');
+
+        // Guardar la preferencia del usuario
+        if (document.body.classList.contains('dark-mode')) {
+            localStorage.setItem('modo', 'dark-mode'); // Guarda que está en modo oscuro
+            toggleModeButton.innerHTML = '<i class="bi bi-sun-fill"></i>'; // Cambia el icono al de sol
+        } else {
+            localStorage.setItem('modo', 'claro'); // Guarda que está en modo claro
+            toggleModeButton.innerHTML = '<i class="bi bi-moon-fill"></i>'; // Cambia el icono al de luna
+        }
+    });
 });
+
+
