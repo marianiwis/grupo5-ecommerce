@@ -54,12 +54,57 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="container mt-5">
+      <h2>Perfil</h2>
+      <hr style="border: 2px solid #FFC107; width: 80px;">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <img src="img/fake-profile-pic.jpg" alt="Foto de perfil" class="rounded-circle">
+          <div class="mt-2">
+            <button class="btn btn-warning">Subir foto</button>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <form id="profileForm">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="firstName">Nombre *</label>
+                <input type="text" class="form-control" id="firstName" placeholder="Ingrese su nombre">
+              </div>
+              <div class="col-md-6">
+                <label for="secondName">Segundo nombre</label>
+                <input type="text" class="form-control" id="secondName" placeholder="Ingrese su segundo nombre">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="lastName">Apellido *</label>
+                <input type="text" class="form-control" id="lastName" placeholder="Ingrese su apellido">
+              </div>
+              <div class="col-md-6">
+                <label for="secondLastName">Segundo apellido</label>
+                <input type="text" class="form-control" id="secondLastName" placeholder="Ingrese su segundo apellido">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="email">E-mail *</label>
+                <input type="email" class="form-control" id="email" placeholder="Ingrese su e-mail">
+              </div>
+              <div class="col-md-6">
+                <label for="contactPhone">Teléfono de contacto</label>
+                <input type="text" class="form-control" id="contactPhone" placeholder="Ingrese su teléfono de contacto">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-warning">Guardar Cambios</button>
+          </form>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <button class="btn btn-light" id="themeToggle">🌞/🌜</button>
       </div>
     </div>
-  </main>
+  </main>  
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
