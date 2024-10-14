@@ -295,30 +295,22 @@ document.querySelector('.btn-enviar').addEventListener('click', function() {
     }
 })})
 
-document.addEventListener('DOMContentLoaded', () => {
-    const toggleModeButton = document.getElementById('toggle-mode');
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('toggle-mode');
 
-    // Verifica el modo actual y ajusta el icono del botón
-    if (localStorage.getItem('modo') !== 'dark-mode') {
-        document.body.classList.add('dark-mode'); // Agrega la clase para el modo oscuro
-        toggleModeButton.innerHTML = '<i class="bi bi-sun-fill"></i>'; // Cambia el icono al de sol
-    } else {
-        //document.body.classList.remove('dark-mode'); // Asegúrate de eliminar la clase si no está en modo oscuro
-        toggleModeButton.innerHTML = '<i class="bi bi-moon-fill"></i>'; // Cambia el icono al de luna
+    // Comprobar si hay una preferencia de modo guardada
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        document.body.classList.add('dark-mode');
     }
 
-    // Agrega el event listener al botón
-    toggleModeButton.addEventListener('click', () => {
-        // Alternar la clase 'dark-mode' en el body
+    toggleButton.addEventListener('click', function() {
         document.body.classList.toggle('dark-mode');
 
-        // Guardar la preferencia del usuario
+        // Guardar la preferencia en localStorage
         if (document.body.classList.contains('dark-mode')) {
-            localStorage.setItem('modo', 'dark-mode'); // Guarda que está en modo oscuro
-            toggleModeButton.innerHTML = '<i class="bi bi-sun-fill"></i>'; // Cambia el icono al de sol
+            localStorage.setItem('dark-mode', 'enabled');
         } else {
-            localStorage.setItem('modo', 'claro'); // Guarda que está en modo claro
-            toggleModeButton.innerHTML = '<i class="bi bi-moon-fill"></i>'; // Cambia el icono al de luna
+            localStorage.removeItem('dark-mode');
         }
     });
 });

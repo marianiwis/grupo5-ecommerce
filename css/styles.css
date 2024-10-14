@@ -423,6 +423,7 @@ body.dark-mode {
   background-size: cover; /* Asegúrate de que la imagen cubra todo el contenedor */ 
 }
 
+
 .dark-mode::before {
   content: ""; /* Crea un pseudo-elemento */
   position: absolute; /* Posición absoluta para cubrir todo el contenedor */
@@ -430,8 +431,13 @@ body.dark-mode {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Color negro con 30% de opacidad */
+  background-color: rgba(0, 0, 0, 0.5); /* Color negro con 50% de opacidad */
   z-index: 1; /* Asegúrate de que esté por encima de la imagen de fondo */
+}
+
+.dark-mode * {
+  position: relative; /* Para asegurarte de que el contenido esté por encima de la superposición */
+  z-index: 2; /* Asegúrate de que el contenido esté por encima de la superposición */
 }
 
 .dark-mode .content {
@@ -469,4 +475,12 @@ body.dark-mode {
   color: #fff; /* Color de texto blanco */
   position: relative; /* Para que el pseudo-elemento funcione correctamente */
   z-index: 2; /* Asegúrate de que el contenido esté encima del overlay */
+}
+
+body.dark-mode .carousel-control-prev,
+body.dark-mode .carousel-control-next {
+    /* Revisa estas propiedades */
+    position: absolute; /* Asegúrate de que esté definido */
+    top: 50%; /* Asegúrate de que esté centrado verticalmente */
+    transform: translateY(-50%); /* Centra la flecha verticalmente */
 }
