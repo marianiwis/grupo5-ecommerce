@@ -135,8 +135,15 @@
             <button type="submit">Buscar</button>
             <ul id="resultados"></ul> <!-- Lista para mostrar resultados -->    
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" id="cerrarSesion">Cerrar sesión</a>
+          <li class="nav-item dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Usuario <!-- Aca puede ir el nombre de us -->
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+              <li><a class="dropdown-item" href="profile.html">Mi perfil</a></li>
+              <li><a class="dropdown-item" href="index.html" id="cerrarSesion">Cerrar sesión</a></li>
+            </ul>
           </li>
         </ul>
       </div>
