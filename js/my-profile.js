@@ -58,4 +58,4 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   document.addEventListener("DOMContentLoaded", function() {
     // Todo tu código va aquí
-    console.log("DOM completamente cargado y parseado.");
+    console.log("DOM completamente cargado y parseado.");})
