@@ -453,21 +453,19 @@ body.dark-mode {
 .dark-mode .custom-card-body, .dark-mode .custom-card-comment {
   background-color: #333;
   color: #fff;
-}
-
-.dark-mode .custom-card-body, .dark-mode .custom-card-comment {
-  background-color: #333;
-  color: #fff;
+  border-radius: 15px; /* bordes redondeados */
 }
 
 .dark-mode .card-body, .dark-mode .card-comment {
   background-color: #333;
   color: #fff;
+  border-radius: 15px; /* bordes redondeados */
 }
 
 .dark-mode .calificacion-card {
   background-color: #444;
   color: #fff;
+  border-radius: 15px; /* bordes redondeados */
 }
 
 .dark-mode .dark-mode, .dark-mode .dark-mode {
