@@ -278,10 +278,7 @@ button#iniciarSesion {
   text-align: left;
 }
 
-
-
 /* Añadir media queries para dispositivos móviles y tabletas */
-
 @media (max-width: 768px) {
   /* Ajustes para dispositivos móviles */
 
@@ -416,4 +413,72 @@ button#iniciarSesion {
 
 .carousel-control-next {
   right: -5%;
+}
+
+
+ /*Modo oscuro*/
+body.dark-mode {
+  position: relative; /* Necesario para posicionar el pseudo-elemento o el overlay */
+  background-image: url('https://i.pinimg.com/564x/01/9d/fa/019dfabf0312f0de5d3df51c5817d602.jpg'); /* Establece tu imagen de fondo */
+  background-size: cover; /* Asegúrate de que la imagen cubra todo el contenedor */ 
+}
+
+
+.dark-mode::before {
+  content: ""; /* Crea un pseudo-elemento */
+  position: absolute; /* Posición absoluta para cubrir todo el contenedor */
+  top: 0; 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Color negro con 50% de opacidad */
+  z-index: 1; /* Asegúrate de que esté por encima de la imagen de fondo */
+}
+
+.dark-mode * {
+  position: relative; /* Para asegurarte de que el contenido esté por encima de la superposición */
+  z-index: 2; /* Asegúrate de que el contenido esté por encima de la superposición */
+}
+
+.dark-mode .content {
+  position: relative; /* Para asegurarte de que el contenido esté por encima del overlay */
+  z-index: 2; /* Asegúrate de que el contenido esté encima del overlay */
+  color: #fff; /* Color de texto blanco para buena legibilidad */
+}
+
+.dark-mode .navbar {
+  background-color: #333;
+}
+
+.dark-mode .custom-card-body, .dark-mode .custom-card-comment {
+  background-color: #333;
+  color: #fff;
+  border-radius: 15px; /* bordes redondeados */
+}
+
+.dark-mode .card-body, .dark-mode .card-comment {
+  background-color: #333;
+  color: #fff;
+  border-radius: 15px; /* bordes redondeados */
+}
+
+.dark-mode .calificacion-card {
+  background-color: #444;
+  color: #fff;
+  border-radius: 15px; /* bordes redondeados */
+}
+
+.dark-mode .dark-mode, .dark-mode .dark-mode {
+  background-color: #222; /* Fondo oscuro */
+  color: #fff; /* Color de texto blanco */
+  position: relative; /* Para que el pseudo-elemento funcione correctamente */
+  z-index: 2; /* Asegúrate de que el contenido esté encima del overlay */
+}
+
+body.dark-mode .carousel-control-prev,
+body.dark-mode .carousel-control-next {
+    /* Revisa estas propiedades */
+    position: absolute; /* Asegúrate de que esté definido */
+    top: 50%; /* Asegúrate de que esté centrado verticalmente */
+    transform: translateY(-50%); /* Centra la flecha verticalmente */
 }
