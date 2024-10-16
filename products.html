@@ -107,6 +107,8 @@
         max-width: 100%;
       }
     }
+
+
   </style>
 </head>
 
@@ -117,7 +119,7 @@
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Saco esta parte de acá porque esto hace que el nombre se repita al lado del boton <div class="collapse navbar-collapse" id="navbarNav">  -->
         <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
             <a class="nav-link" href="index.html">Inicio</a>
@@ -133,9 +135,10 @@
             <button type="submit">Buscar</button>
             <ul id="resultados"></ul> <!-- Lista para mostrar resultados -->    
           </li>
+
           <li class="nav-item dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Usuario <!-- Aca puede ir el nombre de us -->
+              Usuario <!-- Menú desplegable con opciones -->
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
