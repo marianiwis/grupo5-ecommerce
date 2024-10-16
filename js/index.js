@@ -13,14 +13,15 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 });
 document.addEventListener("DOMContentLoaded", function() {
-    // Obtener el nombre de usuario almacenado en localStorage
-    const usuario = window.localStorage.getItem("usuario");
-
+    
+     // Obtener el email almacenado en localStorage
+     const email = localStorage.getItem("email");  
+   
     // Verificar si hay un usuario guardado en localStorage
-    if (usuario) {
+    if (email) {
         // Cambiar el texto del botón con el nombre del usuario
         const userButton = document.querySelector('.dropdown-toggle');
-        userButton.textContent = usuario;
+        userButton.textContent = email;
     } else {
         // Si no hay usuario logueado, redirigir al login
         window.location.href = "login.html";
@@ -28,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Cerrar sesión: limpiar el localStorage y redirigir al login
     document.getElementById("cerrarSesion").addEventListener("click", function() {
-        window.localStorage.removeItem("usuario");
+        window.localStorage.removeItem("email");
         window.location.href = "login.html";
     });
 });
