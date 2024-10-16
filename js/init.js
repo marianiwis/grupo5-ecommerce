@@ -40,7 +40,7 @@ let getJSONData = function(url){
     });
 }
 
-let showuser = function(usuario){
+let showuser = function(email){
 document.addEventListener("DOMContentLoaded", function () {
   let navBar = document.getElementById("navbarNav")
   if (!navBar) {
@@ -48,12 +48,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   
   const ul = navBar.querySelector('ul');
-  ul.insertAdjacentHTML('beforeend', '<li class="nav-item"><a href="#" class="nav-link">'+usuario+'</a></li>');
+  ul.insertAdjacentHTML('beforeend', '<li class="nav-item"><a href="#" class="nav-link">'+email+'</a></li>');
 })
 }
 
 let autentication = function(){
-  let session = window.localStorage.getItem("usuario")
+  let session = window.localStorage.getItem("email")
   if (!session) {
     window.location.href = "login.html"; 
     return 
@@ -65,7 +65,7 @@ autentication()
 
 document.addEventListener("DOMContentLoaded", function(){
   document.getElementById("cerrarSesion").addEventListener("click", function() {
-    localStorage.removeItem("usuario");
+    localStorage.removeItem("email");
     window.location = "login.html"
   });
 })

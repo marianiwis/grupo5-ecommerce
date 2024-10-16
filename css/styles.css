@@ -482,3 +482,4 @@ body.dark-mode .carousel-control-next {
     position: absolute; /* Asegúrate de que esté definido */
     top: 50%; /* Asegúrate de que esté centrado verticalmente */
     transform: translateY(-50%); /* Centra la flecha verticalmente */
+}
