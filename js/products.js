@@ -1,10 +1,9 @@
-
-let productos = []; // Variable para almacenar los productos
+let productos = []; // variable para almacenar los productos
 
 function mostrarProductos(productosArray) {
     let htmlContentToAppend = "";
 
-// iterar sobre cada producto usando forEach
+    // iterar sobre cada producto usando forEach
     //diferentes columnas para que se ajusten a las pantallas
     // Iterar sobre cada producto usando forEach
     //agregamos el onclick para redirigir
@@ -29,14 +28,19 @@ function mostrarProductos(productosArray) {
         </div>
         `;
     });
+
 // insertar el contenido HTML generado en el contenedor de productos
     document.getElementById("productos-lista").innerHTML = htmlContentToAppend;
 }
+
 // función para guardar el ID del producto y redirigir
 function guardarProductoYRedirigir(productoId) {
+    // guarda el ID del producto en el almacenamiento local
     localStorage.setItem("productoId", productoId);
+    // redirige al usuario a la página product-info.html
     window.location.href = "product-info.html";
 }
+
 
 // Llamada a la función cuando los datos están disponibles
 /*getJSONData(PRODUCTS_URL + "101.json").then(function(resultObj) {
@@ -46,6 +50,7 @@ function guardarProductoYRedirigir(productoId) {
         console.error("Error en la obtención de datos:", resultObj.data);
     }
 });*/
+
 function productosVacios() {
     document.getElementById("productos-lista").innerHTML = "<div class='col-md-4'> No hay productos para mostrar. </div>";
 }
@@ -74,6 +79,12 @@ function applyFilters() {
     mostrarProductos(filteredProductos);
 }
 
+function clearFilters() {
+    document.getElementById('min-price').value = null;
+    document.getElementById('max-price').value = null;
+    applyFilters()
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     const categoriaID = localStorage.getItem('catID');
     console.log(`Categoría ID obtenido: ${categoriaID}`);
@@ -96,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             );
                             mostrarProductos(productosFiltrados);
                         });
-
+                        applyFilters()
                     } else {
                         productosVacios();
                     }
@@ -136,4 +147,8 @@ document.addEventListener("DOMContentLoaded", function() {
         window.localStorage.removeItem("usuario");
         window.location.href = "login.html";
     });
+
+    
+    document.getElementById('clear-filters').addEventListener('click', clearFilters);
+
 });
