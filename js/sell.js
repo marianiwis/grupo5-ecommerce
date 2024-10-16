@@ -147,3 +147,24 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Obtener el nombre de usuario almacenado en localStorage
+    const usuario = window.localStorage.getItem("usuario");
+
+    // Verificar si hay un usuario guardado en localStorage
+    if (usuario) {
+        // Cambiar el texto del botón con el nombre del usuario
+        const userButton = document.querySelector('.dropdown-toggle');
+        userButton.textContent = usuario;
+    } else {
+        // Si no hay usuario logueado, redirigir al login
+        window.location.href = "login.html";
+    }
+
+    // Cerrar sesión: limpiar el localStorage y redirigir al login
+    document.getElementById("cerrarSesion").addEventListener("click", function() {
+        window.localStorage.removeItem("usuario");
+        window.location.href = "login.html";
+    });
+});

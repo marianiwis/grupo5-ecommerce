@@ -113,6 +113,26 @@ let htmlContentToAppend = `
     `;
     document.getElementById("product-info").innerHTML = htmlContentToAppend;
 }
+document.addEventListener("DOMContentLoaded", function() {
+    // Obtener el nombre de usuario almacenado en localStorage
+    const usuario = window.localStorage.getItem("usuario");
+
+    // Verificar si hay un usuario guardado en localStorage
+    if (usuario) {
+        // Cambiar el texto del botón con el nombre del usuario
+        const userButton = document.querySelector('.dropdown-toggle');
+        userButton.textContent = usuario;
+    } else {
+        // Si no hay usuario logueado, redirigir al login
+        window.location.href = "login.html";
+    }
+
+    // Cerrar sesión: limpiar el localStorage y redirigir al login
+    document.getElementById("cerrarSesion").addEventListener("click", function() {
+        window.localStorage.removeItem("usuario");
+        window.location.href = "login.html";
+    });
+});
 
 
 
@@ -188,11 +208,13 @@ function generarEstrellas(puntuacion) {
 // Función para mostrar las calificaciones (comentarios) como cards
 function mostrarCalificaciones(comentarios) {
     let calificacionesHtml = ''; // Iniciar como cadena vacía
+
+    // Iterar sobre cada comentario
     comentarios.forEach(comentario => {
         calificacionesHtml += `
-            <div class="card mb-4 shadow-sm">
+            <div class="card comment-card mb-4 shadow-sm"> <!-- Asegúrate de usar comment-card aquí -->
                 <div class="card-body">
-                    <h5 class="card-title" style="color: #ff8a0d; font-weight: bold;">${comentario.user}</h5>
+                    <h5 class="card-title">${comentario.user}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">${comentario.dateTime}</h6>
                     <p class="card-text"><strong>Comentario:</strong> ${comentario.description}</p>
                     <p class="card-text"><strong>Producto ID:</strong> ${comentario.product}</p>
@@ -202,9 +224,11 @@ function mostrarCalificaciones(comentarios) {
         `;
     });
 
+    // Asignar el HTML generado al contenedor de calificaciones
     document.getElementById("calificaciones-lista").innerHTML = calificacionesHtml;
 }
-});
+
+
 // DESAFIATE Manejador para la selección de estrellas y el envío de comentarios
 document.addEventListener("DOMContentLoaded", function() {
     let calificacionSeleccionada = 0;
@@ -289,4 +313,26 @@ document.querySelector('.btn-enviar').addEventListener('click', function() {
         // Agregar el comentario al inicio de la lista
         calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
     }
+})})
+
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('toggle-mode');
+
+    // Comprobar si hay una preferencia de modo guardada
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+    }
+
+    toggleButton.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+
+        // Guardar la preferencia en localStorage
+        if (document.body.classList.contains('dark-mode')) {
+            localStorage.setItem('dark-mode', 'enabled');
+        } else {
+            localStorage.removeItem('dark-mode');
+        }
+    });
 });
+
+
