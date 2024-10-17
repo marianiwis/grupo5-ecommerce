@@ -426,12 +426,12 @@ body.dark-mode {
 
 .dark-mode .navbar {
   background-color: #333;
-  z-index: 1000; /* Asegúrate de que el navbar tenga un z-index alto */
+  z-index: 4; /* Asegúrate de que el navbar tenga un z-index alto */
   position: relative; /* Esto permite que los hijos usen z-index en relación al navbar */
 }
 
 .dropdown-menu {
-  z-index: 1050; /* Asegúrate de que este valor sea mayor que el del overlay */
+  z-index: 3; /* Asegúrate de que este valor sea mayor que el del overlay */
   position: absolute; 
 }
 
@@ -441,7 +441,7 @@ body.dark-mode {
   color: #fff; /* Color de texto blanco para el menú */
   border: 1px solid #444; /* Un borde para separar visualmente el menú */
   border-radius: 5px; /* Bordes redondeados */
-  z-index: 1050; /* Asegúrate de que esté por encima de otros elementos */
+  z-index: 3; /* Asegúrate de que esté por encima de otros elementos */
 }
 
 .dark-mode .dropdown-item {
@@ -464,9 +464,6 @@ body.dark-mode {
   outline: none; /* Sin contorno al enfocarse */
   box-shadow: none; /* Sin sombra al enfocarse */
 }
-
-
-
 .dark-mode::before {
   content: ""; /* Crea un pseudo-elemento */
   position: absolute; /* Posición absoluta para cubrir todo el contenedor */
@@ -487,11 +484,6 @@ body.dark-mode {
   position: relative; /* Para asegurarte de que el contenido esté por encima del overlay */
   z-index: 2; /* Asegúrate de que el contenido esté encima del overlay */
   color: #fff; /* Color de texto blanco para buena legibilidad */
-}
-
-
-.dark-mode .navbar {
-  background-color: #333;
 }
 
 .dark-mode .custom-card-body, .dark-mode .custom-card-comment {
