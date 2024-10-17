@@ -315,24 +315,4 @@ document.querySelector('.btn-enviar').addEventListener('click', function() {
     }
 })})
 
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleButton = document.getElementById('toggle-mode');
-
-    // Comprobar si hay una preferencia de modo guardada
-    if (localStorage.getItem('dark-mode') === 'enabled') {
-        document.body.classList.add('dark-mode');
-    }
-
-    toggleButton.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
-
-        // Guardar la preferencia en localStorage
-        if (document.body.classList.contains('dark-mode')) {
-            localStorage.setItem('dark-mode', 'enabled');
-        } else {
-            localStorage.removeItem('dark-mode');
-        }
-    });
-});
-
 

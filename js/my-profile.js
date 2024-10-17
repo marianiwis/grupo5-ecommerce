@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const savedProfile = JSON.parse(localStorage.getItem('userProfile')); // Cargar el perfil guardado
   if (savedProfile) {
     firstNameInput.value = savedProfile.firstName || "";
-    middleNameInput.value = savedProfile.middleName || "";
+    middleNameInput.value = savedProfile.secondName || "";
     lastNameInput.value = savedProfile.lastName || "";
     secondLastNameInput.value = savedProfile.secondLastName || "";
     contactPhoneInput.value = savedProfile.contactPhone || "";
@@ -90,8 +90,17 @@ document.getElementById("cerrarSesion").addEventListener("click", function() {
 });
 });
 
-    // Cambio de tema claro/oscuro
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener("click", function () {
-      document.body.classList.toggle("dark-mode");
-    });
+// Cambio de tema claro/oscuro
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener("click", function (e) {
+  e.preventDefault()
+  document.body.classList.toggle("dark-mode");
+});
+
+const subirfoto = document.getElementById('subirfoto');
+subirfoto.addEventListener("click", function (e) {
+  e.preventDefault()
+  document.getElementById('profilePhoto').click();
+});
+
+
