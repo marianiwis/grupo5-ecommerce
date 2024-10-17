@@ -71,3 +71,35 @@ document.addEventListener("DOMContentLoaded", function(){
 })
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    
+  // Obtener el email almacenado en localStorage
+  const email = localStorage.getItem("email");  
+  const userButton = document.querySelector('.dropdown-toggle');
+ // Verificar si hay un usuario guardado en localStorage
+ if (email  && userButton) {
+     // Cambiar el texto del botón con el nombre del usuario
+     userButton.textContent = email;
+ }
+
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleButton = document.getElementById('toggle-mode');
+
+  // Comprobar si hay una preferencia de modo guardada
+  if (localStorage.getItem('dark-mode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+  }
+
+  toggleButton.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+
+      // Guardar la preferencia en localStorage
+      if (document.body.classList.contains('dark-mode')) {
+          localStorage.setItem('dark-mode', 'enabled');
+      } else {
+          localStorage.removeItem('dark-mode');
+      }
+  });
+});
