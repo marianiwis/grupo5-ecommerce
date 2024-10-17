@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 document.addEventListener("DOMContentLoaded", function() {
     // Obtener el nombre de usuario almacenado en localStorage
-    const usuario = window.localStorage.getItem("usuario");
+    const usuario = window.localStorage.getItem("email");
 
     // Verificar si hay un usuario guardado en localStorage
     if (usuario) {
