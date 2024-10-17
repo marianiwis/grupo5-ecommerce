@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const savedProfile = JSON.parse(localStorage.getItem('userProfile')); // Cargar el perfil guardado
   if (savedProfile) {
     firstNameInput.value = savedProfile.firstName || "";
-    middleNameInput.value = savedProfile.middleName || "";
+    middleNameInput.value = savedProfile.secondName || "";
     lastNameInput.value = savedProfile.lastName || "";
     secondLastNameInput.value = savedProfile.secondLastName || "";
     contactPhoneInput.value = savedProfile.contactPhone || "";
@@ -55,6 +55,7 @@ if (file) {
 }
 });
 
+  // subir foto
 const subirfoto = document.getElementById('subirfoto');
 subirfoto.addEventListener("click", function (e) {
   e.preventDefault()
