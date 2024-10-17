@@ -55,6 +55,13 @@ if (file) {
 }
 });
 
+const subirfoto = document.getElementById('subirfoto');
+subirfoto.addEventListener("click", function (e) {
+  e.preventDefault()
+  document.getElementById('profilePhoto').click();
+});
+
+
 // Validación y guardado de datos en localStorage
 profileForm.addEventListener("submit", function (e) {
 e.preventDefault();
@@ -68,7 +75,7 @@ e.preventDefault();
     // Guardar datos en local storage
     const userProfile = {
         firstName: firstNameInput.value,
-        secondName: document.getElementById("middleName").value,
+        middleName: document.getElementById("middleName").value,
         lastName: lastNameInput.value,
         secondLastName: document.getElementById("secondLastName").value,
         contactPhone: contactPhoneInput.value,
@@ -90,8 +97,12 @@ document.getElementById("cerrarSesion").addEventListener("click", function() {
 });
 });
 
-    // Cambio de tema claro/oscuro
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener("click", function () {
-      document.body.classList.toggle("dark-mode");
-    });
+// Cambio de tema claro/oscuro
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener("click", function (e) {
+  e.preventDefault()
+  document.body.classList.toggle("dark-mode");
+});
+
+
+
