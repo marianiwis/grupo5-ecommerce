@@ -113,6 +113,26 @@ let htmlContentToAppend = `
     `;
     document.getElementById("product-info").innerHTML = htmlContentToAppend;
 }
+document.addEventListener("DOMContentLoaded", function() {
+    // Obtener el nombre de usuario almacenado en localStorage
+    const usuario = window.localStorage.getItem("usuario");
+
+    // Verificar si hay un usuario guardado en localStorage
+    if (usuario) {
+        // Cambiar el texto del botón con el nombre del usuario
+        const userButton = document.querySelector('.dropdown-toggle');
+        userButton.textContent = usuario;
+    } else {
+        // Si no hay usuario logueado, redirigir al login
+        window.location.href = "login.html";
+    }
+
+    // Cerrar sesión: limpiar el localStorage y redirigir al login
+    document.getElementById("cerrarSesion").addEventListener("click", function() {
+        window.localStorage.removeItem("usuario");
+        window.location.href = "login.html";
+    });
+});
 
 
 
@@ -294,25 +314,5 @@ document.querySelector('.btn-enviar').addEventListener('click', function() {
         calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
     }
 })})
-
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleButton = document.getElementById('toggle-mode');
-
-    // Comprobar si hay una preferencia de modo guardada
-    if (localStorage.getItem('dark-mode') === 'enabled') {
-        document.body.classList.add('dark-mode');
-    }
-
-    toggleButton.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
-
-        // Guardar la preferencia en localStorage
-        if (document.body.classList.contains('dark-mode')) {
-            localStorage.setItem('dark-mode', 'enabled');
-        } else {
-            localStorage.removeItem('dark-mode');
-        }
-    });
-});
 
 
