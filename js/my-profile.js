@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const savedProfile = JSON.parse(localStorage.getItem('userProfile')); // Cargar el perfil guardado
   if (savedProfile) {
     firstNameInput.value = savedProfile.firstName || "";
-    middleNameInput.value = savedProfile.secondName || "";
+    middleNameInput.value = savedProfile.middleName || "";
     lastNameInput.value = savedProfile.lastName || "";
     secondLastNameInput.value = savedProfile.secondLastName || "";
     contactPhoneInput.value = savedProfile.contactPhone || "";
