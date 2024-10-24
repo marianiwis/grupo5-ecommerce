@@ -545,3 +545,7 @@ body.dark-mode .carousel-control-next {
 .required{
   color: red;
 }
+
+.btn-comprar{
+ max-width: 150px;
+}
