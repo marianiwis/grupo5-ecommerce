@@ -108,6 +108,9 @@ let htmlContentToAppend = `
             <p class="card-text" style="font-size: 1.1rem;"><strong>Categoria:</strong> ${producto.category}</p>
             <p class="card-text" style="font-size: 1.1rem;"><strong>Vendidos:</strong> ${producto.soldCount}</p>
             <p class="card-text text-danger" style="font-size: 1.1rem;"><strong>Precio:</strong> ${producto.currency} ${producto.cost}</p>
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-danger btn-comprar" onclick="comprar('${encodeURIComponent(JSON.stringify(producto))}')">Comprar</button>
+            </div>
         </div>
     </div>
     `;
@@ -314,5 +317,15 @@ document.querySelector('.btn-enviar').addEventListener('click', function() {
         calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
     }
 })})
+
+function comprar(data) {
+    let cart = []
+    if(window.localStorage.getItem("cart")){
+        cart = JSON.parse(window.localStorage.getItem("cart"))
+    }
+    cart.push(JSON.parse(decodeURIComponent(data)))
+    window.localStorage.setItem("cart",JSON.stringify(cart))
+    window.location.href = "cart.html";
+}
 
 
