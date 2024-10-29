@@ -129,6 +129,27 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
+
+          <li class="nav-item">
+            <input type="text" id="inputBuscador" placeholder="Buscar">
+            <button type="submit">Buscar</button>
+            <ul id="resultados"></ul> <!-- Lista para mostrar resultados -->    
+          </li>
+
+          <li class="nav-item dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Usuario <!-- Menú desplegable con opciones -->
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+              <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+              <li><a class="dropdown-item" href="index.html" id="cerrarSesion">Cerrar sesión</a></li>
+            </ul>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="cerrarSesion">Cerrar sesión</a>
+          </li>
+
           <li class="nav-item">
             <button id="toggle-mode" class="btn btn-outline-light">
               <i class="bi bi-moon-fill"></i>
@@ -149,7 +170,6 @@
   </div>
 </nav>
   
-
   <main>
     <div id="product-info" class="container mt-4 mb-5">
       <!-- Aca se inserta el contenido del producto -->

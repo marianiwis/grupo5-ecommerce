@@ -116,6 +116,7 @@ let htmlContentToAppend = `
     `;
     document.getElementById("product-info").innerHTML = htmlContentToAppend;
 }
+
 document.addEventListener("DOMContentLoaded", function() {
     // Obtener el nombre de usuario almacenado en localStorage
     const usuario = window.localStorage.getItem("email");
@@ -313,10 +314,39 @@ document.querySelector('.btn-enviar').addEventListener('click', function() {
             </div>
         `;
 
-        // Agregar el comentario al inicio de la lista
-        calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
+
+// Agregar el comentario al inicio de la lista
+calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
     }
 })})
+function comprar(data) {
+    let cart = [];
+    if (window.localStorage.getItem("cartItems")) {
+        cart = JSON.parse(window.localStorage.getItem("cartItems"));
+    }
+    
+    const producto = JSON.parse(decodeURIComponent(data));
+    
+    // Verifica si el producto ya está en el carrito
+    console.log("Producto agregado:", producto);
+
+    const existingProduct = cart.find(item => item.id === producto.id);
+// Si ya existe aumenta la cantidad
+    if (existingProduct) {
+        existingProduct.quantity += 1;
+// Si no existe agrega el producto al carrito con cantidad 1
+    } else {
+        producto.quantity = 1;
+        cart.push(producto);
+    }
+
+    window.localStorage.setItem("cartItems", JSON.stringify(cart));
+    window.location.href = "cart.html";
+}
+
+        // Agregar el comentario al inicio de la lista
+        calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
+
 
 function comprar(data) {
     let cart = []
