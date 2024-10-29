@@ -59,7 +59,7 @@
         padding: 20px; /* espacio interno */
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* sombra */
         margin: 10px; /* margen entre tarjetas */
-        height: 300px; /* altura fija */
+        height: 400px; /* altura fija */
         display: flex; /* usar flexbox */
         flex-direction: column; /* disposición en columna */
         justify-content: space-between; /* espacio entre elementos */
@@ -108,7 +108,6 @@
             width: 33.33%; /* 3 productos por slide en pantallas grandes */
         }
     }
-    
   </style>
 </head>
 
@@ -119,11 +118,10 @@
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <!-- Saco esta parte de acá porque esto hace que el nombre se repita al lado del boton <div class="collapse navbar-collapse" id="navbarNav">  -->
-        <ul class="navbar-nav w-100 justify-content-between">
+<!-- Saco esta parte de acá porque esto hace que el nombre se repita al lado del boton <div class="collapse navbar-collapse" id="navbarNav">  -->
         <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
+            <a class="nav-link active" href="index.html">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
@@ -131,6 +129,7 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
+
           <li class="nav-item">
             <input type="text" id="inputBuscador" placeholder="Buscar">
             <button type="submit">Buscar</button>
@@ -150,16 +149,26 @@
           <li class="nav-item">
             <a class="nav-link" href="#" id="cerrarSesion">Cerrar sesión</a>
           </li>
+
           <li class="nav-item">
             <button id="toggle-mode" class="btn btn-outline-light">
               <i class="bi bi-moon-fill"></i>
             </button>
-
           </li>
-        </ul>
-      </div>
+        <li class="nav-item dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Usuario 
+          </button>
+          <ul class="dropdown-menu"> <!-- Menú desplegable con opciones -->
+            <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+            <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+            <li><a class="dropdown-item" href="index.html" id="cerrarSesion">Cerrar sesión</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
   
   <main>
     <div id="product-info" class="container mt-4 mb-5">

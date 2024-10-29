@@ -348,24 +348,14 @@ function comprar(data) {
         calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleButton = document.getElementById('toggle-mode');
-
-    // Comprobar si hay una preferencia de modo guardada
-    if (localStorage.getItem('dark-mode') === 'enabled') {
-        document.body.classList.add('dark-mode');
+function comprar(data) {
+    let cart = []
+    if(window.localStorage.getItem("cart")){
+        cart = JSON.parse(window.localStorage.getItem("cart"))
     }
-
-    toggleButton.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
-
-        // Guardar la preferencia en localStorage
-        if (document.body.classList.contains('dark-mode')) {
-            localStorage.setItem('dark-mode', 'enabled');
-        } else {
-            localStorage.removeItem('dark-mode');
-        }
-    });
-});
+    cart.push(JSON.parse(decodeURIComponent(data)))
+    window.localStorage.setItem("cart",JSON.stringify(cart))
+    window.location.href = "cart.html";
+}
 
 

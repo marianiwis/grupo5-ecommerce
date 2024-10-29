@@ -17,11 +17,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("iniciarSesion").addEventListener("click", function() {
 
-        let usuario = document.getElementById("username").value;
+        let email = document.getElementById("email").value;
         let contraseña = document.getElementById("password").value;
         
-        if(!usuario){
-            appendAlert('El campo usuario no puede estar vacío.', 'danger')
+        if(!email){
+            appendAlert('El campo e-mail no puede estar vacío.', 'danger')
             return
         }
 
@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", function() {
             return
         }
 
-        if (usuario) {
-            window.localStorage.setItem("usuario", usuario)
+        if (email) {
+            window.localStorage.setItem("email", email)
            window.location.href="index.html"
         }       
 })
