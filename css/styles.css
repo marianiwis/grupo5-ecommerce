@@ -548,4 +548,19 @@ body.dark-mode .carousel-control-next {
 
 .btn-comprar{
  max-width: 150px;
+
+}
+
+.navbar {
+  position: relative; /* Asegura que el navbar no sea fijo */
+  z-index: 1; /* Para evitar que sea tapado por otros elementos */
+}
+
+main {
+  padding-top: 70px; /* Asegura espacio debajo del navbar */
+  position: relative; /* Para que su posición sea controlada por el flujo de la página */
+}
+
+.alert {
+  position: relative; /* Asegura que la alerta se mueva con el flujo de la página */
 }
