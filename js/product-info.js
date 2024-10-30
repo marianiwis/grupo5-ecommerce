@@ -314,7 +314,6 @@ document.querySelector('.btn-enviar').addEventListener('click', function() {
             </div>
         `;
 
-
 // Agregar el comentario al inicio de la lista
 calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
     }
@@ -343,19 +342,3 @@ function comprar(data) {
     window.localStorage.setItem("cartItems", JSON.stringify(cart));
     window.location.href = "cart.html";
 }
-
-        // Agregar el comentario al inicio de la lista
-        calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
-
-
-function comprar(data) {
-    let cart = []
-    if(window.localStorage.getItem("cart")){
-        cart = JSON.parse(window.localStorage.getItem("cart"))
-    }
-    cart.push(JSON.parse(decodeURIComponent(data)))
-    window.localStorage.setItem("cart",JSON.stringify(cart))
-    window.location.href = "cart.html";
-}
-
-
