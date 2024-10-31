@@ -98,3 +98,30 @@ function eliminarProducto(index) {
   localStorage.setItem("cartItems", JSON.stringify(cart));
   window.location.reload();
 }
+
+function addToCart(product) {
+  console.log("Producto agregado:", product); // Verifica si product tiene imagen y precio
+  console.log("Precio:", product.price);
+  console.log("Imagen:", product.image);
+
+  let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const existingProductIndex = cartItems.findIndex(item => item.id === product.id);
+  
+  if (existingProductIndex !== -1) {
+      cartItems[existingProductIndex].quantity += 1;
+  } else {
+      product.quantity = 1;
+      cartItems.push(product);
+  }
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+}
+// Desafiate, cantidad de productos en carrito
+function actualizarBadgeCarrito() {
+  let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const totalQuantity = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  document.getElementById("cartCountBadge").innerText = totalQuantity;
+}
+document.addEventListener("DOMContentLoaded", function() {
+  actualizarBadgeCarrito();
+});
+
