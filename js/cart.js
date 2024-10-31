@@ -86,6 +86,7 @@ function addToCart(product) {
   }
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }
+// Desafiate, cantidad de productos en carrito
 function actualizarBadgeCarrito() {
   let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const totalQuantity = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
