@@ -71,16 +71,14 @@ document.addEventListener("DOMContentLoaded", function() {
       cartContainer.appendChild(finalizarCompraBtn);
 
     } else {
-      mostrarCarritoVacio();
+      mostrarCarritoVacio(cartContainer);
     }
-  } else {
-    mostrarCarritoVacio();
   }
 });
 
-function mostrarCarritoVacio() {
+function mostrarCarritoVacio(cartContainer) {
   cartContainer.innerHTML = `
-    <div class="alert alert-info text-center" role="alert">
+    <div class="text-center" role="alert">
       <h4 class="alert-heading">Tu carrito está vacío</h4>
       <p>Agrega productos para verlos aquí.</p>
     </div>`;
