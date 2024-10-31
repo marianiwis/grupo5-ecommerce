@@ -6,30 +6,32 @@ document.addEventListener("DOMContentLoaded", function() {
     const cartItems = JSON.parse(storedCart);
 
     if (cartItems.length > 0) {
-      cartContainer.innerHTML = `<h4>Mi carrito</h4>`;
+      cartContainer.innerHTML = `<h4 class="mb-5 fw-bold">Mi Carrito</h4>`;
       cartItems.forEach((item, index) => {
         cartContainer.innerHTML += `
-          <div class="card mb-3">
+          <div class="card mb-3 ms-5 cart-item shadow-sm">
             <div class="row g-0">
-              <div class="col-md-4">
-                <img src="${item.images[0]}" class="img-fluid rounded-start" alt="${item.name}">
+              <div class="col-md-2">
+                <img src="${item.images[0]}" class="cart-img" alt="${item.name}">
               </div>
-              <div class="col-md-8">
-                <div class="card-body d-flex justify-content-between align-items-center">
-                  <div>
-                    <h5 class="card-title">${item.name}</h5>
-                    <p class="card-text">Precio: ${item.currency} ${item.cost}</p>
-                  </div>
-                  <div class="d-flex align-items-center ms-auto">
-                    <p class="card-text" style="margin-right: 8px; font-size: 1.2em;">
-                      <span class="badge" style="background-color: white; color: black; border: 1px solid lightgray;">
-                        ${item.quantity || 1}
-                      </span>
+              <div class="col-md-10">
+                <div class="row height-100 d-flex align-items-center">
+                   <div class="col">
+                     <h5 class="card-title">${item.name}</h5>
+                   </div>
+                    <div class="col text-center">
+                     <p class="card-text">${item.currency} ${item.cost}</p>
+                   </div>
+                    <div class="col text-center">
+                     <p class="card-text" style="margin-right: 8px; font-size: 1.2em;">
+                      <input type="number" class="cart-quantity" min="0" value="${item.quantity || 1}">
                     </p>
-                    <button class="btn btn-link text-secondary" onclick="eliminarProducto(${index})">
-                      <img src="img/papelera-de-reciclaje.png" alt="Eliminar" width="20">
+                   </div>
+                    <div class="col text-end">
+                    <button class="btn btn-link text-secondary pe-5" onclick="eliminarProducto(${index})">
+                      <img src="img/papelera-de-reciclaje.png" alt="Eliminar" width="30">
                     </button>
-                  </div>
+                   </div>
                 </div>
               </div>
             </div>
