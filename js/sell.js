@@ -168,3 +168,12 @@ document.addEventListener("DOMContentLoaded", function() {
         window.location.href = "login.html";
     });
 });
+// Desafiate, cantidad de productos en carrito
+function actualizarBadgeCarrito() {
+    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const totalQuantity = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    document.getElementById("cartCountBadge").innerText = totalQuantity;
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    actualizarBadgeCarrito();
+  });
