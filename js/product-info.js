@@ -351,7 +351,7 @@ function actualizarBadgeCarrito() {
   }
   document.addEventListener("DOMContentLoaded", function() {
     actualizarBadgeCarrito();
-  });  });
+  });
 =======
 
 >>>>>>> Stashed changes
