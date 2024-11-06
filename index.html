@@ -10,6 +10,61 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <link href="css/styles.css" rel="stylesheet">
+
+    <style>
+      body {
+        background-image: url('https://i.pinimg.com/564x/01/9d/fa/019dfabf0312f0de5d3df51c5817d602.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        transition: background-color 0.3s, color 0.3s; /* Transición para el modo oscuro*/
+      }
+
+      .jumbotron {
+        position: relative;
+        padding: 2em 1em; /* Ajusta el padding para dar espacio al contenido */
+        height: 70vh; /* Aumenta la altura para asegurar espacio adecuado */
+      }
+
+      .jumbotron .femme-image {
+        width: 400px;
+        height: auto;
+        border-radius: 8px;
+        float: left;
+        margin-right: 10px;
+        margin-left: 100px;
+      }
+
+      .jumbotron .circle-image {
+        width: 500px; /* Ajusta el tamaño según sea necesario */
+        position: absolute;
+        top: 20px; /* Ajusta la posición vertical según sea necesario */
+        left: 75px; /* Ajusta la posición horizontal para centrarlo sobre la otra imagen */
+        border-radius: 50%; /* Convierte la imagen en un círculo */
+      }
+
+      .jumbotron-text {
+        float: left;
+        max-width: 50%; /* Limita el ancho del texto */
+        margin-left: 80px;
+      }
+
+      .jumbotron-text h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+
+      .jumbotron-text p {
+        font-size: 1.2em;
+        line-height: 1.5;
+      }
+
+      .album {
+        margin-top: 30px; /* Espacio entre el jumbotron y las tarjetas */
+      }
+   
+    </style>
 </head>
 
 <body>
@@ -51,8 +106,17 @@
   </div>
 </nav>
   <main>
-    <div class="jumbotron text-center"></div>
-    <div class="album py-5 bg-light">
+    <div class="jumbotron">
+      <img src="img/femme.png" alt="Imagen Femme" class="femme-image">
+      <img src="img/grungecircle.png" alt="Imagen Circle" class="circle-image">
+
+        <!-- Contenedor de texto -->
+        <div class="jumbotron-text">
+          <h1>Bienvenidos a eMercado</h1>
+          <p>Todo lo que busques está aquí. Encuentra productos de todas las categorías, con las mejores ofertas y la mejor calidad. Únete a nuestra comunidad y comienza a disfrutar de tus compras en línea.</p>
+        </div>
+    </div>
+    <div class="album py-5">
       <div class="container">
         <div class="row">
           <div class="col-md-4">
