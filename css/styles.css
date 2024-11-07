@@ -31,9 +31,6 @@ nav a {
 .jumbotron {
   height: 50vh;
   padding: 5em inherit;
-  margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -58,9 +55,7 @@ nav a {
 
 .jumbotron .container {
   max-width: 40rem;
-  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
-  text-shadow: 1px 1px 2px grey;
 }
 
 .jumbotron .lead {
