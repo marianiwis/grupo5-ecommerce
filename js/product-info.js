@@ -339,6 +339,7 @@ function comprar(data) {
         cart.push(producto);
     }
 
+
     window.localStorage.setItem("cartItems", JSON.stringify(cart));
     window.location.href = "cart.html";
 }
@@ -350,5 +351,4 @@ function actualizarBadgeCarrito() {
   }
   document.addEventListener("DOMContentLoaded", function() {
     actualizarBadgeCarrito();
-  });
-
+});
