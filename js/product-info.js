@@ -352,4 +352,10 @@ function actualizarBadgeCarrito() {
   document.addEventListener("DOMContentLoaded", function() {
     actualizarBadgeCarrito();
 
+<<<<<<< HEAD
   });
+=======
+  });
+
+  });
+>>>>>>> d069907de66ad5725368a432c647340197ba0b0a
