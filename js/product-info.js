@@ -108,14 +108,18 @@ let htmlContentToAppend = `
             <p class="card-text" style="font-size: 1.1rem;"><strong>Categoria:</strong> ${producto.category}</p>
             <p class="card-text" style="font-size: 1.1rem;"><strong>Vendidos:</strong> ${producto.soldCount}</p>
             <p class="card-text text-danger" style="font-size: 1.1rem;"><strong>Precio:</strong> ${producto.currency} ${producto.cost}</p>
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-danger btn-comprar" onclick="comprar('${encodeURIComponent(JSON.stringify(producto))}')">Comprar</button>
+            </div>
         </div>
     </div>
     `;
     document.getElementById("product-info").innerHTML = htmlContentToAppend;
 }
+
 document.addEventListener("DOMContentLoaded", function() {
     // Obtener el nombre de usuario almacenado en localStorage
-    const usuario = window.localStorage.getItem("usuario");
+    const usuario = window.localStorage.getItem("email");
 
     // Verificar si hay un usuario guardado en localStorage
     if (usuario) {
@@ -310,9 +314,41 @@ document.querySelector('.btn-enviar').addEventListener('click', function() {
             </div>
         `;
 
-        // Agregar el comentario al inicio de la lista
-        calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
+// Agregar el comentario al inicio de la lista
+calificacionesLista.insertAdjacentHTML('afterbegin', comentarioHtml);
     }
 })})
+function comprar(data) {
+    let cart = [];
+    if (window.localStorage.getItem("cartItems")) {
+        cart = JSON.parse(window.localStorage.getItem("cartItems"));
+    }
+    
+    const producto = JSON.parse(decodeURIComponent(data));
+    
+    // Verifica si el producto ya está en el carrito
+    console.log("Producto agregado:", producto);
+
+    const existingProduct = cart.find(item => item.id === producto.id);
+// Si ya existe aumenta la cantidad
+    if (existingProduct) {
+        existingProduct.quantity += 1;
+// Si no existe agrega el producto al carrito con cantidad 1
+    } else {
+        producto.quantity = 1;
+        cart.push(producto);
+    }
 
 
+    window.localStorage.setItem("cartItems", JSON.stringify(cart));
+    window.location.href = "cart.html";
+}
+// Desafiate, cantidad de productos en carrito
+function actualizarBadgeCarrito() {
+    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const totalQuantity = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    document.getElementById("cartCountBadge").innerText = totalQuantity;
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    actualizarBadgeCarrito();
+});
