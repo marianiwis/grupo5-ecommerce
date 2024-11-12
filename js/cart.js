@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (cartItems.length > 0) {
       cartContainer.innerHTML = `
         <h4 class="mb-5 fw-bold">Mi Carrito <i class="bi bi-cart me-2"></i></h4>
-        <div class="header row ms-5 mb-3 text-center fw-bold">
+        <div class="header row ms-5 me-5 mb-3 text-center fw-bold">
           <div class="col-md-4 header-etiquetas" >Producto</div>
           <div class="col-md-1 header-etiquetas">Precio</div>
           <div class="col-md-2 header-etiquetas">Cantidad</div>
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       cartItems.forEach((item, index) => {
         cartContainer.innerHTML += `
-          <div class="card mb-3 ms-5 cart-item shadow-sm">
+          <div class="card mb-3 ms-5 me-5 cart-item shadow-sm">
             <div class="row g-0">
               <div class="col-md-2">
                 <img src="${item.images[0]}" class="cart-img" alt="${item.name}">
@@ -44,8 +44,116 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
               </div>
             </div>
-          </div>`;
+          </div>
+          `;
       });
+      // AGREGAMOS LOS TIPOS
+      cartContainer.innerHTML +=`
+        <div class="header row ms-5 me-5 mb-3 mt-5 text-center fw-bold">
+            <div class="col-md-4 header-etiquetas w-100" >Tipo de envio</div>
+          </div>
+
+          <div class="header row ms-5 me-5 mb-3 mt-5 text-center fw-bold">
+            <div class="col-4">
+                <label for="premium">
+                  <div class="p-3 cart-tipo-envio-radio">
+                    <input id="premium" type="radio" name="tipo">
+                    Premium 2 a 5 dias (15%)
+                  </div>
+                </label>
+            </div>
+            <div class="col-4">
+                <label for="expira">
+                  <div class="p-3 cart-tipo-envio-radio">
+                    <input id="expira" type="radio" name="tipo">
+                    Expira 5 a 8 dias (7%)
+                  </div>
+                </label>
+            </div>
+            <div class="col-4">
+                <label for="Standard">
+                  <div class="p-3 cart-tipo-envio-radio">
+                    <input id="Standard" type="radio" name="tipo">
+                    Standard 12 a 15 dias (5%)
+                  </div>
+                </label>
+            </div>
+          </div>
+
+          <div class="card mb-3 ms-5 me-5 cart-item shadow-sm p-5">
+            <div class="row g-0">
+              <div class="col-md-12">
+                <div class="row height-100 d-flex align-items-center">
+                   <div class="col-12 text-left mb-4">
+                      <b>Direccion de envio:</b>
+                   </div>
+                   <div class="col-4 text-left mb-4">
+                     <label for="departamento" class="mb-2">Departamento <span class="required">*</span></label>
+                     <input type="text" class="form-control" id="departamento" placeholder="Ingrese su departamento" required="true">
+                   </div>
+                   <div class="col-4 text-left mb-4">
+                     <label for="localidad" class="mb-2">Localidad </label>
+                     <input type="text" class="form-control" id="localidad" placeholder="Ingrese su localidad">
+                   </div>
+                   <div class="col-4 text-left mb-4"></div>
+                   <div class="col-4 text-left mb-4">
+                     <label for="calle" class="mb-2">Calle <span class="required">*</span></label>
+                     <input type="text" class="form-control" id="calle" placeholder="Ingrese su calle" required="true">
+                   </div>
+                   <div class="col-2 text-left mb-4">
+                      <label for="numero" class="mb-2">Numero <span class="required">*</span></label>
+                     <input type="number" class="form-control" id="numero" placeholder="Numero" required="true">
+                   </div>
+                   <div class="col-3 text-left mb-4">
+                      <label for="esquina" class="mb-2">Esquina <span class="required">*</span></label>
+                     <input type="text" class="form-control" id="esquina" placeholder="ESquina">
+                   </div>
+                   <div class="col-2 text-left mb-4"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        //AGREGAMOS LOS MEDIOS DE PAGOS
+        cartContainer.innerHTML +=`
+        <div class="header row ms-5 me-5 mb-3 mt-5 text-center fw-bold">
+            <div class="col-md-4 header-etiquetas w-100" >Medios de pago</div>
+          </div>
+
+          <div class="card mb-3 ms-5 me-5 cart-item shadow-sm p-4 coste-envio">
+            <div class="row g-0">
+              <div class="col-md-12">
+                <div class="row height-100 d-flex align-items-center">
+                   <div class="col-6 text-center">
+                      <b>Costo de envio: $99</b>
+                   </div>
+                   <div class="col-6 text-center">
+                      <b>Total: $9999 U$S: 999</b>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="header row ms-5 me-5 mb-3 mt-5 text-center fw-bold">
+            <div class="col-6">
+                <label for="credito">
+                  <div class="p-4 cart-tipo-envio-radio">
+                    <input id="credito" type="radio" name="pago">
+                    Tarjeta de credito
+                  </div>
+                </label>
+            </div>
+            <div class="col-6">
+                <label for="expira">
+                  <div class="p-4 cart-tipo-envio-radio">
+                    <input id="expira" type="radio" name="pago">
+                    Transferencia bancaria
+                  </div>
+                </label>
+            </div>
+          </div>
+        `;
 
       // Agregar evento para actualizar subtotal cuando cambie la cantidad
       const quantityInputs = document.querySelectorAll(".cart-quantity");
@@ -64,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function() {
       finalizarCompraBtn.innerText = "Finalizar compra";
       finalizarCompraBtn.className = "btn btn-warning text-dark mt-3"; 
       finalizarCompraBtn.style.width = "20%";
-      finalizarCompraBtn.style.marginLeft = "45%";
+      finalizarCompraBtn.style.marginLeft = "39%";
       finalizarCompraBtn.onclick = function() {
         alert("Finalizando compra..."); 
       };
