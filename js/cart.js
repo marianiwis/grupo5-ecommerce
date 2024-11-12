@@ -161,11 +161,56 @@ document.addEventListener("DOMContentLoaded", function() {
       // Botón de finalizar compra
       const finalizarCompraBtn = document.createElement("button");
       finalizarCompraBtn.innerText = "Finalizar compra";
-      finalizarCompraBtn.className = "btn btn-warning text-dark mt-3"; 
+      finalizarCompraBtn.className = "btn btn-warning mt-3"; 
       finalizarCompraBtn.style.width = "20%";
       finalizarCompraBtn.style.marginLeft = "39%";
+
       finalizarCompraBtn.onclick = function() {
-        alert("Finalizando compra...");
+        // Validación de los campos de dirección
+        const departamento = document.getElementById("departamento").value.trim();
+        const calle = document.getElementById("calle").value.trim();
+        const numero = document.getElementById("numero").value.trim();
+        const esquina = document.getElementById("esquina").value.trim();
+
+        if (!departamento || !calle || !numero || !esquina) {
+          alert("Por favor, completa todos los campos de la dirección de envío.");
+          return;
+        }
+
+        // Validación de la forma de envío
+        const envioSeleccionado = document.querySelector("input[name='tipo']:checked");
+        if (!envioSeleccionado) {
+          alert("Por favor, selecciona un tipo de envío.");
+          return;
+        }
+
+        // Validación de cantidad de productos
+        const cantidades = document.querySelectorAll(".cart-quantity");
+        for (let input of cantidades) {
+          if (parseInt(input.value) <= 0) {
+            alert("La cantidad de cada producto debe ser mayor a 0.");
+            return;
+          }
+        }
+
+        // Validación de la forma de pago
+        const pagoSeleccionado = document.querySelector("input[name='pago']:checked");
+        if (!pagoSeleccionado) {
+          alert("Por favor, selecciona una forma de pago.");
+          return;
+        }
+
+        // Validación de los campos específicos de la forma de pago
+        const camposPago = document.querySelectorAll(".campoPago");
+        for (let campo of camposPago) {
+          if (campo.value.trim() === "") {
+            alert("Por favor, completa todos los campos de la forma de pago seleccionada.");
+            return;
+          }
+        }
+
+        // Si todas las validaciones son correctas, muestra mensaje de éxito
+        alert("Compra realizada exitosamente. ¡Gracias por tu compra!");
       };
       cartContainer.appendChild(finalizarCompraBtn);
 
