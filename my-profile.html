@@ -7,6 +7,8 @@
   <title>eMercado - Todo lo que busques está aquí</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Markazi+Text&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   
@@ -19,6 +21,17 @@
       position: relative;
       transition: background-color 0.3s, color 0.3s; /* Transición para el modo oscuro*/
     }
+
+    #profileForm {
+      background-image: url('img/fondoCAT.jpg'); /* Ruta de tu imagen */
+      background-size: cover;
+      background-position: center;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+      margin-bottom: 50px;
+    }
+
     .bd-placeholder-img {
       font-size: 1.125rem;
       text-anchor: middle;
@@ -32,6 +45,33 @@
       color: #FFA20D;
       height: 3px !important;
       opacity: 1;
+    }
+
+    .text-left {
+        font-size: 3.0em;  /* Ajusta el tamaño a tu gusto */
+        margin-bottom: 5px;
+        margin-top: 0px;
+        font-family: 'Markazi Text', serif;
+        color: #000000;
+    }
+
+    .lead {
+        font-size: 1.3em;
+        line-height: 1.5;
+        font-family: 'Cormorant Garamond', serif;
+        color:#000000;
+        font-weight: bold;
+    }
+
+    /* Definir la clase para los campos del formulario */
+    .form-field {
+        font-family: 'Markazi Text', serif;  /* Cambiar a la fuente deseada */
+        font-size: 1.5em; /* Tamaño de letra más grande */
+        color: #000000; /* Color del texto */
+    }
+
+    .form-field input {
+        font-family: 'Markazi Text', serif;  /* Cambiar la fuente de los inputs */
     }
 
     @media (min-width: 768px) {
@@ -86,8 +126,10 @@
       </div>
     </div>
   </nav>
-  <main class="container mt-5">
-    <h2 class="text-left">Perfil</h2>
+  <main class="container mt-3">
+    <hr class="mb-5">
+    <h2 class="text-left">Mi Perfil</h2>
+    <p class="lead">Tu perfil, totalmente personalizable.</p>
     <hr class="mb-5">
     <div class="row justify-content-center mt-5 pt-4">
       <div class="col-md-12">
@@ -105,30 +147,29 @@
               </div>
             </div>
             <div class="col-md-9 row">
-
               <div class="col-md-6">
-                <label for="firstName">Nombre <span class="required">*</span></label>
-                <input type="text" class="form-control" id="firstName" placeholder="Ingrese su nombre" required>
+                <label for="firstName" class="form-field">Nombre <span class="required">*</span></label>
+                <input type="text" class="form-control form-field" id="firstName" placeholder="Ingrese su nombre" required>
               </div>
               <div class="col-md-6">
-                <label for="middleName">Segundo nombre</label>
-                <input type="text" class="form-control" id="middleName" placeholder="Ingrese su segundo nombre">
+                <label for="middleName" class="form-field">Segundo nombre</label>
+                <input type="text" class="form-control form-field" id="middleName" placeholder="Ingrese su segundo nombre">
               </div>
               <div class="col-md-6">
-                <label for="lastName">Apellido <span class="required">*</span></label>
-                <input type="text" class="form-control" id="lastName" placeholder="Ingrese su apellido" required>
+                <label for="lastName" class="form-field">Apellido <span class="required">*</span></label>
+                <input type="text" class="form-control form-field" id="lastName" placeholder="Ingrese su apellido" required>
               </div>
               <div class="col-md-6">
-                <label for="secondLastName">Segundo apellido</label>
-                <input type="text" class="form-control" id="secondLastName" placeholder="Ingrese su segundo apellido">
+                <label for="secondLastName" class="form-field">Segundo apellido</label>
+                <input type="text" class="form-control form-field" id="secondLastName" placeholder="Ingrese su segundo apellido">
               </div>
               <div class="col-md-6">
-                <label for="email">E-mail <span class="required">*</span></label>
-                <input type="email" class="form-control" id="email" placeholder="Ingrese su e-mail" required>
+                <label for="email" class="form-field">E-mail <span class="required">*</span></label>
+                <input type="email" class="form-control form-field" id="email" placeholder="Ingrese su e-mail" required>
               </div>
               <div class="col-md-6">
-                <label for="contactPhone">Teléfono de contacto</label>
-                <input type="text" class="form-control" id="contactPhone" placeholder="Ingrese su teléfono de contacto">
+                <label for="contactPhone" class="form-field">Teléfono de contacto</label>
+                <input type="text" class="form-control form-field" id="contactPhone" placeholder="Ingrese su teléfono de contacto">
               </div>
             </div>
             <div class="col-md-12 row pt-5 mt-3" >
@@ -142,23 +183,11 @@
               </div>
             </div>
           </div>
-          <div class="d-flex justify-content-between align-items-center"
-          </div>
         </form>
       </div>
     </div>
   </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
   <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/my-profile.js"></script>
 </body>
 
 </html>
