@@ -47,8 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
     return 
   }
   
-  const ul = navBar.querySelector('ul');
-  ul.insertAdjacentHTML('beforeend', '<li class="nav-item"><a href="#" class="nav-link">'+email+'</a></li>');
+  // const ul = navBar.querySelector('ul');
+  // ul.insertAdjacentHTML('beforeend', '<li class="nav-item"><a href="#" class="nav-link">'+email+'</a></li>');
 })
 }
 

@@ -8,36 +8,36 @@ document.addEventListener("DOMContentLoaded", function() {
     if (cartItems.length > 0) {
       cartContainer.innerHTML = `
         <h4 class="mb-5 fw-bold">Mi Carrito <i class="bi bi-cart me-2"></i></h4>
-        <div class="header row ms-5 me-5 mb-3 text-center fw-bold">
-          <div class="col-md-4 header-etiquetas">Producto</div>
-          <div class="col-md-1 header-etiquetas">Precio</div>
-          <div class="col-md-2 header-etiquetas">Cantidad</div>
-          <div class="col-md-2 header-etiquetas">Subtotal</div>
+        <div class="header row ms-5 me-5 mb-4 text-center fw-bold">
+          <div class="col-4 header-etiquetas me-1 d-xs-none d-none d-sm-none d-md-block">Producto</div>
+          <div class="col-2 header-etiquetas me-1 d-xs-none d-none d-md-block">Precio</div>
+          <div class="col-2 header-etiquetas me-1 d-xs-none d-none d-md-block">Cantidad</div>
+          <div class="col-3 header-etiquetas d-none d-sm-none d-md-block">Subtotal</div>
         </div>`;
 
       cartItems.forEach((item, index) => {
         cartContainer.innerHTML += `
-          <div class="card mb-3 ms-5 me-5 cart-item shadow-sm" id="cart-item-${index}">
+          <div class="card ms-1 me-1 ms-md-5 me-md-5 me-1 cart-item shadow-sm" id="cart-item-${index}">
             <div class="row g-0">
-              <div class="col-md-2">
+              <div class="col-lg-2 col-md-12 col-sm-12">
                 <img src="${item.images[0]}" class="cart-img" alt="${item.name}">
               </div>
-              <div class="col-md-10">
-                <div class="row height-100 d-flex align-items-center">
-                   <div class="col text-center">
-                     <h5 class="card-title">${item.name}</h5>
+              <div class="col-lg-10 col-md-12 col-sm-12">
+                <div class="row height-100 d-flex align-items-center w-100">
+                   <div class="col-lg-4 col-md-4 text-center text-md-end text-sm-center">
+                     <div class="card-title">${item.name}</div>
                    </div>
-                   <div class="col text-center">
+                   <div class="col-lg-2 col-md-2 text-center text-md-end text-sm-center">
                      <p class="card-text">${item.currency} ${item.cost}</p>
                    </div>
-                   <div class="col text-center">
+                   <div class="col-lg-2 col-md-2 text-center text-md-end text-sm-center">
                      <input type="number" class="cart-quantity" min="0" value="${item.quantity || 1}" data-index="${index}">
                    </div>
-                   <div class="col text-center">
+                   <div class="col-lg-2 col-md-3 text-center text-md-end text-sm-center">
                      <p class="subtotal" id="subtotal-${index}">${item.currency} ${(item.cost * (item.quantity || 1)).toFixed(2)}</p>
                    </div>
-                   <div class="col text-end">
-                     <button class="btn btn-link text-secondary pe-5" onclick="eliminarProducto(${index})">
+                   <div class="col-lg-2 col-md-1 text-lg-end text-md-center text-sm-center text-center">
+                     <button class="btn btn-link text-secondary pe-ls-5 pe-md-0 ps-sm-0 pe-sm-0 elimiar-item" onclick="eliminarProducto(${index})">
                        <img src="img/papelera-de-reciclaje.png" alt="Eliminar" width="30">
                      </button>
                    </div>
@@ -49,29 +49,29 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Sección de tipos de envío
       cartContainer.innerHTML += `
-        <div class="header row ms-5 me-5 mb-3 mt-5 text-center fw-bold">
+        <div class="header row ms-1 me-1 ms-md-5 me-md-5 mb-3 mt-5 text-center fw-bold">
           <div class="col-md-4 header-etiquetas w-100">Tipo de envío</div>
         </div>
 
-        <div class="header row ms-5 me-5 mb-3 mt-5 text-center fw-bold">
-          <div class="col-4">
-            <label for="premium">
+        <div class="header row ms-1 me-1 ms-md-5 me-md-5 mb-3 mt-5 text-center fw-bold">
+          <div class="col-12 col-sm-4 mb-2">
+            <label for="premium" class="w-md-100 w-100">
               <div class="p-3 cart-tipo-envio-radio">
-                <input id="premium" type="radio" name="tipo">
+                <input id="premium" type="radio" name="tipo" class="me-1">
                 Premium 2 a 5 días (15%)
               </div>
             </label>
           </div>
-          <div class="col-4">
-            <label for="expira">
+          <div class="col-12 col-sm-4 mb-2">
+            <label for="expira" class="w-md-100 w-100">
               <div class="p-3 cart-tipo-envio-radio">
-                <input id="expira" type="radio" name="tipo">
+                <input id="expira" type="radio" name="tipo" class="me-1">
                 Expira 5 a 8 días (7%)
               </div>
             </label>
           </div>
-          <div class="col-4">
-            <label for="Standard">
+          <div class="col-12 col-sm-4 mb-2">
+            <label for="Standard" class="w-md-100 w-100">
               <div class="p-3 cart-tipo-envio-radio">
                 <input id="Standard" type="radio" name="tipo">
                 Standard 12 a 15 días (5%)
@@ -82,31 +82,31 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Sección de dirección de envío
       cartContainer.innerHTML += `
-        <div class="card mb-3 ms-5 me-5 cart-item shadow-sm p-5">
+        <div class="card mb-3 ms-1 me-1 ms-md-5 me-md-5 cart-item shadow-sm p-3 p-md-5">
           <div class="row g-0">
             <div class="col-md-12">
               <div class="row height-100 d-flex align-items-center">
                 <div class="col-12 text-left mb-4">
                   <b>Dirección de envío:</b>
                 </div>
-                <div class="col-4 text-left mb-4">
+                <div class="col-12 text-left mb-4">
                   <label for="departamento" class="mb-2">Departamento <span class="required">*</span></label>
                   <input type="text" class="form-control" id="departamento" placeholder="Ingrese su departamento" required>
                 </div>
-                <div class="col-4 text-left mb-4">
-                  <label for="localidad" class="mb-2">Localidad</label>
+                <div class="col-12 text-left mb-4">
+                  <label for="localidad" class="mb-2">Localidad <span class="required">*</span></label>
                   <input type="text" class="form-control" id="localidad" placeholder="Ingrese su localidad">
                 </div>
-                <div class="col-4 text-left mb-4"></div>
-                <div class="col-4 text-left mb-4">
+                <div class="col-12 text-left mb-4"></div>
+                <div class="col-12 text-left mb-4">
                   <label for="calle" class="mb-2">Calle <span class="required">*</span></label>
                   <input type="text" class="form-control" id="calle" placeholder="Ingrese su calle" required>
                 </div>
-                <div class="col-2 text-left mb-4">
+                <div class="col-12 text-left mb-4">
                   <label for="numero" class="mb-2">Número <span class="required">*</span></label>
                   <input type="number" class="form-control" id="numero" placeholder="Número" required>
                 </div>
-                <div class="col-3 text-left mb-4">
+                <div class="col-12 text-left mb-4">
                   <label for="esquina" class="mb-2">Esquina <span class="required">*</span></label>
                   <input type="text" class="form-control" id="esquina" placeholder="Esquina">
                 </div>
@@ -118,23 +118,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Sección de medios de pago
       cartContainer.innerHTML += `
-        <div class="header row ms-5 me-5 mb-3 mt-5 text-center fw-bold">
+        <div class="header row ms-1 me-1 ms-md-5 me-md-5 mb-3 mt-5 text-center fw-bold">
           <div class="col-md-4 header-etiquetas w-100">Medios de pago</div>
         </div>
 
-        <div class="header row ms-5 me-5 mb-3 mt-5 text-center fw-bold">
-          <div class="col-6">
-            <label for="credito">
+        <div class="header row ms-1 me-1 ms-md-5 me-md-5 mb-3 mt-5 text-center fw-bold">
+          <div class="col-12 col-md-6 mb-2">
+            <label for="credito" class="w-md-100 w-100">
               <div class="p-4 cart-tipo-envio-radio">
-                <input id="credito" type="radio" name="pago">
+                <input id="credito" type="radio" name="pago" class="me-1">
                 Tarjeta de crédito
               </div>
             </label>
           </div>
-          <div class="col-6">
-            <label for="expira">
+          <div class="col-12 col-md-6 mb-2">
+            <label for="expira" class="w-md-100 w-100">
               <div class="p-4 cart-tipo-envio-radio">
-                <input id="expira" type="radio" name="pago">
+                <input id="expira" type="radio" name="pago" class="me-1">
                 Transferencia bancaria
               </div>
             </label>
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Sección de resumen de costos
       cartContainer.innerHTML += `
-        <div class="card mb-3 ms-5 me-5 cart-item shadow-sm p-4 coste-envio">
+        <div class="card ms-1 me-1 ms-md-5 me-md-5 mb-3 mt-5 cart-item shadow-sm p-4">
           <div class="row g-0">
             <div class="col-md-12">
               <div class="row height-100 d-flex align-items-center">
@@ -161,9 +161,9 @@ document.addEventListener("DOMContentLoaded", function() {
       // Botón de finalizar compra
       const finalizarCompraBtn = document.createElement("button");
       finalizarCompraBtn.innerText = "Finalizar compra";
-      finalizarCompraBtn.className = "btn btn-warning mt-3"; 
-      finalizarCompraBtn.style.width = "20%";
-      finalizarCompraBtn.style.marginLeft = "39%";
+      finalizarCompraBtn.className = "btn btn-warning mt-3 finalizar-compra"; 
+      //finalizarCompraBtn.style.width = "20%";
+      //finalizarCompraBtn.style.marginLeft = "39%";
 
       finalizarCompraBtn.onclick = function() {
         // Validación de los campos de dirección
