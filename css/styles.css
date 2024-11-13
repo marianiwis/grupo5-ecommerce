@@ -31,9 +31,6 @@ nav a {
 .jumbotron {
   height: 50vh;
   padding: 5em inherit;
-  margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -58,9 +55,7 @@ nav a {
 
 .jumbotron .container {
   max-width: 40rem;
-  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
-  text-shadow: 1px 1px 2px grey;
 }
 
 .jumbotron .lead {
@@ -587,5 +582,23 @@ main {
 .my-cart{
   background-color: white;
   border-radius: 20px;
-  padding: 35px 45px;
+}
+
+.cart-tipo-envio-radio{
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 4px 2px #80808040;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.finalizar-compra{
+    display: block;
+    margin: 0 auto;
+}
+
+.elimiar-item img{
+  width: 20px;
 }

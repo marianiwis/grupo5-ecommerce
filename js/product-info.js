@@ -330,16 +330,15 @@ function comprar(data) {
     console.log("Producto agregado:", producto);
 
     const existingProduct = cart.find(item => item.id === producto.id);
-// Si ya existe aumenta la cantidad
+    // Si ya existe aumenta la cantidad
     if (existingProduct) {
         existingProduct.quantity += 1;
-// Si no existe agrega el producto al carrito con cantidad 1
+    // Si no existe agrega el producto al carrito con cantidad 1
     } else {
         producto.quantity = 1;
         cart.push(producto);
     }
-
-
+    
     window.localStorage.setItem("cartItems", JSON.stringify(cart));
     window.location.href = "cart.html";
 }
@@ -351,11 +350,4 @@ function actualizarBadgeCarrito() {
   }
   document.addEventListener("DOMContentLoaded", function() {
     actualizarBadgeCarrito();
-
-<<<<<<< HEAD
-  });
-=======
-  });
-
-  });
->>>>>>> d069907de66ad5725368a432c647340197ba0b0a
+});

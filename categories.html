@@ -10,17 +10,93 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Markazi+Text&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/564x/01/9d/fa/019dfabf0312f0de5d3df51c5817d602.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      transition: background-color 0.3s, color 0.3s; /* Transición para el modo oscuro*/
+    }
+
+    hr {
+      color: #FFA20D;
+      height: 3px !important;
+      opacity: 1;
+    }
+
+    .categoria-titulo {
+      font-size: 3.0em;
+      margin-bottom: 10px;
+      font-family: 'Markazi Text', serif;
+      color: #000000;
+    }
+
+    .lead {
+      font-size: 1.3em;
+      line-height: 1.5;
+      font-family: 'Cormorant Garamond', serif;
+      color: #000000;
+      font-weight: bold;
+    }
+
+    .card {
+      margin-bottom: 20px;
+    }
+
+    .card img {
+      max-height: 200px;
+      object-fit: cover;
+    }
+
+    .list-group-item {
+      margin-bottom: 15px; /* Espacio entre tarjetas */
+      background-image: url('img/fondoCAT.jpg'); /* Ruta de tu imagen */
+      background-size: cover; /* Ajusta para que cubra todo el contenedor */
+      background-repeat: no-repeat; /* Evita que la imagen se repita */
+      background-position: center; /* Centra la imagen */
+      border-radius: 8px; /* Bordes redondeados */
+    }
+
+    .list-group-item h4 {
+      font-size: 3.0em;  /* Ajusta el tamaño a tu gusto */
+      margin-bottom: 5px;
+      margin-top: 0px;
+      font-family: 'Markazi Text', serif;
+      color: #000000;
+    }
+
+    .list-group-item p {
+      font-size: 1.3em;
+      line-height: 1.5;
+      font-family: 'Cormorant Garamond', serif;
+      color:#000000;
+      font-weight: bold;
+    }
+
+    /*.list-group-item img {
+      width: 300px; /* Ajusta el tamaño de la imagen
+      height: 300px; /* Ajusta el tamaño de la imagen
+      border-radius: 50%; /* Hace que la imagen sea redonda
+      object-fit: cover; /* Asegura que la imagen se recorte bien
+    }*/
+
+  </style>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-<!-- Saco esta parte de acá porque esto hace que el nombre se repita al lado del boton <div class="collapse navbar-collapse" id="navbarNav">  -->
+      <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
             <a class="nav-link active" href="index.html">Inicio</a>
@@ -36,27 +112,29 @@
               <i class="bi bi-moon-fill"></i>
             </button>
           </li>
-        <li class="nav-item dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Usuario 
-          </button>
-          <ul class="dropdown-menu"> <!-- Menú desplegable con opciones -->
-            <li><a class="dropdown-item" href="cart.html">Mi carrito
-              <span id="cartCountBadge" class="badge bg-danger ms-2"> </span>
-            </a></li>
-            <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
-            <li><a class="dropdown-item" href="index.html" id="cerrarSesion">Cerrar sesión</a></li>
-          </ul>
-        </li>
-      </ul>
+          <li class="nav-item dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Usuario
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="cart.html">Mi carrito <span id="cartCountBadge" class="badge bg-danger ms-2"></span></a></li>
+              <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+              <li><a class="dropdown-item" href="index.html" id="cerrarSesion">Cerrar sesión</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
-  <main class="pb-5">
-    <div class="text-center p-4">
-      <h2>Categorías</h2>
+  </nav>
+
+  <main class="container mt-3">
+    <div class="text-left">
+      <hr class="mb-5">
+      <h2 class="categoria-titulo">Categorías</h2>
       <p class="lead">Verás aquí todas las categorías del sitio.</p>
+      <hr class="mb-5">
     </div>
+
     <div class="container">
       <div class="row">
         <div class="col text-end">
@@ -70,6 +148,7 @@
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
           <div class="row container p-0 m-0">
@@ -91,20 +170,20 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="list-group" id="cat-list-container">
-        </div>
+
+      <div class="row" id="cat-list-container">
+        <!-- Las tarjetas de categorías se generarán aquí dinámicamente -->
       </div>
     </div>
   </main>
+
   <footer class="text-muted">
     <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
+      <p class="float-end"><a href="#">Volver arriba</a></p>
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
   </footer>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -113,6 +192,7 @@
       <div></div>
     </div>
   </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/categories.js"></script>
