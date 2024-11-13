@@ -9,7 +9,7 @@ function mostrarProductos(productosArray) {
     //agregamos el onclick para redirigir
     productosArray.forEach(producto => {
         htmlContentToAppend += `
-        <div class="col-lg-4 col-md-12 col-12">
+        <div class="col-lg-4 col-md-4 col-ms-12 col-12">
             <div class="card mb-4 shadow-lg rounded" style="box-shadow: 0 4px 8px #ff8a0d;" onclick="guardarProductoYRedirigir(${producto.id})">
                 <img src="${producto.image}" class="card-img-top" alt="${producto.name}">
                 <div class="card-body">
