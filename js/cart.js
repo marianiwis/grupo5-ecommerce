@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
   const cartContainer = document.getElementById("cart-container");
   const storedCart = localStorage.getItem("cartItems");
+  const exchangeRate = 42; // cotizacion fija 42 pesos por dolar
 
   if (storedCart) {
     const cartItems = JSON.parse(storedCart);
@@ -16,6 +17,13 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>`;
 
       cartItems.forEach((item, index) => {
+        // convierte el precio a dol 
+        let itemPriceInDollars = item.cost;
+        if (item.currency !== "USD") {
+          itemPriceInDollars = (item.cost / exchangeRate).toFixed(2);
+          item.currency = "USD"; // cambia la moneda a dol
+        }
+
         cartContainer.innerHTML += `
           <div class="card mb-3 ms-5 me-5 cart-item shadow-sm" id="cart-item-${index}">
             <div class="row g-0">
@@ -28,13 +36,13 @@ document.addEventListener("DOMContentLoaded", function() {
                      <h5 class="card-title">${item.name}</h5>
                    </div>
                    <div class="col text-center">
-                     <p class="card-text">${item.currency} ${item.cost}</p>
+                     <p class="card-text">USD ${itemPriceInDollars}</p>
                    </div>
                    <div class="col text-center">
                      <input type="number" class="cart-quantity" min="0" value="${item.quantity || 1}" data-index="${index}">
                    </div>
                    <div class="col text-center">
-                     <p class="subtotal" id="subtotal-${index}">${item.currency} ${(item.cost * (item.quantity || 1)).toFixed(2)}</p>
+                     <p class="subtotal" id="subtotal-${index}">USD ${(itemPriceInDollars * (item.quantity || 1)).toFixed(2)}</p>
                    </div>
                    <div class="col text-end">
                      <button class="btn btn-link text-secondary pe-5" onclick="eliminarProducto(${index})">
@@ -256,12 +264,19 @@ function actualizarSubtotal(index, quantity, cost, currency) {
 
 function actualizarTotal() {
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const exchangeRate = 42; // cotizacion a dol para el total
   let subtotal = 0;
 
+  // convierte todos los costos a dol para el subtotal
   cartItems.forEach(item => {
-    subtotal += item.cost * (item.quantity || 1);
+    let itemCostInDollars = item.cost;
+    if (item.currency !== "USD") {
+      itemCostInDollars = item.cost / exchangeRate;
+    }
+    subtotal += itemCostInDollars * (item.quantity || 1);
   });
 
+  // Calcular costo de envío
   const tipoEnvio = document.querySelector("input[name='tipo']:checked");
   let costoEnvio = 0;
 
@@ -279,9 +294,12 @@ function actualizarTotal() {
     }
   }
 
+  // Calcular el total final
   const total = subtotal + costoEnvio;
-  document.getElementById("costo-envio").textContent = `Costo de envío: $${costoEnvio.toFixed(2)}`;
-  document.getElementById("total-final").textContent = `Total: $${total.toFixed(2)}`;
+  
+  // Mostrar los resultados en el DOM
+  document.getElementById("costo-envio").textContent = `Costo de envío: USD ${costoEnvio.toFixed(2)}`;
+  document.getElementById("total-final").textContent = `Total: USD ${total.toFixed(2)}`;
 }
 
 function eliminarProducto(index) {
@@ -310,7 +328,7 @@ document.querySelectorAll(".cart-quantity").forEach(input => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
     actualizarSubtotal(index, newQuantity, cartItems[index].cost, cartItems[index].currency);
     actualizarTotal();
-    actualizarBadgeCarrito(); // Actualizar el badge de cantidad
+    actualizarBadgeCarrito(); // actualiza el badge de cantidad
   });
 });
 // así se actualiza el total en tiempo real sin la necesidad de recargar la pag 
