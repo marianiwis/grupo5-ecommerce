@@ -258,7 +258,7 @@ const tasaDeCambio = 41; // Suponiendo que estás trabajando con una moneda loca
 function convertirAPrecioEnDolares(costo, moneda) {
   // Convertir el precio a dólares si la moneda es diferente a USD
   if (moneda !== 'USD') {
-    return costo * tasaDeCambio;
+    return costo / tasaDeCambio;
   }
   return costo; // Si ya está en USD, no hacer ninguna conversión
 }
