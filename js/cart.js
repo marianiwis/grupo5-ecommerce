@@ -15,37 +15,38 @@ document.addEventListener("DOMContentLoaded", function() {
           <div class="col-3 header-etiquetas d-none d-sm-none d-md-block">Subtotal</div>
         </div>`;
 
-      cartItems.forEach((item, index) => {
-        cartContainer.innerHTML += `
-          <div class="card ms-1 me-1 ms-md-5 me-md-5 me-1 cart-item shadow-sm" id="cart-item-${index}">
-            <div class="row g-0">
-              <div class="col-lg-2 col-md-12 col-sm-12">
-                <img src="${item.images[0]}" class="cart-img" alt="${item.name}">
-              </div>
-              <div class="col-lg-10 col-md-12 col-sm-12">
-                <div class="row height-100 d-flex align-items-center w-100">
-                   <div class="col-lg-4 col-md-4 text-center text-md-end text-sm-center">
-                     <div class="card-title">${item.name}</div>
-                   </div>
-                   <div class="col-lg-2 col-md-2 text-center text-md-end text-sm-center">
-                     <p class="card-text">${item.currency} ${item.cost}</p>
-                   </div>
-                   <div class="col-lg-2 col-md-2 text-center text-md-end text-sm-center">
-                     <input type="number" class="cart-quantity" min="0" value="${item.quantity || 1}" data-index="${index}">
-                   </div>
-                   <div class="col-lg-2 col-md-3 text-center text-md-end text-sm-center">
-                     <p class="subtotal" id="subtotal-${index}">${item.currency} ${(item.cost * (item.quantity || 1)).toFixed(2)}</p>
-                   </div>
-                   <div class="col-lg-2 col-md-1 text-lg-end text-md-center text-sm-center text-center">
-                     <button class="btn btn-link text-secondary pe-ls-5 pe-md-0 ps-sm-0 pe-sm-0 elimiar-item" onclick="eliminarProducto(${index})">
-                       <img src="img/papelera-de-reciclaje.png" alt="Eliminar" width="30">
-                     </button>
-                   </div>
+        cartItems.forEach((item, index) => {
+          cartContainer.innerHTML += `
+            <div class="card ms-1 me-1 ms-md-5 me-md-5 me-1 cart-item shadow-sm" id="cart-item-${index}">
+              <div class="row g-0">
+                <div class="col-lg-2 col-md-12 col-sm-12 d-flex align-items-center justify-content-start">
+                  <img src="${item.images[0]}" class="cart-img" alt="${item.name}">
+                </div>
+                <div class="col-lg-10 col-md-12 col-sm-12">
+                  <div class="row height-100 d-flex align-items-center w-100">
+                     <div class="col-lg-4 col-md-4 text-center text-md-start text-sm-center d-flex align-items-center">
+                       <div class="card-title">${item.name}</div>
+                     </div>
+                     <div class="col-lg-2 col-md-2 text-center text-md-start text-sm-center">
+                       <p class="card-text">${item.currency} ${item.cost}</p>
+                     </div>
+                     <div class="col-lg-2 col-md-2 text-center text-md-start text-sm-center">
+                       <input type="number" class="cart-quantity" min="0" value="${item.quantity || 1}" data-index="${index}">
+                     </div>
+                     <div class="col-lg-2 col-md-3 text-center text-md-start text-sm-center">
+                       <p class="subtotal" id="subtotal-${index}">${item.currency} ${(item.cost * (item.quantity || 1)).toFixed(2)}</p>
+                     </div>
+                     <div class="col-lg-2 col-md-1 text-lg-end text-md-center text-sm-center text-center">
+                       <button class="btn btn-link text-secondary pe-ls-5 pe-md-0 ps-sm-0 pe-sm-0 elimiar-item" onclick="eliminarProducto(${index})">
+                         <img src="img/papelera-de-reciclaje.png" alt="Eliminar" width="30">
+                       </button>
+                     </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>`;
-      });
+            </div>`;
+        });
+        
 
       // Sección de tipos de envío
       cartContainer.innerHTML += `
@@ -147,10 +148,13 @@ document.addEventListener("DOMContentLoaded", function() {
           <div class="row g-0">
             <div class="col-md-12">
               <div class="row height-100 d-flex align-items-center">
-                <div class="col-6 text-center" id="costo-envio">
+                <div class="col-4 text-center" id="subtotal">
+                  <b>Subtotal: $0.00</b>
+                </div>
+                <div class="col-4 text-center" id="costo-envio">
                   <b>Costo de envío: $0.00</b>
                 </div>
-                <div class="col-6 text-center" id="total-final">
+                <div class="col-4 text-center" id="total-final">
                   <b>Total: $0.00</b>
                 </div>
               </div>
@@ -246,11 +250,6 @@ function mostrarCarritoVacio(cartContainer) {
     </div>`;
 }
 
-function actualizarSubtotal(index, quantity, cost, currency) {
-  const subtotalElement = document.getElementById(`subtotal-${index}`);
-  const subtotal = quantity * cost;
-  subtotalElement.textContent = `${currency} ${subtotal.toFixed(2)}`;
-}
 
 // Definir la tasa de cambio (por ejemplo, 1 moneda local = 41 USD)
 const tasaDeCambio = 41; // Suponiendo que estás trabajando con una moneda local
@@ -304,6 +303,7 @@ function actualizarTotal() {
   }
 
   const total = subtotal + costoEnvio;
+  document.getElementById("subtotal").textContent = `Subtotal: USD ${subtotal.toFixed(2)}`;
   document.getElementById("costo-envio").textContent = `Costo de envío: USD ${costoEnvio.toFixed(2)}`;
   document.getElementById("total-final").textContent = `Total: USD ${total.toFixed(2)}`;
 
