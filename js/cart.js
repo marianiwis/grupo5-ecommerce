@@ -252,12 +252,38 @@ function actualizarSubtotal(index, quantity, cost, currency) {
   subtotalElement.textContent = `${currency} ${subtotal.toFixed(2)}`;
 }
 
+// Definir la tasa de cambio (por ejemplo, 1 moneda local = 41 USD)
+const tasaDeCambio = 41; // Suponiendo que estás trabajando con una moneda local
+
+function convertirAPrecioEnDolares(costo, moneda) {
+  // Convertir el precio a dólares si la moneda es diferente a USD
+  if (moneda !== 'USD') {
+    return costo * tasaDeCambio;
+  }
+  return costo; // Si ya está en USD, no hacer ninguna conversión
+}
+
+function actualizarSubtotal(index, quantity, cost, currency) {
+  const subtotalElement = document.getElementById(`subtotal-${index}`);
+  
+  // Convertir el costo a dólares
+  const costoEnDolares = convertirAPrecioEnDolares(cost, currency);
+  
+  // Calcular el subtotal en dólares
+  const subtotal = quantity * costoEnDolares;
+  
+  // Mostrar el subtotal convertido
+  subtotalElement.textContent = `USD ${subtotal.toFixed(2)}`;
+}
+
 function actualizarTotal() {
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   let subtotal = 0;
 
   cartItems.forEach(item => {
-    subtotal += item.cost * (item.quantity || 1);
+    // Convertir cada precio a dólares antes de sumarlo al subtotal
+    const costoEnDolares = convertirAPrecioEnDolares(item.cost, item.currency);
+    subtotal += costoEnDolares * (item.quantity || 1);
   });
 
   const tipoEnvio = document.querySelector("input[name='tipo']:checked");
@@ -278,8 +304,8 @@ function actualizarTotal() {
   }
 
   const total = subtotal + costoEnvio;
-  document.getElementById("costo-envio").textContent = `Costo de envío: $${costoEnvio.toFixed(2)}`;
-  document.getElementById("total-final").textContent = `Total: $${total.toFixed(2)}`;
+  document.getElementById("costo-envio").textContent = `Costo de envío: USD ${costoEnvio.toFixed(2)}`;
+  document.getElementById("total-final").textContent = `Total: USD ${total.toFixed(2)}`;
 }
 
 function eliminarProducto(index) {
