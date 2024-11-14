@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
   const cartContainer = document.getElementById("cart-container");
   const storedCart = localStorage.getItem("cartItems");
-  const exchangeRate = 42; // cotizacion fija 42 pesos por dolar
 
   if (storedCart) {
     const cartItems = JSON.parse(storedCart);
@@ -9,11 +8,6 @@ document.addEventListener("DOMContentLoaded", function() {
     if (cartItems.length > 0) {
       cartContainer.innerHTML = `
         <h4 class="mb-5 fw-bold">Mi Carrito <i class="bi bi-cart me-2"></i></h4>
-        <div class="header row ms-5 me-5 mb-3 text-center fw-bold">
-          <div class="col-md-4 header-etiquetas">Producto</div>
-          <div class="col-md-1 header-etiquetas">Precio</div>
-          <div class="col-md-2 header-etiquetas">Cantidad</div>
-          <div class="col-md-2 header-etiquetas">Subtotal</div>
         <div class="header row ms-5 me-5 mb-4 text-center fw-bold">
           <div class="col-4 header-etiquetas me-1 d-xs-none d-none d-sm-none d-md-block">Producto</div>
           <div class="col-2 header-etiquetas me-1 d-xs-none d-none d-md-block">Precio</div>
@@ -22,15 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>`;
 
       cartItems.forEach((item, index) => {
-        // convierte el precio a dol 
-        let itemPriceInDollars = item.cost;
-        if (item.currency !== "USD") {
-          itemPriceInDollars = (item.cost / exchangeRate).toFixed(2);
-          item.currency = "USD"; // cambia la moneda a dol
-        }
-
         cartContainer.innerHTML += `
-          <div class="card mb-3 ms-5 me-5 cart-item shadow-sm" id="cart-item-${index}">
           <div class="card ms-1 me-1 ms-md-5 me-md-5 me-1 cart-item shadow-sm" id="cart-item-${index}">
             <div class="row g-0">
               <div class="col-lg-2 col-md-12 col-sm-12">
@@ -41,17 +27,6 @@ document.addEventListener("DOMContentLoaded", function() {
                    <div class="col-lg-4 col-md-4 text-center text-md-end text-sm-center">
                      <div class="card-title">${item.name}</div>
                    </div>
-                   <div class="col text-center">
-                     <p class="card-text">USD ${itemPriceInDollars}</p>
-                   </div>
-                   <div class="col text-center">
-                     <input type="number" class="cart-quantity" min="0" value="${item.quantity || 1}" data-index="${index}">
-                   </div>
-                   <div class="col text-center">
-                     <p class="subtotal" id="subtotal-${index}">USD ${(itemPriceInDollars * (item.quantity || 1)).toFixed(2)}</p>
-                   </div>
-                   <div class="col text-end">
-                     <button class="btn btn-link text-secondary pe-5" onclick="eliminarProducto(${index})">
                    <div class="col-lg-2 col-md-2 text-center text-md-end text-sm-center">
                      <p class="card-text">${item.currency} ${item.cost}</p>
                    </div>
@@ -74,16 +49,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Sección de tipos de envío
       cartContainer.innerHTML += `
-
-        <div class="header row ms-5 me-5 mb-3 mt-5 text-center fw-bold">
-          <div class="col-md-4 header-etiquetas w-100">Tipo de envío</div>
-        </div>
-
-        <div class="header row ms-5 me-5 mb-3 mt-5 text-center fw-bold">
-          <div class="col-4">
-            <label for="premium">
-              <div class="p-3 cart-tipo-envio-radio">
-                <input id="premium" type="radio" name="tipo">
         <div class="header row ms-1 me-1 ms-md-5 me-md-5 mb-3 mt-5 text-center fw-bold">
           <div class="col-md-4 header-etiquetas w-100">Tipo de envío</div>
         </div>
@@ -97,16 +62,6 @@ document.addEventListener("DOMContentLoaded", function() {
               </div>
             </label>
           </div>
-          <div class="col-4">
-            <label for="expira">
-              <div class="p-3 cart-tipo-envio-radio">
-                <input id="expira" type="radio" name="tipo">
-                Express 5 a 8 días (7%)
-              </div>
-            </label>
-          </div>
-          <div class="col-4">
-            <label for="Standard">
           <div class="col-12 col-sm-4 mb-2">
             <label for="expira" class="w-md-100 w-100">
               <div class="p-3 cart-tipo-envio-radio">
@@ -127,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Sección de dirección de envío
       cartContainer.innerHTML += `
-        <div class="card mb-3 ms-5 me-5 cart-item shadow-sm p-5">
         <div class="card mb-3 ms-1 me-1 ms-md-5 me-md-5 cart-item shadow-sm p-3 p-md-5">
           <div class="row g-0">
             <div class="col-md-12">
@@ -135,24 +89,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="col-12 text-left mb-4">
                   <b>Dirección de envío:</b>
                 </div>
-                <div class="col-4 text-left mb-4">
-                  <label for="departamento" class="mb-2">Departamento <span class="required">*</span></label>
-                  <input type="text" class="form-control" id="departamento" placeholder="Ingrese su departamento" required>
-                </div>
-                <div class="col-4 text-left mb-4">
-                  <label for="localidad" class="mb-2">Localidad</label>
-                  <input type="text" class="form-control" id="localidad" placeholder="Ingrese su localidad">
-                </div>
-                <div class="col-4 text-left mb-4"></div>
-                <div class="col-4 text-left mb-4">
-                  <label for="calle" class="mb-2">Calle <span class="required">*</span></label>
-                  <input type="text" class="form-control" id="calle" placeholder="Ingrese su calle" required>
-                </div>
-                <div class="col-2 text-left mb-4">
-                  <label for="numero" class="mb-2">Número <span class="required">*</span></label>
-                  <input type="number" class="form-control" id="numero" placeholder="Número" required>
-                </div>
-                <div class="col-3 text-left mb-4">
                 <div class="col-12 text-left mb-4">
                   <label for="departamento" class="mb-2">Departamento <span class="required">*</span></label>
                   <input type="text" class="form-control" id="departamento" placeholder="Ingrese su departamento" required>
@@ -182,15 +118,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Sección de medios de pago
       cartContainer.innerHTML += `
-        <div class="header row ms-5 me-5 mb-3 mt-5 text-center fw-bold">
-          <div class="col-md-4 header-etiquetas w-100">Medios de pago</div>
-        </div>
-
-        <div class="header row ms-5 me-5 mb-3 mt-5 text-center fw-bold">
-          <div class="col-6">
-            <label for="credito">
-              <div class="p-4 cart-tipo-envio-radio">
-                <input id="credito" type="radio" name="pago">
         <div class="header row ms-1 me-1 ms-md-5 me-md-5 mb-3 mt-5 text-center fw-bold">
           <div class="col-md-4 header-etiquetas w-100">Medios de pago</div>
         </div>
@@ -204,10 +131,6 @@ document.addEventListener("DOMContentLoaded", function() {
               </div>
             </label>
           </div>
-          <div class="col-6">
-            <label for="expira">
-              <div class="p-4 cart-tipo-envio-radio">
-                <input id="expira" type="radio" name="pago">
           <div class="col-12 col-md-6 mb-2">
             <label for="expira" class="w-md-100 w-100">
               <div class="p-4 cart-tipo-envio-radio">
@@ -220,7 +143,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Sección de resumen de costos
       cartContainer.innerHTML += `
-        <div class="card mb-3 ms-5 me-5 cart-item shadow-sm p-4 coste-envio">
         <div class="card ms-1 me-1 ms-md-5 me-md-5 mb-3 mt-5 cart-item shadow-sm p-4">
           <div class="row g-0">
             <div class="col-md-12">
@@ -239,9 +161,6 @@ document.addEventListener("DOMContentLoaded", function() {
       // Botón de finalizar compra
       const finalizarCompraBtn = document.createElement("button");
       finalizarCompraBtn.innerText = "Finalizar compra";
-      finalizarCompraBtn.className = "btn btn-warning mt-3"; 
-      finalizarCompraBtn.style.width = "20%";
-      finalizarCompraBtn.style.marginLeft = "39%";
       finalizarCompraBtn.className = "btn btn-warning mt-3 finalizar-compra"; 
       //finalizarCompraBtn.style.width = "20%";
       //finalizarCompraBtn.style.marginLeft = "39%";
@@ -304,8 +223,6 @@ document.addEventListener("DOMContentLoaded", function() {
           localStorage.setItem("cartItems", JSON.stringify(cartItems));
           actualizarSubtotal(index, newQuantity, cartItems[index].cost, cartItems[index].currency);
           actualizarTotal();
-              // actualiza la cantidad total en el badge del carrito haciendo que al sumar o restar directo del producto lo muestre en tiempo real
-          actualizarBadgeCarrito();
         });
       });
 
@@ -337,19 +254,6 @@ function actualizarSubtotal(index, quantity, cost, currency) {
 
 function actualizarTotal() {
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  const exchangeRate = 42; // cotizacion a dol para el total
-  let subtotal = 0;
-
-  // convierte todos los costos a dol para el subtotal
-  cartItems.forEach(item => {
-    let itemCostInDollars = item.cost;
-    if (item.currency !== "USD") {
-      itemCostInDollars = item.cost / exchangeRate;
-    }
-    subtotal += itemCostInDollars * (item.quantity || 1);
-  });
-
-  // Calcular costo de envío
   let subtotal = 0;
 
   cartItems.forEach(item => {
@@ -373,12 +277,6 @@ function actualizarTotal() {
     }
   }
 
-  // Calcular el total final
-  const total = subtotal + costoEnvio;
-  
-  // Mostrar los resultados en el DOM
-  document.getElementById("costo-envio").textContent = `Costo de envío: USD ${costoEnvio.toFixed(2)}`;
-  document.getElementById("total-final").textContent = `Total: USD ${total.toFixed(2)}`;
   const total = subtotal + costoEnvio;
   document.getElementById("costo-envio").textContent = `Costo de envío: $${costoEnvio.toFixed(2)}`;
   document.getElementById("total-final").textContent = `Total: $${total.toFixed(2)}`;
@@ -398,32 +296,6 @@ function actualizarBadgeCarrito() {
   document.getElementById("cartCountBadge").innerText = totalQuantity;
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  actualizarBadgeCarrito();
-});
-// Evento para actualizar subtotal y total cuando cambia la cantidad
-document.querySelectorAll(".cart-quantity").forEach(input => {
-  input.addEventListener("input", function() {
-    const index = input.getAttribute("data-index");
-    const newQuantity = parseInt(input.value);
-    cartItems[index].quantity = newQuantity;
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    actualizarSubtotal(index, newQuantity, cartItems[index].cost, cartItems[index].currency);
-    actualizarTotal();
-    actualizarBadgeCarrito(); // actualiza el badge de cantidad
-  });
-});
-// así se actualiza el total en tiempo real sin la necesidad de recargar la pag 
-function eliminarProducto(index) {
-  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-  cart.splice(index, 1);
-  localStorage.setItem("cartItems", JSON.stringify(cart));
-  document.getElementById(`cart-item-${index}`).remove();
-  actualizarTotal();
-  actualizarBadgeCarrito(); // actualiza el badge de cantidad
-}
-
-// llama a actualizar badgeCarrito al cargar la página para reflejar la cantidad inicial
 document.addEventListener("DOMContentLoaded", function() {
   actualizarBadgeCarrito();
 });
