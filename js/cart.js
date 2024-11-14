@@ -306,6 +306,9 @@ function actualizarTotal() {
   const total = subtotal + costoEnvio;
   document.getElementById("costo-envio").textContent = `Costo de envío: USD ${costoEnvio.toFixed(2)}`;
   document.getElementById("total-final").textContent = `Total: USD ${total.toFixed(2)}`;
+
+  // Actualizar el badge del carrito
+  actualizarBadgeCarrito();
 }
 
 function eliminarProducto(index) {
@@ -316,6 +319,7 @@ function eliminarProducto(index) {
   actualizarTotal();
 }
 
+// Función para actualizar el badge del carrito
 function actualizarBadgeCarrito() {
   let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const totalQuantity = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
