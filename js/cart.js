@@ -63,10 +63,10 @@ document.addEventListener("DOMContentLoaded", function() {
             </label>
           </div>
           <div class="col-12 col-sm-4 mb-2">
-            <label for="expira" class="w-md-100 w-100">
+            <label for="express" class="w-md-100 w-100">
               <div class="p-3 cart-tipo-envio-radio">
-                <input id="expira" type="radio" name="tipo" class="me-1">
-                Expira 5 a 8 días (7%)
+                <input id="express" type="radio" name="tipo" class="me-1">
+                Express 5 a 8 días (7%)
               </div>
             </label>
           </div>
@@ -294,7 +294,7 @@ function actualizarTotal() {
       case "premium":
         costoEnvio = subtotal * 0.15;
         break;
-      case "expira":
+      case "express":
         costoEnvio = subtotal * 0.07;
         break;
       case "Standard":
