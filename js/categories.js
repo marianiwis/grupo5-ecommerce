@@ -40,8 +40,7 @@ function setCatID(id) {
     window.location = "products.html"
 }
 
-function showCategoriesList(){
-
+function showCategoriesList() {
     let htmlContentToAppend = "";
     for(let i = 0; i < currentCategoriesArray.length; i++){
         let category = currentCategoriesArray[i];
@@ -50,25 +49,25 @@ function showCategoriesList(){
             ((maxCount == undefined) || (maxCount != undefined && parseInt(category.productCount) <= maxCount))){
 
             htmlContentToAppend += `
-            <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="${category.imgSrc}" alt="${category.description}" class="img-thumbnail">
+            <div onclick="setCatID(${category.id})" class="col-12 justify-content-center align-items-center">
+              <div class="card mb-3" style="max-width:100%;">
+                    <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="${category.imgSrc}" class="img-fluid rounded-end" alt="${category.name}">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">${category.name}</h5>
+                                    <p class="card-text">${category.description}</p>
+                                    <p class="card-text"><small class="text-muted">${category.productCount} artículos</small></p>
+                                </div>
+                                </div>
+                            </div>
                     </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">${category.name}</h4>
-                            <small class="text-muted">${category.productCount} artículos</small>
-                        </div>
-                        <p class="mb-1">${category.description}</p>
-                    </div>
-                </div>
-            </div>
-            `
+            </div>`;
         }
-
-        document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
     }
+    document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
 }
 
 function sortAndShowCategories(sortCriteria, categoriesArray){
