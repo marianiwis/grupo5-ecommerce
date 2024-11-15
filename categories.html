@@ -53,6 +53,63 @@
       border: 3px solid #eed6a9;
       margin-bottom: 20px;
       margin-top: 20px;
+      background-image: url('img/fondocart.jpg'); /* Ruta de tu imagen */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .custom-cardinga-body {
+      background-image: url('img/fondocart.jpg'); /* Ruta de tu imagen */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 10px; /* bordes redondeados */
+      border: 3px solid #eed6a9;
+      position: relative;
+      padding: 20px;
+      opacity: 1; /* Modo claro */
+    }
+
+    .card img {
+      border-radius: 10px; /* bordes redondeados */
+      border: 3px solid #eed6a9;
+      opacity: 1; /* Modo claro */
+      transition: opacity 0.3s ease;
+      max-height: 200px;
+      object-fit: cover;
+    }
+
+    .dark-mode .card {
+      margin-bottom: 20px;
+      border-radius: 15px; /* bordes redondeados */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* sombra */
+      border: 3px solid #eed6a9;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      background-image: url('img/fondocart.jpg'); /* Ruta de tu imagen */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.9; /* Ajusta la opacidad */
+      transition: background-color 0.3s, color 0.3s; /* Transición para el modo oscuro*/
+    }
+
+    .dark-mode .card img {
+      border-radius: 15px; /* bordes redondeados */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* sombra */
+      opacity: 0.6; /* Ajusta la opacidad */
+    }
+
+    .dark-mode .custom-cardinga-body {
+      background-image: url('img/fondocart.jpg'); /* Ruta de tu imagen */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      padding: 20px;
+      opacity: 0.7; /* Ajusta la opacidad */
+      transition: background-color 0.7s, color 0.3s; /* Transición para el modo oscuro*/
     }
 
     .category-title {
@@ -67,15 +124,22 @@
       font-size: 1.5em;
     }
 
+    .dark-mode.category-title {
+      font-family: 'Cormorant Garamond', serif;
+      color: #000000;
+      font-size: 3.5em;
+    }
+
+    .dark-mode.category-text {
+      font-family: 'Cormorant Garamond', serif;
+      color: #313030;
+      font-size: 1.5em;
+    }
+
     .category-art {
       font-family: 'Cormorant Garamond', serif;
       color: #f08c2f;
       font-size: 1.5em;
-    }
-
-    .card img {
-      max-height: 200px;
-      object-fit: cover;
     }
 
     .list-group-item {
@@ -116,28 +180,40 @@
       display: flex;
       align-items: center; /* Alinea el contenido verticalmente */
       justify-content: flex-start; /* Alinea el contenido horizontalmente */
+      
     }
 
     #ordenar-titulo {
       font-weight: bold;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5em;
-      border-radius: 15px; /* Bordes redondeados */
+      font-size: 1.2em;
+      border-radius: 20px; /* Bordes redondeados */
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
       border: 3px solid #eed6a9;
     }
 
+    .font-weight-normal {
+      font-weight: bold;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2em;
+      border-radius: 20px; /* Bordes redondeados */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+      border: 3px solid #eed6a9;
+      padding: 5px;
+      margin: 10px 0; /* Equivalente a my-2 */
+    }
+
     #filterBtn{
-      background-color: #f8f9fa; /* Fondo claro */
-      border: 1px solid rgb(253, 240, 189); /* Borde gris claro */
+      background-color: rgb(253, 240, 189); /* Fondo claro */
+      border: 2px solid #f08c2f;/* Borde gris claro */
       width: 100%; /* Asegura que ambos botones tengan el mismo ancho que los campos de min/max */
       padding: 10px; /* Ajuste de padding para que coincida con el tamaño de los campos */
       margin: 0; /* Eliminar márgenes adicionales */
     }
 
     #clearRangeFilter {
-      background-color: #ec0e0e; /* Fondo claro */
-      border: 1px solid #b40000; /* Borde gris claro */
+      background-color: #f87777; /* Fondo claro */
+      border: 2px solid #b40000; /* Borde gris claro */
       width: 100%; /* Asegura que ambos botones tengan el mismo ancho que los campos de min/max */
       padding: 10px; /* Ajuste de padding para que coincida con el tamaño de los campos */
       margin: 0; /* Eliminar márgenes adicionales */
@@ -151,17 +227,10 @@
       padding: 12px; /* Ajusta el padding a un tamaño más pequeño */
     }
 
-    /*.list-group-item img {
-      width: 300px; /* Ajusta el tamaño de la imagen
-      height: 300px; /* Ajusta el tamaño de la imagen
-      border-radius: 50%; /* Hace que la imagen sea redonda
-      object-fit: cover; /* Asegura que la imagen se recorte bien
-    }*/
-
   </style>
 </head>
 
-<body>
+<body class="dark-mode">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -235,7 +304,7 @@
         <div class="col-md-12">
           <div class="row g-2 align-items-center">
             <div class="col-auto">
-              <p class="font-weight-normal my-2" style="background-color: white; padding: 5px;">Cantidad</p>
+              <p class="font-weight-normal my-2">Cantidad</p>
             </div>
             <div class="col-auto">
               <input class="form-control" type="number" placeholder="min" id="rangeFilterCountMin" style="width: 100%;">

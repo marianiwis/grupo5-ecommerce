@@ -53,10 +53,10 @@ function showCategoriesList() {
               <div class="card mb-3" style="max-width:100%;">
                     <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="${category.imgSrc}" class="img-fluid rounded-end" alt="${category.name}">
+                                <img src="${category.imgSrc}" class="img-fluid rounded-end" style="object-fit: cover; width: 100%; height: 100%;" alt="${category.name}">
                             </div>
                             <div class="col-md-8">
-                                <div class="card-body">
+                                <div class="custom-cardinga-body" style="object-fit: cover; width: 100%; height: 100%; padding: 10px;">
                                     <h5 class="card-title fw-bold category-title">${category.name}</h5>
                                     <p class="card-text fw-bold category-text">${category.description}</p>
                                     <p class="card-text fw-bold category-art text-end">${category.productCount} artículos</p>
@@ -86,81 +86,66 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(CATEGORIES_URL).then(function(resultObj){
-        if (resultObj.status === "ok"){
-            currentCategoriesArray = resultObj.data
-            showCategoriesList()
-            //sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
+document.addEventListener("DOMContentLoaded", function () {
+    getJSONData(CATEGORIES_URL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+            currentCategoriesArray = resultObj.data;
+            showCategoriesList();
         }
     });
 
-    document.getElementById("sortAsc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_ASC_BY_NAME);
-    });
-
-    document.getElementById("sortDesc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_DESC_BY_NAME);
-    });
-
-    document.getElementById("sortByCount").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_BY_PROD_COUNT);
-    });
-
-    document.getElementById("clearRangeFilter").addEventListener("click", function(){
-        document.getElementById("rangeFilterCountMin").value = "";
-        document.getElementById("rangeFilterCountMax").value = "";
-
-        minCount = undefined;
-        maxCount = undefined;
-
-        showCategoriesList();
-    });
-
-    document.getElementById("rangeFilterCount").addEventListener("click", function(){
-        //obtenemos el mínimo y máximo de los intervalos para filtrar por cantidad
-        //de productos por categoría.
-        minCount = document.getElementById("rangeFilterCountMin").value;
-        maxCount = document.getElementById("rangeFilterCountMax").value;
-
-        if ((minCount != undefined) && (minCount != "") && (parseInt(minCount)) >= 0){
-            minCount = parseInt(minCount);
-        }
-        else{
-            minCount = undefined;
-        }
-
-        if ((maxCount != undefined) && (maxCount != "") && (parseInt(maxCount)) >= 0){
-            maxCount = parseInt(maxCount);
-        }
-        else{
-            maxCount = undefined;
-        }
-
-        showCategoriesList();
-    });
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    // Obtener el nombre de usuario almacenado en localStorage
-    const usuario = window.localStorage.getItem("email");
-
-    // Verificar si hay un usuario guardado en localStorage
-    if (usuario) {
-        // Cambiar el texto del botón con el nombre del usuario
-        const userButton = document.querySelector('.dropdown-toggle');
-        userButton.textContent = usuario;
-    } else {
-        // Si no hay usuario logueado, redirigir al login
-        window.location.href = "login.html";
+    // Verificar y añadir eventos solo si los elementos existen
+    const sortAsc = document.getElementById("sortAsc");
+    if (sortAsc) {
+        sortAsc.addEventListener("click", function () {
+            sortAndShowCategories(ORDER_ASC_BY_NAME);
+        });
     }
 
-    // Cerrar sesión: limpiar el localStorage y redirigir al login
-    document.getElementById("cerrarSesion").addEventListener("click", function() {
-        window.localStorage.removeItem("usuario");
-        window.location.href = "login.html";
-    });
+    const sortDesc = document.getElementById("sortDesc");
+    if (sortDesc) {
+        sortDesc.addEventListener("click", function () {
+            sortAndShowCategories(ORDER_DESC_BY_NAME);
+        });
+    }
+
+    const sortByCount = document.getElementById("sortByCount");
+    if (sortByCount) {
+        sortByCount.addEventListener("click", function () {
+            sortAndShowCategories(ORDER_BY_PROD_COUNT);
+        });
+    }
+
+    const clearRangeFilter = document.getElementById("clearRangeFilter");
+    if (clearRangeFilter) {
+        clearRangeFilter.addEventListener("click", function () {
+            const rangeMin = document.getElementById("rangeFilterCountMin");
+            const rangeMax = document.getElementById("rangeFilterCountMax");
+
+            if (rangeMin) rangeMin.value = "";
+            if (rangeMax) rangeMax.value = "";
+
+            minCount = undefined;
+            maxCount = undefined;
+
+            showCategoriesList();
+        });
+    }
+
+    const rangeFilterCount = document.getElementById("rangeFilterCount");
+    if (rangeFilterCount) {
+        rangeFilterCount.addEventListener("click", function () {
+            const rangeMin = document.getElementById("rangeFilterCountMin");
+            const rangeMax = document.getElementById("rangeFilterCountMax");
+
+            minCount = rangeMin && rangeMin.value && parseInt(rangeMin.value) >= 0 ? parseInt(rangeMin.value) : undefined;
+            maxCount = rangeMax && rangeMax.value && parseInt(rangeMax.value) >= 0 ? parseInt(rangeMax.value) : undefined;
+
+            showCategoriesList();
+        });
+    }
 });
+
 // Desafiate, cantidad de productos en carrito
 function actualizarBadgeCarrito() {
     let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
