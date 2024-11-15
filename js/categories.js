@@ -57,9 +57,9 @@ function showCategoriesList() {
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title">${category.name}</h5>
-                                    <p class="card-text">${category.description}</p>
-                                    <p class="card-text"><small class="text-muted">${category.productCount} artículos</small></p>
+                                    <h5 class="card-title fw-bold category-title">${category.name}</h5>
+                                    <p class="card-text fw-bold category-text">${category.description}</p>
+                                    <p class="card-text fw-bold category-art text-end">${category.productCount} artículos</p>
                                 </div>
                                 </div>
                             </div>
