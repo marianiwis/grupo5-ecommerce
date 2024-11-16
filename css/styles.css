@@ -499,13 +499,6 @@ body.dark-mode {
   border-radius: 15px; /* bordes redondeados */
 }
 
-.dark-mode .dark-mode, .dark-mode .dark-mode {
-  background-color: #222; /* Fondo oscuro */
-  color: #fff; /* Color de texto blanco */
-  position: relative; /* Para que el pseudo-elemento funcione correctamente */
-  z-index: 2; /* Asegúrate de que el contenido esté encima del overlay */
-}
-
 body.dark-mode .carousel-control-prev,
 body.dark-mode .carousel-control-next {
     /* Revisa estas propiedades */

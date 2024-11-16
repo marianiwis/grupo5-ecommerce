@@ -86,20 +86,60 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.addEventListener('DOMContentLoaded', function() {
   const toggleButton = document.getElementById('toggle-mode');
+  const body = document.body;
 
-  // Comprobar si hay una preferencia de modo guardada
-  if (localStorage.getItem('dark-mode') === 'enabled') {
-      document.body.classList.add('dark-mode');
+  // Función para aplicar el modo oscuro
+  function applyDarkMode() {
+    body.classList.add('dark-mode');
+    toggleButton.innerHTML = '<i class="bi bi-sun-fill"></i>';
+    localStorage.setItem('dark-mode', 'enabled');
   }
 
-  toggleButton.addEventListener('click', function() {
-      document.body.classList.toggle('dark-mode');
+  // Función para quitar el modo oscuro
+  function removeDarkMode() {
+    body.classList.remove('dark-mode');
+    toggleButton.innerHTML = '<i class="bi bi-moon-fill"></i>';
+    localStorage.setItem('dark-mode', 'disabled');
+  }
 
-      // Guardar la preferencia en localStorage
-      if (document.body.classList.contains('dark-mode')) {
-          localStorage.setItem('dark-mode', 'enabled');
-      } else {
-          localStorage.removeItem('dark-mode');
-      }
+  // Comprobar el estado del modo oscuro al cargar la página
+  if (localStorage.getItem('dark-mode') === 'enabled') {
+    applyDarkMode();
+  } else {
+    removeDarkMode();
+  }
+
+  // Manejar el clic en el botón de alternar modo
+  toggleButton.addEventListener('click', function() {
+    if (body.classList.contains('dark-mode')) {
+      removeDarkMode();
+    } else {
+      applyDarkMode();
+    }
   });
+
+  // Función para actualizar estilos específicos de la página de categorías
+  function updateCategoryStyles() {
+    if (window.location.pathname.includes('categories.html')) {
+      const categoryElements = document.querySelectorAll('.card, .custom-cardinga-body, .list-group-item, .categoria-titulo, .lead, .category-title, .category-text');
+      
+      categoryElements.forEach(element => {
+        if (body.classList.contains('dark-mode')) {
+          element.style.opacity = '0.7';
+          if (element.classList.contains('card') || element.classList.contains('custom-cardinga-body')) {
+            element.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+          }
+        } else {
+          element.style.opacity = '1';
+          if (element.classList.contains('card') || element.classList.contains('custom-cardinga-body')) {
+            element.style.backgroundColor = '';
+          }
+        }
+      });
+    }
+  }
+
+  // Actualizar estilos al cargar la página y cuando cambie el modo
+  updateCategoryStyles();
+  toggleButton.addEventListener('click', updateCategoryStyles);
 });
