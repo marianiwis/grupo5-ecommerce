@@ -22,8 +22,6 @@
       transition: background-color 0.3s, color 0.3s; /* Transición para el modo oscuro*/
     }
 
-   
-
     .bd-placeholder-img {
       font-size: 1.125rem;
       text-anchor: middle;
@@ -109,7 +107,24 @@
       transition: opacity 0.3s ease; /* Suaviza la transición de opacidad */
     }
 
+    .dark-mode.category-title {
+      font-family: 'Cormorant Garamond', serif;
+      color: #000000;
+      font-size: 3.5em;
+      position: relative; /* Para asegurarte de que el contenido esté por encima de la superposición */
+      z-index: 2; /* Asegúrate de que el contenido esté por encima de la superposición */
+    }
+
+    .dark-mode.category-text {
+      font-family: 'Cormorant Garamond', serif;
+      color: #313030;
+      font-size: 1.5em;
+      position: relative; /* Para asegurarte de que el contenido esté por encima de la superposición */
+      z-index: 2; /* Asegúrate de que el contenido esté por encima de la superposición */
+    }
+
     /* Modo oscuro */
+    
     @media (prefers-color-scheme: dark) {
       #profileForm {
         opacity: 0.95; /* Opacidad ajustada para el modo oscuro */
