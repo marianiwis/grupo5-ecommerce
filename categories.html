@@ -98,7 +98,7 @@
     .dark-mode .card img {
       border-radius: 15px; /* bordes redondeados */
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* sombra */
-      opacity: 0.6; /* Ajusta la opacidad */
+      opacity: 0.9; /* Ajusta la opacidad */
     }
 
     .dark-mode .custom-cardinga-body {
@@ -108,7 +108,7 @@
       background-repeat: no-repeat;
       position: relative;
       padding: 20px;
-      opacity: 0.7; /* Ajusta la opacidad */
+      opacity: 0.4; /* Ajusta la opacidad */
       transition: background-color 0.7s, color 0.3s; /* Transición para el modo oscuro*/
     }
 
@@ -128,18 +128,24 @@
       font-family: 'Cormorant Garamond', serif;
       color: #000000;
       font-size: 3.5em;
+      position: relative; /* Para asegurarte de que el contenido esté por encima de la superposición */
+      z-index: 2; /* Asegúrate de que el contenido esté por encima de la superposición */
     }
 
     .dark-mode.category-text {
       font-family: 'Cormorant Garamond', serif;
       color: #313030;
       font-size: 1.5em;
+      position: relative; /* Para asegurarte de que el contenido esté por encima de la superposición */
+      z-index: 2; /* Asegúrate de que el contenido esté por encima de la superposición */
     }
 
     .category-art {
       font-family: 'Cormorant Garamond', serif;
       color: #f08c2f;
       font-size: 1.5em;
+      position: relative; /* Para asegurarte de que el contenido esté por encima de la superposición */
+      z-index: 2; /* Asegúrate de que el contenido esté por encima de la superposición */
     }
 
     .list-group-item {

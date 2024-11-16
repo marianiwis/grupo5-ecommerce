@@ -63,27 +63,6 @@ let autentication = function(){
 
 autentication()
 
-document.addEventListener("DOMContentLoaded", function(){
-  document.getElementById("cerrarSesion").addEventListener("click", function() {
-    localStorage.removeItem("email");
-    window.location = "login.html"
-  });
-})
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    
-  // Obtener el email almacenado en localStorage
-  const email = localStorage.getItem("email");  
-  const userButton = document.querySelector('.dropdown-toggle');
- // Verificar si hay un usuario guardado en localStorage
- if (email  && userButton) {
-     // Cambiar el texto del botón con el nombre del usuario
-     userButton.textContent = email;
- }
-
-});
-
 document.addEventListener('DOMContentLoaded', function() {
   const toggleButton = document.getElementById('toggle-mode');
   const body = document.body;
@@ -121,19 +100,59 @@ document.addEventListener('DOMContentLoaded', function() {
   // Función para actualizar estilos específicos de la página de categorías
   function updateCategoryStyles() {
     if (window.location.pathname.includes('categories.html')) {
-      const categoryElements = document.querySelectorAll('.card, .custom-cardinga-body, .list-group-item, .categoria-titulo, .lead, .category-title, .category-text');
+      const outsideCardElements = document.querySelectorAll('.categoria-titulo, .lead, hr, body > p, body > h1, body > h2, body > h3, body > h4, body > h5, body > h6');
+      const cardElements = document.querySelectorAll('.card, .custom-cardinga-body, .list-group-item');
+      const categoryTitles = document.querySelectorAll('.category-title');
       
-      categoryElements.forEach(element => {
+      outsideCardElements.forEach(element => {
         if (body.classList.contains('dark-mode')) {
-          element.style.opacity = '0.7';
-          if (element.classList.contains('card') || element.classList.contains('custom-cardinga-body')) {
-            element.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+          if (!element.classList.contains('category-title')) {
+            element.style.color = '#fff';  // Texto blanco fuera de las tarjetas, excepto para .category-title
+          }
+          if (element.tagName.toLowerCase() === 'hr') {
+            element.style.borderColor = '#fff';  // Línea hr blanca
           }
         } else {
-          element.style.opacity = '1';
-          if (element.classList.contains('card') || element.classList.contains('custom-cardinga-body')) {
-            element.style.backgroundColor = '';
+          element.style.color = '';
+          if (element.tagName.toLowerCase() === 'hr') {
+            element.style.borderColor = '';
           }
+        }
+      });
+
+      cardElements.forEach(element => {
+        if (body.classList.contains('dark-mode')) {
+          element.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';  // Fondo oscuro para las tarjetas
+          element.style.color = '#707070';  // Texto gris más oscuro dentro de las tarjetas
+          element.style.opacity = '0.9';
+        } else {
+          element.style.backgroundColor = '';
+          element.style.color = '';
+          element.style.opacity = '1';
+        }
+
+        // Aplicar estilos a los elementos de texto dentro de las tarjetas
+        const cardTextElements = element.querySelectorAll('p, h1, h2, h3, h4, h5, h6');
+        cardTextElements.forEach(textElement => {
+          if (body.classList.contains('dark-mode')) {
+            if (!textElement.classList.contains('category-title')) {
+              textElement.style.color = '#707070';  // Texto gris más oscuro dentro de las tarjetas, excepto para .category-title
+            }
+          } else {
+            textElement.style.color = '';
+          }
+        });
+      });
+
+      // Manejar específicamente los elementos .category-title
+      categoryTitles.forEach(title => {
+        if (body.classList.contains('dark-mode')) {
+          // No cambiar el color, ya que está definido en el CSS
+          title.style.position = 'relative';
+          title.style.zIndex = '2';
+        } else {
+          title.style.position = '';
+          title.style.zIndex = '';
         }
       });
     }

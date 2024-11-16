@@ -41,26 +41,25 @@
       user-select: none;
     }
 
-    hr{
-      color: #FFA20D;
+    hr {
+      color: #FFA20D !important;
       height: 3px !important;
       opacity: 1;
     }
 
-    .text-left {
-        font-size: 3.0em;  /* Ajusta el tamaño a tu gusto */
-        margin-bottom: 5px;
-        margin-top: 0px;
-        font-family: 'Markazi Text', serif;
-        color: #000000;
+    .perfil-titulo {
+      font-size: 4.0em;
+      margin-bottom: 10px;
+      font-family: 'Markazi Text', serif;
+      color: #000000;
     }
 
     .lead {
-        font-size: 1.3em;
-        line-height: 1.5;
-        font-family: 'Cormorant Garamond', serif;
-        color:#000000;
-        font-weight: bold;
+      font-size: 1.3em;
+      line-height: 1.5;
+      font-family: 'Cormorant Garamond', serif;
+      color: #000000;
+      font-weight: bold;
     }
 
     /* Definir la clase para los campos del formulario */
@@ -127,10 +126,12 @@
     </div>
   </nav>
   <main class="container mt-3">
-    <hr class="mb-5">
-    <h2 class="text-left">Mi Perfil</h2>
-    <p class="lead">Tu perfil, totalmente personalizable.</p>
-    <hr class="mb-5">
+    <div class="text-left">
+      <hr class="mb-5">
+      <h2 class="perfil-titulo">Mi Perfil</h2>
+      <p class="lead">Tu perfil, totalmente personalizable.</p>
+      <hr class="mb-5">
+    </div>
     <div class="row justify-content-center mt-5 pt-4">
       <div class="col-md-12">
         <form id="profileForm" class="pt-5 pb-5 ps-2 pe-2 shadow">
