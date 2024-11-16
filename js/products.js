@@ -86,10 +86,12 @@ function clearFilters() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+    // Obtener el ID de categoría desde localStorage
     const categoriaID = localStorage.getItem('catID');
     console.log(`Categoría ID obtenido: ${categoriaID}`);
 
     if (categoriaID) {
+        // Obtener los productos de la categoría
         getJSONData(`https://japceibal.github.io/emercado-api/cats_products/${categoriaID}.json`)
             .then(function(resultObj) {
                 if (resultObj.status === "ok") {
@@ -107,13 +109,15 @@ document.addEventListener("DOMContentLoaded", function() {
                             );
                             mostrarProductos(productosFiltrados);
                         });
-                        applyFilters()
+
+                        applyFilters(); // Aplicar filtros
+
                     } else {
-                        productosVacios();
+                        productosVacios(); // Si no hay productos
                     }
 
                     if (resultObj.data.catName) {
-                        productoTitulos(resultObj.data.catName);
+                        productoTitulos(resultObj.data.catName); // Mostrar el título de la categoría
                     }
                 } else {
                     console.error("Error en la obtención de datos:", resultObj.data);
@@ -123,16 +127,10 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error("No se encontró el ID de categoría en el almacenamiento local.");
     }
 
-    // Agregar evento de aplicar filtros
-    document.getElementById('apply-filters').addEventListener('click', applyFilters);
- 
-    document.getElementById('clear-filters').addEventListener('click', clearFilters);
-});
-document.addEventListener("DOMContentLoaded", function() {
     // Obtener el nombre de usuario almacenado en localStorage
     const usuario = window.localStorage.getItem("email");
 
-    // Verificar si hay un usuario guardado en localStorage
+    // Verificar si hay un usuario guardado
     if (usuario) {
         // Cambiar el texto del botón con el nombre del usuario
         const userButton = document.querySelector('.dropdown-toggle');
@@ -148,10 +146,13 @@ document.addEventListener("DOMContentLoaded", function() {
         window.location.href = "login.html";
     });
 
-    
-    document.getElementById('clear-filters').addEventListener('click', clearFilters);
+    // Agregar evento de aplicar filtros
+    document.getElementById('apply-filters').addEventListener('click', applyFilters);
 
+    // Limpiar filtros
+    document.getElementById('clear-filters').addEventListener('click', clearFilters);
 });
+
 // Desafiate, cantidad de productos en carrito
 function actualizarBadgeCarrito() {
     let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
