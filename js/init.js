@@ -63,6 +63,27 @@ let autentication = function(){
 
 autentication()
 
+document.addEventListener("DOMContentLoaded", function(){
+  document.getElementById("cerrarSesion").addEventListener("click", function() {
+    localStorage.removeItem("email");
+    window.location = "login.html"
+  });
+})
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    
+  // Obtener el email almacenado en localStorage
+  const email = localStorage.getItem("email");  
+  const userButton = document.querySelector('.dropdown-toggle');
+ // Verificar si hay un usuario guardado en localStorage
+ if (email  && userButton) {
+     // Cambiar el texto del botón con el nombre del usuario
+     userButton.textContent = email;
+ }
+
+});
+
 document.addEventListener('DOMContentLoaded', function() {
   const toggleButton = document.getElementById('toggle-mode');
   const body = document.body;
