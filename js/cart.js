@@ -133,15 +133,61 @@ document.addEventListener("DOMContentLoaded", function() {
             </label>
           </div>
           <div class="col-12 col-md-6 mb-2">
-            <label for="expira" class="w-md-100 w-100">
+            <label for="banco" class="w-md-100 w-100">
               <div class="p-4 cart-tipo-envio-radio">
-                <input id="expira" type="radio" name="pago" class="me-1">
+                <input id="banco" type="radio" name="pago" class="me-1">
                 Transferencia bancaria
               </div>
             </label>
           </div>
         </div>`;
+      
+      // Sección de tarjeta de credito
+      cartContainer.innerHTML += `
+        <div class="card mb-3 ms-1 me-1 ms-md-5 me-md-5 cart-item shadow-sm p-3 p-md-5 d-none" id="tarjeta-credito">
+          <div class="row g-0">
+            <div class="col-md-12">
+              <div class="row height-100 d-flex align-items-center">
+                <div class="col-12 text-left mb-1">
+                  <label for="tarjeta" class="mb-1">Numero de tarjeta <span class="required">*</span></label>
+                  <input type="text" class="form-control" id="tarjeta" placeholder="Ingrese numero de tarjeta" required>
+                </div>
+                <div class="col-12 text-left mb-1">
+                  <label for="titular" class="mb-1">Titular <span class="required">*</span></label>
+                  <input type="text" class="form-control" id="titular" placeholder="Ingrese titular">
+                </div>
+                <div class="col-12 text-left mb-1"></div>
+                <div class="col-12 text-left mb-1">
+                  <label for="vencimiento" class="mb-1">Fecha de vencimiento <span class="required">*</span></label>
+                  <input type="text" class="form-control" id="vencimiento" placeholder="Ingrese fecha de vencimiento" required>
+                </div>
+                <div class="col-12 text-left mb-1">
+                  <label for="cvv" class="mb-1">CVV <span class="required">*</span></label>
+                  <input type="number" class="form-control" id="cvv" placeholder="CVV" required>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `
 
+      // Sección de cuenta bancaria
+      cartContainer.innerHTML += `
+        <div class="card mb-3 ms-1 me-1 ms-md-5 me-md-5 cart-item shadow-sm p-3 p-md-5 hidden d-none" id="cuenta-bancaria-seccion">
+          <div class="row g-0">
+            <div class="col-md-12">
+              <label for="cuenta-bancaria" class="mb-1">Cuenta Bancaria</label>
+              <textarea id="cuenta-bancaria" name="cuenta-bancaria" rows="5" cols="33" class="form-control" disabled="true" style="background-color: #fff;">
+BANCO ITAÚ
+9968761
+SUC 25
+LAND SA
+              </textarea>
+            </div>
+          </div>
+        </div>
+      `
+        
       // Sección de resumen de costos
       cartContainer.innerHTML += `
         <div class="card ms-1 me-1 ms-md-5 me-md-5 mb-3 mt-5 cart-item shadow-sm p-4">
@@ -160,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function() {
               </div>
             </div>
           </div>
-        </div>`;
+        </div>`; 
 
       // Botón de finalizar compra
       const finalizarCompraBtn = document.createElement("button");
@@ -218,6 +264,34 @@ document.addEventListener("DOMContentLoaded", function() {
       };
       cartContainer.appendChild(finalizarCompraBtn);
 
+      // Mostrar u ocultar los campos de pago 
+      const tarjetaCreditoRadio = document.getElementById("credito");
+      const transferenciaRadio = document.getElementById("banco");
+
+      const camposCredito = document.getElementById("tarjeta-credito");
+      const camposTransferencia = document.getElementById("cuenta-bancaria-seccion");
+
+      function mostrarCamposPago() {
+        if (tarjetaCreditoRadio.checked) {
+            camposCredito.classList.remove("d-none");
+        } else {
+            camposCredito.classList.add("d-none");
+        }
+    
+        if (transferenciaRadio.checked) {
+            camposTransferencia.classList.remove("d-none");
+        } else {
+            camposTransferencia.classList.add("d-none");
+        }
+    }
+    
+
+      tarjetaCreditoRadio.addEventListener("change", mostrarCamposPago);
+      transferenciaRadio.addEventListener("change", mostrarCamposPago);
+
+      // Llamar a la función de mostrar campos al cargar la página (si ya hay una opción seleccionada)
+      mostrarCamposPago();    
+
       // Evento para actualizar subtotal y total cuando cambia la cantidad
       document.querySelectorAll(".cart-quantity").forEach(input => {
         input.addEventListener("input", function() {
@@ -227,6 +301,7 @@ document.addEventListener("DOMContentLoaded", function() {
           localStorage.setItem("cartItems", JSON.stringify(cartItems));
           actualizarSubtotal(index, newQuantity, cartItems[index].cost, cartItems[index].currency);
           actualizarTotal();
+          actualizarBadgeCarrito(); //Actualiza en tiempo real los totales
         });
       });
 
