@@ -44,18 +44,6 @@
       object-fit: cover; /* hace que la imagen se recorte de manera que ocupe todo el espacio del contenedor mientras mantiene su relación de aspecto*/
     }
 
-    #productos-lista {
-      display: flex;
-      flex-wrap: wrap; /* permite que los elementos flexibles dentro de #productos-lista se envuelvan en la siguiente línea si no caben en la línea actual*/
-      gap: 1rem;
-    }
-
-    
-    .col-md-4 {
-      flex: 1 1 30%; /* voy a poner 3 tarjetas por filas */
-      max-width: 30%; /* aseguro que no se expandan mas del 30% */
-    }
-
     .card {
       border: none;
       border-radius: 0.25rem;
@@ -79,36 +67,6 @@
       object-fit: cover; /* hace que la imagen se recorte de manera que ocupe todo el espacio del contenedor mientras mantiene su relación de aspecto*/
     }
 
-    #productos-lista {
-      display: flex;
-      flex-wrap: wrap; /* permite que los elementos flexibles dentro de #productos-lista se envuelvan en la siguiente línea si no caben en la línea actual*/
-      gap: 1rem;
-    }
-
-    
-    .col-md-4 {
-      flex: 1 1 30%; /* voy a poner 3 tarjetas por filas */
-      max-width: 30%; /* aseguro que no se expandan mas del 30% */
-    }
-
-    /*las Media Queries se utilizan para hacer que el diseño sea responsivo*/
-    /*para pantallas con un ancho máximo de 768px, cada tarjeta ocupará el
-    45% del ancho disponible, mostrando dos tarjetas por fila*/
-    @media (max-width: 768px) {
-      .col-md-4 {
-        flex: 1 1 45%; /* dos tarjetas por fila en pantallas medianas */
-        max-width: 45%;
-      }
-    }
-    /*para pantallas con un ancho máximo de 320px, cada tarjeta ocupará
-    el 100% del ancho disponible, mostrando una tarjeta por fila.*/
-    @media (max-width: 320px) {
-      .col-md-4 {
-        flex: 1 1 100%; /* una tarjeta por fila para una pantalla chica */
-        max-width: 100%;
-      }
-    }
-
 
   </style>
 </head>
@@ -116,11 +74,14 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
+      <!-- Botón de colapso para móviles -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-<!-- Saco esta parte de acá porque esto hace que el nombre se repita al lado del boton <div class="collapse navbar-collapse" id="navbarNav">  -->
+  
+      <!-- Contenedor colapsable -->
+      <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
             <a class="nav-link active" href="index.html">Inicio</a>
@@ -136,22 +97,23 @@
               <i class="bi bi-moon-fill"></i>
             </button>
           </li>
-        <li class="nav-item dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Usuario 
-          </button>
-          <ul class="dropdown-menu"> <!-- Menú desplegable con opciones -->
-            <li><a class="dropdown-item" href="cart.html">Mi carrito
-              <span id="cartCountBadge" class="badge bg-danger ms-2"> </span>
-            </a></li>
-            <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
-            <li><a class="dropdown-item" href="index.html" id="cerrarSesion">Cerrar sesión</a></li>
-          </ul>
-        </li>
-      </ul>
+          <li class="nav-item dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Usuario
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="cart.html">Mi carrito
+                  <span id="cartCountBadge" class="badge bg-danger ms-2"></span>
+                </a>
+              </li>
+              <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+              <li><a class="dropdown-item" href="index.html" id="cerrarSesion">Cerrar sesión</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
   
 
   <!-- aca se puede cambiar a trener un solo contenedor seria mas facil, lo voy a ver desp -->

@@ -499,13 +499,6 @@ body.dark-mode {
   border-radius: 15px; /* bordes redondeados */
 }
 
-.dark-mode .dark-mode, .dark-mode .dark-mode {
-  background-color: #222; /* Fondo oscuro */
-  color: #fff; /* Color de texto blanco */
-  position: relative; /* Para que el pseudo-elemento funcione correctamente */
-  z-index: 2; /* Asegúrate de que el contenido esté encima del overlay */
-}
-
 body.dark-mode .carousel-control-prev,
 body.dark-mode .carousel-control-next {
     /* Revisa estas propiedades */
@@ -582,16 +575,23 @@ main {
 .my-cart{
   background-color: white;
   border-radius: 20px;
-  padding: 35px 45px;
 }
 
 .cart-tipo-envio-radio{
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0px 0px 4px 2px #80808040;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.coste-envio{
-  margin-right: 8rem !important;
-  margin-left: 8rem !important;
+.finalizar-compra{
+    display: block;
+    margin: 0 auto;
+}
+
+.elimiar-item img{
+  width: 20px;
 }

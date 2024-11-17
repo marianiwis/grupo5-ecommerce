@@ -8,6 +8,8 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Markazi+Text&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
 
@@ -31,16 +33,14 @@
       background-color: #FFC107;
       font-weight: bold;
       text-align: center;
-      padding: 12px;
-      margin-right: 42px; /* Espacio entre cada columna */
       border-radius: 8px;
+      font-size: 0.8rem;
     }
     .header-etiquetas {
       background-color: #FFC107;
       font-weight: bold;
       text-align: center;
       padding: 12px;
-      margin-right: 44px; /* Espacio entre cada columna */
       border-radius: 8px;
     }
 
@@ -55,47 +55,51 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-        <!-- Saco esta parte de acá porque esto hace que el nombre se repita al lado del boton <div class="collapse navbar-collapse" id="navbarNav">  -->
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-            <button id="toggle-mode" class="btn btn-outline-light">
-              <i class="bi bi-moon-fill"></i>
-            </button>
-          </li>
+  <div class="container">
+    <!-- Botón de colapso para móviles -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Contenedor colapsable -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav w-100 justify-content-between">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="categories.html">Categorías</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="sell.html">Vender</a>
+        </li>
+        <li class="nav-item">
+          <button id="toggle-mode" class="btn btn-outline-light">
+            <i class="bi bi-moon-fill"></i>
+          </button>
+        </li>
         <li class="nav-item dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Usuario 
+            Usuario
           </button>
-          <ul class="dropdown-menu"> <!-- Menú desplegable con opciones -->
+          <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="cart.html">Mi carrito
-              <span id="cartCountBadge" class="badge bg-danger ms-2"> </span>
-            </a></li>
+                <span id="cartCountBadge" class="badge bg-danger ms-2"></span>
+              </a>
+            </li>
             <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
             <li><a class="dropdown-item" href="index.html" id="cerrarSesion">Cerrar sesión</a></li>
           </ul>
         </li>
       </ul>
     </div>
-  </nav>
-
+  </div>
+</nav>
   <main class="container mt-5">
     <!-- <h2 class="text-left">Mi Carrito</h2> -->
     <!--<hr class="mb-5"> -->
-    <div class="container my-cart shadow" id="cart-container">
+    <div class="container my-cart shadow p-md-5 p-sm-3 p-3" id="cart-container">
     </div>
   </main>
 
