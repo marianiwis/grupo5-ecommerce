@@ -220,7 +220,10 @@ LAND SA
         const departamento = document.getElementById("departamento").value.trim();
         const calle = document.getElementById("calle").value.trim();
         const numero = document.getElementById("numero").value.trim();
-        const esquina = document.getElementById("esquina").value.trim();
+        const tarjeta = document.getElementById("tarjeta").value.trim();
+        const titular = document.getElementById("titular").value.trim();
+        const vencimiento = document.getElementById("vencimiento").value.trim();
+        const cvv = document.getElementById("cvv").value.trim();
 
         if (!departamento || !calle || !numero || !esquina) {
           alert("Por favor, completa todos los campos de la dirección de envío.");
@@ -258,6 +261,14 @@ LAND SA
             return;
           }
         }
+
+         // Validación de la forma de pago
+         const tarjetaCreditoRadio = document.getElementById("credito");
+
+         if (tarjetaCreditoRadio.checked && !tarjeta || tarjetaCreditoRadio.checked && !titular || tarjetaCreditoRadio.checked && !vencimiento || tarjetaCreditoRadio.checked && !cvv) {
+           alert("Por favor, ingrese los datos de la tarjeta.");
+           return;
+         }
 
         // Si todas las validaciones son correctas, muestra mensaje de éxito
         alert("Compra realizada exitosamente. ¡Gracias por tu compra!");
