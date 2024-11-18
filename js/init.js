@@ -160,35 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  function updateProfileStyles(isDarkMode) {
-    if (window.location.pathname.includes('my-profile.html')) {
-      const profileForm = document.getElementById('profileForm');
-      const formFields = document.querySelectorAll('.form-field');
-      const inputs = document.querySelectorAll('#profileForm input');
-  
-      if (profileForm) {
-        profileForm.style.backgroundColor = isDarkMode ? 'rgba(51, 51, 51, 0.8)' : '';
-        profileForm.style.color = isDarkMode ? '#e0e0e0' : '';
-        profileForm.style.transition = 'background-color 0.3s, color 0.3s';
-      }
-  
-      formFields.forEach(field => {
-        field.style.color = isDarkMode ? '#c0c0c0' : '';
-        field.style.transition = 'color 0.3s';
-      });
-  
-      inputs.forEach(input => {
-        input.style.backgroundColor = isDarkMode ? 'rgba(68, 68, 68, 0.8)' : '';
-        input.style.color = isDarkMode ? '#e0e0e0' : '';
-        input.style.borderColor = isDarkMode ? '#555' : '';
-        input.style.transition = 'background-color 0.3s, color 0.3s, border-color 0.3s';
-      });
-    }
-  }
-  
-
-  // Actualizar estilos al cargar la página y cuando cambie el modo
-  updateMYProfileStyles()
   updateCategoryStyles();
   toggleButton.addEventListener('click', updateCategoryStyles);
 });
