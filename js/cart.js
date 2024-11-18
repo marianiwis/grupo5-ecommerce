@@ -225,6 +225,7 @@ LAND SA
         const vencimiento = document.getElementById("vencimiento").value.trim();
         const cvv = document.getElementById("cvv").value.trim();
 
+        //validacion de los campos
         if (!departamento || !calle || !numero || !esquina) {
           alert("Por favor, completa todos los campos de la dirección de envío.");
           return;
@@ -247,7 +248,7 @@ LAND SA
         }
 
         // Validación de la forma de pago
-        const pagoSeleccionado = document.querySelector("input[name='pago']:checked");
+        const pagoSeleccionado = document.querySelector("input[name='pago']:checked"); //se selecciona una opcion
         if (!pagoSeleccionado) {
           alert("Por favor, selecciona una forma de pago.");
           return;
