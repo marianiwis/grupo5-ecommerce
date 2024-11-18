@@ -220,21 +220,22 @@ LAND SA
         const departamento = document.getElementById("departamento").value.trim();
         const calle = document.getElementById("calle").value.trim();
         const numero = document.getElementById("numero").value.trim();
+        const esquina = document.getElementById("esquina").value.trim();
         const tarjeta = document.getElementById("tarjeta").value.trim();
         const titular = document.getElementById("titular").value.trim();
         const vencimiento = document.getElementById("vencimiento").value.trim();
         const cvv = document.getElementById("cvv").value.trim();
 
-        //validacion de los campos
-        if (!departamento || !calle || !numero || !esquina) {
-          alert("Por favor, completa todos los campos de la dirección de envío.");
-          return;
-        }
-
         // Validación de la forma de envío
         const envioSeleccionado = document.querySelector("input[name='tipo']:checked");
         if (!envioSeleccionado) {
           alert("Por favor, selecciona un tipo de envío.");
+          return;
+        }
+
+        //validacion de los campos
+        if (!departamento || !calle || !numero || !esquina) {
+          alert("Por favor, completa todos los campos de la dirección de envío.");
           return;
         }
 
